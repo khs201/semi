@@ -1,0 +1,8 @@
+footer {
+  flex-direction: column;
+  display: flex; /* 게시판 목록들을 가로로 나열 */
+  flex-wrap: wrap; /* 여러 행으로 나열 가능하게 함 */
+  justify-content: center; /* 게시판 목록들을 양쪽 끝으로 정렬 */
+  align-items: center;
+  /* margin-bottom: 20px; /* 행 사이 여백 */ 
+}

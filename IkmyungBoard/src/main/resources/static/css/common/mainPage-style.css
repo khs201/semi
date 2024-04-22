@@ -1,0 +1,58 @@
+  body {
+    font-family: sans-serif; /* 원하는 글꼴 설정 */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .row {
+    display: flex; /* 게시판 목록들을 가로로 나열 */
+    flex-wrap: wrap; /* 여러 행으로 나열 가능하게 함 */
+    justify-content: center; /* 게시판 목록들을 양쪽 끝으로 정렬 */
+    align-items: center;
+    margin-bottom: 20px; /* 행 사이 여백 */
+  }
+  
+  .board-list {
+    width: 400px; /* 게시판 목록 너비 */
+    margin: 0 50px; /* 게시판 목록 사이 여백 */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* 모서리 둥글게 처리 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  }
+  
+  .board-list h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: skyblue;
+  }
+  
+  .board-list h2:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+  
+  .board-list ul {
+    list-style: none; /* 기본 목록 스타일 제거 */
+    padding: 0;
+  }
+  
+  .board-item {
+    margin-bottom: 10px;
+  }
+  
+  .board-item a {
+    text-decoration: none; /* 링크 기본 밑줄 제거 */
+    color: #333;
+  }
+  
+  .board-item h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .board-item p {
+    font-size: 14px;
+    color: #666;
+  }
