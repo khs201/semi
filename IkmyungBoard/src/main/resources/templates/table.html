@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style> 
+        .header {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        
+        .logo {
+            /* 로고 스타일링 */
+        }
+        
+        .gub {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+        }
+        
+        .gub li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+        
+        .gub li a {
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .user-links {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-links a {
+            margin-left: 20px;
+            text-decoration: none;
+            display: flex;
+            color: #333;
+        }
+        
+        .user-links a:hover {
+            text-decoration: underline;
+        }
+        </style>
+</head>
+<body>
+    
+</body>
+</html>
+
+<header>
+    
+    <div class="header">
+        <!-- 로고 -->
+        <h1 class="logo">Your Logo</h1>
+        
+        <!-- 메뉴 -->
+        <ul class="gub">
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">SERVICES</a></li>
+            <li><a href="#">CONTACT</a></li>
+            <li><a href="#">CONTACT</a></li>
+            <li><a href="#">CONTACT</a></li>
+        </ul>
+        
+        <!-- 로그인과 회원가입 -->
+        <div class="user-links">
+            <a href="#" class="login">로그인</a>
+            <a href="#" class="signup">회원가입</a>
+        </div>
+    </div>
+
+</header>
