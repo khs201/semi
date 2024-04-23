@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -37,7 +38,7 @@ public class MemberController {
 	
 	/** 회원 가입
 	 * @param inputMember : 입력된 회원 정보
-	 * 				(memberEmail, memberPw, memberNickname, memberTel,memberId) 
+	 * 				(memberEmail, memberPw, memberNickname, memberTel, memberId) 
 	 * @param memberAddress : 입력한 주소 input 3개의 값을 배열로 전달
 	 * @param ra : 리다이렉트 시 request scope로 데이터 전달하는 객체
 	 * @return
@@ -70,7 +71,88 @@ public class MemberController {
 		return "redirect:" + path;
 	}
 	
+	/** 이메일 중복 검사
+	 * @param memeberEmail
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping("checkEmail")
+	public int checkEmail(
+			@RequestParam("memberEmail") String memberEmail
+			) {
+		
+		return service.checkEmail(memberEmail);
+	}
+	
+	/** 닉네임 중복 검사
+	 * @param memberNickname
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping("checkNickname")
+	public int checkNickname(
+			@RequestParam("memberNickname") String memberNickname 
+			){
+		return service.checkNickname(memberNickname);
+	}
+	
+	/** 전화번호 중복 검사
+	 * @param memberTel
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping
+	public int checkTel(
+			@RequestParam("memberTel") String memberTel
+			) {
+		
+		return service.checkTel(memberTel);
+	}
+	
 	
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

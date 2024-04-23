@@ -60,11 +60,22 @@ input[type="password"] {
   width: 150px; /* 버튼의 너비를 조절합니다. */
 }
 
+
 /* 가입 메시지 스타일 */
 .signUp-message {
   font-size: 14px;
   color: #999;
 }
+
+/* 입력 관련 메세지 */
+.signUp-message{
+  font-size: 14px;
+  letter-spacing: -1px;
+}
+
+/* 메세지 색상 지정 */
+.confirm{ color : green; }
+.error{ color : red; }
 
 /* 필수 입력 표시 스타일 */
 .required {
@@ -95,6 +106,9 @@ input[type="password"] {
             placeholder="아이디" maxlength="30" autocomplete="off">
             <button id="doubleCheck" type="button">중복확인</button>
         </div>
+
+        <!-- 정규 표현식 -->
+        <span class="signUp-message" id="idMessage">영어,숫자,밑줄(_) 1~20글자 사이로 입력해주세요.</span>  <!-- ^[a-z][a-z0-9_]{0,19}$ -->
 
 
         <!-- 비밀번호/비밀번호 확인 입력 -->
@@ -200,6 +214,9 @@ input[type="password"] {
   
       <!-- 다음 주소 API 추가 -->
       <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+      <!-- 회원 가입 JS 추가 -->
+      <script src="/js/member/signup.js"></script>
 
 </body>
 </html>
