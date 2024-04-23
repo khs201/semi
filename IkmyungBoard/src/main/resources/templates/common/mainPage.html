@@ -11,7 +11,7 @@
 </head>
 <body>
 
-  <div class="row">
+<!--   <div class="row">
 
 
     <section class="board-list">
@@ -139,7 +139,33 @@
       </ul>
     </section>
 
-  </div>
+  </div> -->
+
+
+<!--   <th:block th:each="boardType : ${application.boardTypeList}">
+    <li>
+      <a th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}" th:text="${boardType.boardName}">게시판 이름</a>
+    </li>
+  </th:block>
+ -->
+ <div class="board-container">
+  <th:block th:each="boardType : ${application.boardTypeList}">
+  <section class="board-list">
+    <a th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}" th:text="${boardType.boardName}">게시판 이름</a>
+    <ul>
+      <li class="board-item">
+        <a href="#">
+          <p>[게시판 설명]</p>
+        </a>
+      </li>
+    </ul>
+  </section>
+</th:block>
+
+</div>
+
+
+
   
 <th:block th:replace="~{common/footer}"></th:block>
 
