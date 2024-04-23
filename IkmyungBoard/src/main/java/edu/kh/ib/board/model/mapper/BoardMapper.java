@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import edu.kh.ib.board.model.dto.Board;
+
 @Mapper
 public interface BoardMapper {
 
@@ -12,6 +14,12 @@ public interface BoardMapper {
 	 * @return
 	 */
 	List<Map<String, Object>> selectBoardTypeList();
+
+	/** 게시판 이름 조회해오기(보드코드로)
+	 * @param boardCode
+	 * @return
+	 */
+	String getBoardName(int boardCode);
 
 
 	

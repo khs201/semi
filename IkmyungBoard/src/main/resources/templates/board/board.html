@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${boardName}">게시판 이름</title>
+
+  <link rel="stylesheet" href="/css/common/board-style.css">
+
+</head>
+
+<body>
+  <th:block th:replace="~{common/header}"></th:block>
+
+  <h1 th:text="${boardName}">게시판 이름</h1>
+
+  <h1>게시판</h1>
+  <table border=0 cellpadding=0 cellspacing=0>
+    <tr>
+      <th>번호</th>
+      <th>제목</th>
+      <th>작성자</th>
+      <th>날짜</th>
+      <th>조회수</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>예시 제목1</td>
+      <td>admin</td>
+      <td>2024-04-23</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>예시 제목2</td>
+      <td>user1</td>
+      <td>2024-04-22</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>예시 제목3</td>
+      <td>user2</td>
+      <td>2024-04-21</td>
+      <td>2</td>
+    </tr>
+  </table>
+  <div style="text-align: center;">
+    <a href="#">글쓰기</a>
+  </div>
+
+  
+
+  <th:block th:replace="~{common/footer}"></th:block>
+</body>
+
+</html>

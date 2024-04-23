@@ -9,6 +9,12 @@ public interface BoardService {
 	 * @return
 	 */
 	List<Map<String, Object>> selectBoardTypeList();
+
+	/** 들어가는 게시판 이름을 게시판 코드로 조회해오기
+	 * @param boardCode
+	 * @return
+	 */
+	String getBoardName(int boardCode);
 	
 	
 
