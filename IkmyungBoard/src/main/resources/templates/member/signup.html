@@ -4,15 +4,93 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원 가입</title>
-
-  <link rel="stylesheet" href="css/signup-style.css">
   
-</head>
-<body>
+  <style>
+    /* 전체 페이지 스타일 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
 
-  <main>
+/* 메인 컨테이너 스타일 */
+main {
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#signUpForm{
+  margin-top: 30px;
+}
+
+#signUpForm > label{
+  display: block;
+  margin-top: 40px;
+  font-size: 18px;
+}
+
+/* 입력란 스타일 */
+input[type="text"],
+input[type="password"] {
+  width: calc(100% - 10px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* 버튼 가운데 정렬 */
+#signUpForm input[type="submit"],
+#signUpForm button {
+  padding: 10px;
+  margin: 20px auto; /* 위 아래 여백을 조절하여 버튼을 가운데 정렬합니다. */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #0e427b;
+  color: #fff;
+  display: block;
+  width: 150px; /* 버튼의 너비를 조절합니다. */
+}
+
+
+/* 가입 메시지 스타일 */
+.signUp-message {
+  font-size: 14px;
+  color: #999;
+}
+
+/* 입력 관련 메세지 */
+.signUp-message{
+  font-size: 14px;
+  letter-spacing: -1px;
+}
+
+/* 메세지 색상 지정 */
+.confirm{ color : green; }
+.error{ color : red; }
+
+/* 필수 입력 표시 스타일 */
+.required {
+  color: red;
+}
+  </style>
+
+
+</head>
+
+<body>
     <!-- 헤더 추가 -->
     <th:block th:replace="~{common/header}"></th:block>
+  <main>
+
 
     <section class="signUp-content">
 
@@ -28,6 +106,9 @@
             placeholder="아이디" maxlength="30" autocomplete="off">
             <button id="doubleCheck" type="button">중복확인</button>
         </div>
+
+        <!-- 정규 표현식 -->
+        <span class="signUp-message" id="idMessage">영어,숫자,밑줄(_) 1~20글자 사이로 입력해주세요.</span>  <!-- ^[a-z][a-z0-9_]{0,19}$ -->
 
 
         <!-- 비밀번호/비밀번호 확인 입력 -->
@@ -133,6 +214,9 @@
   
       <!-- 다음 주소 API 추가 -->
       <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+      <!-- 회원 가입 JS 추가 -->
+      <script src="/js/member/signup.js"></script>
 
 </body>
 </html>
