@@ -15,6 +15,13 @@ public interface BoardService {
 	 * @return
 	 */
 	String getBoardName(int boardCode);
+
+	/** 게시글 목록 조회
+	 * @param boardCode
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectBoardList(int boardCode, int cp);
 	
 	
 

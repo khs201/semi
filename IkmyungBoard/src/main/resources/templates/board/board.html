@@ -18,12 +18,16 @@
   <h1 class="board-title" th:text="${boardName}">게시판 이름</h1>
 
   <table border=0 cellpadding=0 cellspacing=0>
-    <tr>
-      <th>제목</th>
-      <th>글쓴이</th>
-      <th>추천수</th>
-      <th>날짜</th>
-    </tr>
+    <thead>
+      <tr>
+        <th>제목</th>
+        <th>글쓴이</th>
+        <th>추천수</th>
+        <th>날짜</th>
+      </tr>
+    </thead>
+
+<!-- <tbody>
     <tr>
       <td>예시 제목1</td>
       <td>admin</td>
@@ -70,7 +74,52 @@
       <td>예시 제목3</td>
       <td>user2</td>
       <td>2</td>
-      <td>2024-04-21</td>
+      <td>2024-04-21</td> 
+    </tbody> -->
+
+    <tbody>
+      <tr th:each="board : ${boardList}" th:object="${board}">
+								
+        <td th:text="*{boardNo}">게시글 번호</td>
+        
+        <td>
+          <!-- 썸네일 추가 예정 -->
+
+          <!-- 상세 조회 주소에 cp가 포함된 이유 : 상세 -> 목록 돌아올 때 사용 -->
+          
+          <!-- 검색 X -->
+          <a th:unless="${param.key}"
+             th:href="@{/board/{boardCode}/{boardNo} (boardCode=${boardCode}, boardNo=*{boardNo}, cp=${pagination.currentPage})}" 
+             th:text="*{boardTitle}">게시글 제목</a>
+
+          <!-- 검색 O -->
+          <a th:if="${param.key}"
+             th:href="@{/board/{boardCode}/{boardNo} (boardCode=${boardCode}, boardNo=*{boardNo}, cp=${pagination.currentPage}, key=${param.key}, query=${param.query} )}" 
+             th:text="*{boardTitle}">게시글 제목</a>
+
+
+          <th:block th:text="|[*{commentCount}]|">댓글 수</th:block>
+        </td>
+
+        <!-- 작성자 닉네임 -->
+        <td th:text="*{memberNickname}">닉네임</td>
+
+        <!-- 작성일 -->
+        <td th:text="*{boardWriteDate}">2023-10-26</td>
+
+        <!-- 조회수 -->
+        <td th:text="*{readCount}">0</td>
+
+        <!-- 좋아요 수 -->
+        <td th:text="*{likeCount}">0</td>
+
+      </tr>
+
+    </tbody>
+
+
+
+
     </tr>
   </table>
   <div style="text-align: center;">
