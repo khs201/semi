@@ -23,6 +23,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+
 @Controller
 @RequestMapping("board")
 @RequiredArgsConstructor
@@ -69,6 +70,8 @@ public class BoardController {
 			HttpServletRequest req,
 			HttpServletResponse resp
 			) {
+		
+		String boardName = service.getBoardName(boardCode);
 		
 		Map<String, Integer> map = new HashMap<>(); 
 		map.put("boardCode", boardCode);
