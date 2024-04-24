@@ -1,3 +1,4 @@
+
 <header>
     
     <div class="header">
@@ -14,13 +15,47 @@
             <li><a href="#">CONTACT</a></li>
         </ul>
         
-        <!-- 로그인과 회원가입 -->
-        <div class="user-links">
-            <a href="#" class="login">로그인</a>
-            <a href="/member/signup" class="signup">회원가입</a>
+        <!-- 로그인과 회원가입 버튼-->
+        <div class="userlinks">
+            <button class="login" id="login">로그인</button>
+            <a href="#" class="signup">회원가입</a>
         </div>
     </div>
+
+
+    <!-- 로그인 화면 -->
+    <div id="loginlayer" class="loginlayer">
+        <div class="login-container">
+            <h2>Login</h2>
+
+            
+            <form action="/login/login" method="post" id="login-form">
+              <section class="input-box">
+                <input type="text" name="memberEmail" id="username" placeholder="아이디" required>
+              </section>
+
+              <section class="input-box">
+                <input type="password" name="memberPw" id="password" placeholder="비밀번호" required>
+              </section>
+
+                <button type="submit">Login</button>
+            </form>
+            <button id="closelayer" class="close">닫기</button>
+        </div>
+    </div>
+
+
+     <div class="my-info" th:if="${session.loginMember != null}" th:object="${session.loginMember}">     
+        <div>
+          <a href="#" id="nickname" th:text="*{memberNickname}">닉네임</a>
+          <a href="#" id="logoutBtn">로그아웃</a>
+        </div>
+        <p th:text="*{memberEmail}">이메일</p>
+         
+      </div>
+
 
 </header>
 
 <link rel="stylesheet" href="/css/common/header-style.css">
+<script src="/js/login.js"></script>
