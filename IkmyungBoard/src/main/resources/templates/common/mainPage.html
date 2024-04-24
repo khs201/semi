@@ -10,7 +10,6 @@
 </head>
 <body>
   <th:block th:replace="~{common/header}"></th:block>
-
 <!--   <div class="row">
 
 
@@ -142,12 +141,6 @@
   </div> -->
 
 
-<!--   <th:block th:each="boardType : ${application.boardTypeList}">
-    <li>
-      <a th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}" th:text="${boardType.boardName}">게시판 이름</a>
-    </li>
-  </th:block>
- -->
  <div class="board-container">
   <th:block th:each="boardType : ${application.boardTypeList}">
   <section class="board-list">
