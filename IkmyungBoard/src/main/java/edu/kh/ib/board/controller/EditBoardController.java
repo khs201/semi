@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.ib.board.model.dto.Board;
 import edu.kh.ib.board.model.service.BoardService;
 import edu.kh.ib.board.model.service.EditBoardService;
+import edu.kh.ib.member.model.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,12 +50,19 @@ public class EditBoardController {
 	@PostMapping("{boardCode:[0-9]+}/write")
 	public String boardWrite(
 			@PathVariable("boardCode") int boardCode,
+			@SessionAttribute("loginMember") Member loginMember,
 			@ModelAttribute Board inputBoard,
 			RedirectAttributes ra
 			) {
 		
+		inputBoard.setBoardCode(boardCode);
+		inputBoard.setMemberNo(loginMember.getMemberNo());
 		
-		return null;
+		// 게시글 작성 서비스 호출
+		int boardNo = service.boardInsert(inputBoard);
+		
+		
+		return "redirect:/board/" + boardCode;
 	}
 	
 	
