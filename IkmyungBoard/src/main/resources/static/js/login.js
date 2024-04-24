@@ -1,7 +1,8 @@
 var login = document.querySelector("#login");
 var loginLayer = document.getElementById('loginlayer');
 var closeLoginLayer = document.getElementById('closelayer');
-
+var signup = document.querySelector(".signup");
+var myInfo= document.querySelector(".my-info");
 
 // 초기에는 로그인 레이어를 숨김
 loginLayer.style.visibility = 'hidden';
@@ -19,10 +20,8 @@ closeLoginLayer.addEventListener('click', function(event) {
 });
 
 
-// 클릭 후 로고 로 이동
-document.getElementById("pageLogo").onclick = function() {
-    window.location.href = "/";
-};
+
+
 
 
 
