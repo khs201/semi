@@ -74,3 +74,9 @@
   border-radius: 5px;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 }
+
+/* 로고 블럭 안잡히게 하기 */
+.pageLogo{
+  user-select: none;
+}
+
