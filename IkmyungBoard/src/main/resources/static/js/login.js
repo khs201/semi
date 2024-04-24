@@ -19,10 +19,8 @@ closeLoginLayer.addEventListener('click', function(event) {
 });
 
 
-// 클릭 후 로고 로 이동
-document.getElementById("pageLogo").onclick = function() {
-    window.location.href = "/";
-};
+
+
 
 
 
