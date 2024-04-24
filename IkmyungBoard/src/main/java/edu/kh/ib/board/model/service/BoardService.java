@@ -3,12 +3,34 @@ package edu.kh.ib.board.model.service;
 import java.util.List;
 import java.util.Map;
 
+import edu.kh.ib.board.model.dto.Board;
+
 public interface BoardService {
 
 	/** 게시판 목록 얻어와서 HTML application scope에 뿌리기
 	 * @return
 	 */
 	List<Map<String, Object>> selectBoardTypeList();
+
+	/** 들어가는 게시판 이름을 게시판 코드로 조회해오기
+	 * @param boardCode
+	 * @return
+	 */
+	String getBoardName(int boardCode);
+
+	/** 게시글 목록 조회
+	 * @param boardCode
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectBoardList(int boardCode, int cp);
+
+	/** 게시글 상세 조회
+	 * @param map
+	 * @return
+	 */
+	Board selectOne(Map<String, Integer> map);
+
 	
 	
 

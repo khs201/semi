@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="|${board.boardTitle} - ${boardName}|"></title>
+</head>
+<body>
+  
+  <!--   <th:block th:object="${board}">
+  
+      <h1 th:text="*{boardTitle}"></h1>
+      <h1 th:text="*{boardContent}"></h1>
+    </th:block> -->
+  <th:block th:replace="~{common/header}"></th:block>
+
+  <div class="board-header">
+    <h2 th:text="${board.boardTitle}">게시글 제목</h2>
+  </div>
+  <h1></h1>
+  
+
+
+
+
+  <th:block th:replace="~{common/footer}"></th:block>
+
+</body>
+</html>
