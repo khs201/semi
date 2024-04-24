@@ -27,56 +27,6 @@
       </tr>
     </thead>
 
-<!-- <tbody>
-    <tr>
-      <td>예시 제목1</td>
-      <td>admin</td>
-      <td>10</td>
-      <td>2024-04-23</td>
-    </tr>
-    <tr>
-      <td>예시 제목1</td>
-      <td>admin</td>
-      <td>10</td>
-      <td>2024-04-23</td>
-    </tr>
-    <tr>
-      <td>예시 제목1</td>
-      <td>admin</td>
-      <td>10</td>
-      <td>2024-04-23</td>
-    </tr>
-    <tr>
-      <td>예시 제목1</td>
-      <td>admin</td>
-      <td>10</td>
-      <td>2024-04-23</td>
-    </tr>
-    <tr>
-      <td>예시 제목1</td>
-      <td>admin</td>
-      <td>10</td>
-      <td>2024-04-23</td>
-    </tr>
-    <tr>
-      <td>예시 제목1</td>
-      <td>admin</td>
-      <td>10</td>
-      <td>2024-04-23</td>
-    </tr>
-    <tr>
-      <td>예시 제목2</td>
-      <td>user1</td>
-      <td>5</td>
-      <td>2024-04-22</td>
-    </tr>
-    <tr>
-      <td>예시 제목3</td>
-      <td>user2</td>
-      <td>2</td>
-      <td>2024-04-21</td> 
-    </tbody> -->
-
     <tbody>
       <tr th:each="board : ${boardList}" th:object="${board}">
 								
@@ -122,8 +72,11 @@
 
     </tr>
   </table>
-  <div style="text-align: center;">
-    <a href="#">글쓰기</a>
+
+  <div class="btn-area">
+    <!-- 로그인 상태일 때만 글쓰기 버튼 노출 -->
+    <!-- 근데 아님 고려중 넣을꺼면 th:if="${session.loginMember}"-->
+    <button id="writeBtn">글쓰기</button>
   </div>
 
 
@@ -173,7 +126,12 @@
 
   <th:block th:replace="~{common/footer}"></th:block>
 
+	<script th:inline="javascript">
+    /* JS에서 쓰기 위해 boardCode 전역 변수 저장 */
+		const boardCode = /*[[${boardCode}]]*/ "게시판 코드 번호";
+	</script>
 
+  <script src="/js/board/board.js"></script>
 
 
 
