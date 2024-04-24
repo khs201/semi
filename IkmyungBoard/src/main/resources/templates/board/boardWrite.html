@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>글쓰기</title>
+
+  <link rel="stylesheet" href="/css/board/comment-style.css">
+
+
+  <!-- 임시로 여기다가 작성함 -->
+  <style>
+    .write-header{
+    border-bottom: 1px solid;
+    display: flex; /* Flexbox 컨테이너 설정 */
+    align-items: center; /* 항목을 세로 중앙 정렬 */
+    }
+
+    .write-btn {
+      margin-left: 100px;
+    }
+
+
+  </style>
+
+</head>
+<body>
+
+  <th:block th:replace="~{common/header}"></th:block>
+  
+  <div class="write-header">
+    <h1 th:text="|${boardName}에 글쓰기|">게시판명 + 에 글쓰기</h1> 
+  </div>
+  
+  
+  <form action="write" method="POST" class="write-form" id="writeForm" name="writeForm">
+    
+    <!-- 제목 -->
+    <h1 class="write-title">
+      <input type="text" name="boardTitle" placeholder="제목을 작성하세요" value="">
+    </h1>
+    
+    <!-- 내용 -->
+    <div class="write-content">
+      <textarea name="boardContent" placeholder="내용을 입력하세요."></textarea>
+    </div>
+    
+    <button type="submit" id="writeBtn" class="write-btn">글 등록</button>
+  </form>
+  
+  
+  
+  <th:block th:replace="~{common/footer}"></th:block>
+  
+  
+</body>
+</html>

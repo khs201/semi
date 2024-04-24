@@ -72,6 +72,7 @@ public class BoardController {
 			) {
 		
 		String boardName = service.getBoardName(boardCode);
+		model.addAttribute("boardName", boardName);
 		
 		Map<String, Integer> map = new HashMap<>(); 
 		map.put("boardCode", boardCode);
