@@ -31,4 +31,10 @@ public interface MemberMapper {
 	 */
 	int checkTel(String memberTel);
 
+	/** 아이디 중복 검사
+	 * @param memberId
+	 * @return
+	 */
+	int checkId(String memberId);
+
 }

@@ -71,6 +71,9 @@ public class MemberController {
 		return "redirect:" + path;
 	}
 	
+
+	
+	
 	/** 이메일 중복 검사
 	 * @param memeberEmail
 	 * @return
@@ -109,7 +112,18 @@ public class MemberController {
 		return service.checkTel(memberTel);
 	}
 	
-	
+	/** 아이디 중복 검산
+	 * @param memberId
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping("checkId")
+	public int checkId(
+			@RequestParam("memberId") String memberId
+			) {
+		
+		return service.checkId(memberId);
+	}
 	
 	
 }

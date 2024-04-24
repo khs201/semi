@@ -45,6 +45,70 @@ const checkObj = {
     "authKey": false
   };
 
+  // ------------------------------------------------------------
+
+  // 아이디 유효성 검사에 사용될 요소 얻어오기
+  const memberId = document.querySelector("#memberId");
+  const idMessage = document.querySelector("#idMessage");
+  const doubleCheck = document.querySelector("#doubleCheck");
+
+  // 아이디 입력(input 이벤트) 될 때 마다 유효성 검사 수행
+  memberId.addEventListener("input", e => {
+      const inputId = e.target.value;
+
+      // 입력된 아이디가 없을 경우 
+      if(inputId.trim().length === 0) {
+          idMessage.innerText = "영어, 숫자, 밑줄(_) 1~20글자 사이로 입력해주세요.";
+          idMessage.classList.remove('confirm', 'error');
+          checkObj.memberId = false;
+          return;
+      }
+
+      // 입력된 아이디가 있을 경우 정규식 검사
+      const regExp = /^[a-z][a-z0-9_]{0,19}$/;
+
+      // 입력 받은 아이디가 정규식과 일치하는 경우
+      // (알맞은 아이디 형태가 아닌 경우)
+      if (!regExp.test(inputId)) {
+          idMessage.innerText = "알맞은 형식으로 아이디를 작성해주세요";
+          idMessage.classList.add('error');
+          idMessage.classList.remove('confirm');
+          checkObj.memberId = false;
+          return;
+      }
+  });
+
+  // 중복 확인 버튼 클릭 시 중복 확인 수행
+  doubleCheck.addEventListener("click", e => {
+      const inputId = memberId.value;
+
+      // 유효한 아이디 형식인 경우 중복 검사 수행
+      // 비동기(ajax)
+      fetch("/member/checkId?memberId=" + inputId)
+      .then(response => response.text())
+      .then(count => {
+          // count : 중복 검사 여부 1이면 중복 0이면 중복 아님
+          if (count == 1) { // 중복
+              idMessage.innerText = "이미 사용중인 아이디입니다.";
+              idMessage.classList.add('error');
+              idMessage.classList.remove('confirm');
+              checkObj.memberId = false; // 중복은 유효하지 않음
+              return;
+          }
+          // 중복이 아닌 경우
+          idMessage.innerText = "사용 가능한 아이디입니다";
+          idMessage.classList.add('confirm');
+          idMessage.classList.remove('error');
+          checkObj.memberId = true; // 중복 아니라 유효
+      })
+      .catch(e => {
+          // fetch() 중 예외 발생 시 처리
+          console.log(e); // 발생한 예외(e) 출력
+      });
+  });
+
+
+
 // ----------------------------------------------
 
 /* 이메일 유효성 검사 */
@@ -515,6 +579,7 @@ signUpForm.addEventListener("submit", e => {
         case "memberPwConfirm": str = "비번이 똑같지가 않음"; break;
         case "memberNickname": str = "닉네임이 빵꾸"; break;
         case "memberTel": str = "전번이 빵꾸"; break;
+        case "memberId" : str = "아이디가 빵꾸"; break;
 
       }
 
