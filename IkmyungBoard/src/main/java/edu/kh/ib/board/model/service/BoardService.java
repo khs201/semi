@@ -31,6 +31,13 @@ public interface BoardService {
 	 */
 	Board selectOne(Map<String, Integer> map);
 
+	/** 게시판 검색
+	 * @param paramMap
+	 * @param cp
+	 * @return map
+	 */
+	Map<String, Object> searchBoard(Map<String, Object> paramMap, int cp);
+
 	
 	
 
