@@ -46,7 +46,26 @@ public class BoardController {
 		// 조회 서비스 반환값 저장용
 		Map<String, Object> map = null; 
 		
-		map = service.selectBoardList(boardCode, cp);
+		
+		
+		// 검색이 아닌 경우
+		if (paramMap.get("key") == null) {
+
+			// 게시글 목록 조회 서비스 호출
+			map = service.selectBoardList(boardCode, cp);
+
+		} else { // 검색인 경우
+			
+			// boardCode를 paramMap에 추가
+			paramMap.put("boardCode", boardCode);
+			
+			// 검색 서비스 호출
+			 map = service.searchBoard(paramMap, cp);
+			
+		}
+
+		
+		
 		
 		
 		
