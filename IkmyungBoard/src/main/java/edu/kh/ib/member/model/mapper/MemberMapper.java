@@ -37,4 +37,5 @@ public interface MemberMapper {
 	 */
 	int checkId(String memberId);
 
+
 }

@@ -2,6 +2,7 @@ package edu.kh.ib.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import edu.kh.ib.member.model.dto.Member;
 import edu.kh.ib.member.model.service.MemberService;
@@ -112,7 +114,7 @@ public class MemberController {
 		return service.checkTel(memberTel);
 	}
 	
-	/** 아이디 중복 검산
+	/** 아이디 중복 검사
 	 * @param memberId
 	 * @return
 	 */
@@ -124,6 +126,7 @@ public class MemberController {
 		
 		return service.checkId(memberId);
 	}
+	
 	
 	
 }

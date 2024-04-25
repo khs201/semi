@@ -66,13 +66,10 @@ public class EmailServiceImpl implements EmailService{
 			// HTML 코드 해석 여부 true (innerHTML 해석)
 			helper.setText( loadHtml(authKey, htmlName) , true );
 			
-			// 메일에 첨부할 이미지 파일을 ClassPathResource로 가져오기
-			ClassPathResource imageResource = new ClassPathResource("static/images/certification.png");
-			helper.addAttachment("certification.png", imageResource.getFile());
-			
-			// HTML 내에서 이미지 파일을 참조하는 방식 변경
-			// 이미지 파일의 실제 경로가 아닌, 첨부된 파일의 이름을 사용하여 참조
-			helper.setText("<img src='cid:certification.png' width='200px'>", true);
+			// CID(Content-ID)를 이용해 메일에 이미지 첨부
+			// (파일첨부와는 다름, 이메일 내용에 사용할 이미지)
+			helper.addInline("certification", new ClassPathResource("static/images/certification.png"));
+
 			
 			// -> 로고 이미지를 메일 내용에 첨부하는데
 			// 사용하고 싶으면 "logo"라는 id를 작성해라
