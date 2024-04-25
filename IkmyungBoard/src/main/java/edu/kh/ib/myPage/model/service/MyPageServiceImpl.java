@@ -39,16 +39,25 @@ public class MyPageServiceImpl implements MyPageService {
 		return mapper.updateInfo(inputMember);
 	}
 	
-	
-	/*
-	 * // 회원 탈퇴
-	 * 
-	 * @Override public int logout(String memberPw, int memberNo) {
-	 * 
-	 * String originPw = mapper.selectPw(memberPw);
-	 * 
-	 * if( !(bcrypt.matches(memberPw, originPw)) ) { return 0; }
-	 * 
-	 * return mapper.secession(memberNo); }
-	 */
+	// 비밀번호 변경
+	@Override
+	public int change(String currentPw, String newPw, Member loginMember) {
+		String  change = mapper.change(loginMember);
+		
+		if(!bcrypt.matches(currentPw , change)) {
+			return 0;
+		} else 	{
+			String encPw = bcrypt.encode(newPw);
+			loginMember.setMemberPw(encPw);
+			
+			return mapper.changePw(loginMember);
+		}
+		
+		
+
+	}
 }
+	
+	
+	
+

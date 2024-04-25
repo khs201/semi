@@ -13,6 +13,20 @@ public interface MyPageMapper {
 	 */
 	int updateInfo(Member inputMember);
 
+	/** 번호 조회
+	 * @param loginMember
+	 * @return reuslt
+	 */
+	String change(Member loginMember);
+
+	/** 비밀번호 변경
+	 * @param loginMember
+	 * @return result
+	 */
+	int changePw(Member loginMember);
+
+	
+
 	
 	/**
 	 * 회원탈퇴
