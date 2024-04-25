@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.ib.board.model.mapper.CommentMapper">
+
+<!-- 댓글 / 자식 댓글 등록 -->
+	<insert id="insert">
+  		INSERT INTO "COMMENT"	
+		VALUES( SEQ_COMMENT_NO.NEXTVAL, #{commentContent},
+			  DEFAULT, DEFAULT,	#{boardNo}, #{memberNo}, 
+			  
+			<!-- 자식 댓글 -->
+			<if test="parentCommentNo != 0">
+			  #{parentCommentNo}
+			</if>
+			
+			
+			<!-- 부모 댓글 -->
+			<if test="parentCommentNo == 0">
+			  NULL
+			</if>
+			
+			  
+		)
+  	</insert>
+
+
+</mapper>
