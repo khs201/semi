@@ -1,4 +1,4 @@
-package edu.kh.ib.myPage.mdoel.mapper;
+package edu.kh.ib.myPage.model.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 

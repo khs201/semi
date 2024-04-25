@@ -1,4 +1,4 @@
-package edu.kh.ib.myPage.mdoel.service;
+package edu.kh.ib.myPage.model.service;
 
 import edu.kh.ib.member.model.dto.Member;
 
