@@ -9,12 +9,11 @@
 
     <!-- 메뉴 -->
     <ul class="gub">
-      <li><a href="#">HOME</a></li>
-      <li><a href="#">ABOUT</a></li>
-      <li><a href="#">SERVICES</a></li>
-      <li><a href="#">CONTACT</a></li>
-      <li><a href="#">CONTACT</a></li>
-      <li><a href="#">CONTACT</a></li>
+      <th:block th:each="boardType : ${application.boardTypeList}">
+        <li>
+          <a th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}" th:text="${boardType.boardName}">게시판 이름</a>
+        </li>
+      </th:block>
     </ul>
 
     <!-- 로그인과 회원가입 버튼-->

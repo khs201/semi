@@ -1,4 +1,4 @@
-package edu.kh.ib.myPage.mdoel.service;
+package edu.kh.ib.myPage.model.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.ib.member.model.dto.Member;
-import edu.kh.ib.myPage.mdoel.mapper.MyPageMapper;
+import edu.kh.ib.myPage.model.mapper.MyPageMapper;
 import lombok.RequiredArgsConstructor;
 
 @Service
