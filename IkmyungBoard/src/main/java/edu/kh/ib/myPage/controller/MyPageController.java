@@ -12,7 +12,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.ib.member.model.dto.Member;
-import edu.kh.ib.myPage.mdoel.service.MyPageService;
+import edu.kh.ib.myPage.model.service.MyPageService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -86,6 +86,8 @@ public class MyPageController {
 		
 		return "redirect:info";
 	}
+	
+	
 	
 	
 	/*
