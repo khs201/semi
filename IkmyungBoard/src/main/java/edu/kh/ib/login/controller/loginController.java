@@ -44,7 +44,7 @@ public class loginController {
 			
 			model.addAttribute("loginMember", loginMember);
 			
-			Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail());
+			Cookie cookie = new Cookie("saveId", loginMember.getMemberId());
 			cookie.setPath("/");
 			
 			// 만료 기간 지정
@@ -69,4 +69,49 @@ public class loginController {
 		return "redirect:/";
 				
 	}
+	
+	
+	
+	/** 빠른로그인
+	 * @param memberId
+	 * @param model
+	 * @param ra
+	 * @return
+	 */
+	@GetMapping("quickLogin")
+	public String quickLogin(
+			@RequestParam("memberId") String memberId,
+			Model model,
+			RedirectAttributes ra) {
+		
+		Member loginMember = service.quickLogin(memberId);
+		
+		if(loginMember == null) {
+			ra.addFlashAttribute("message","해당 아이디 회원이 존재하지 않습니다.");
+		}else {
+			model.addAttribute("loginMember",loginMember);
+		}
+		
+		return "redirect:/";
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

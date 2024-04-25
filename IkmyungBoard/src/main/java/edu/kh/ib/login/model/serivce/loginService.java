@@ -9,6 +9,12 @@ public interface loginService {
 
 	Member login(Member inputMember);
 
+	/** 빠른 로그인
+	 * @param string
+	 * @return loginMember
+	 */
+	Member quickLogin(String memberId);
+
 	
 	
 

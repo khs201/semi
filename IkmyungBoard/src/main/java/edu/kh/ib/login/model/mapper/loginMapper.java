@@ -7,7 +7,7 @@ import edu.kh.ib.member.model.dto.Member;
 @Mapper
 public interface loginMapper {
 
-	Member login(String memberEmail);
+	Member login(String memberId);
 
 	
 
