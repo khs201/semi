@@ -23,7 +23,7 @@ public class loginServiceImpl implements loginService {
 	public Member login(Member inputMember) {
 		
 
-		Member loginMember = mapper.login(inputMember.getMemberEmail());
+		Member loginMember = mapper.login(inputMember.getMemberId());
 		
 		if(loginMember == null) return null;
 		

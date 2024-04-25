@@ -44,7 +44,7 @@ public class loginController {
 			
 			model.addAttribute("loginMember", loginMember);
 			
-			Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail());
+			Cookie cookie = new Cookie("saveId", loginMember.getMemberId());
 			cookie.setPath("/");
 			
 			// 만료 기간 지정
