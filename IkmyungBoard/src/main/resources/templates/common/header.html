@@ -29,7 +29,7 @@
     <th:block th:if="${session.loginMember != null}" th:object="${session.loginMember}">
       <div class="my-info">
         <div>
-          <a href="#" id="nickname" th:text="*{memberNickname}">닉네임</a>
+          <a href="/myPage/profile" id="nickname" th:text="*{memberNickname}">닉네임</a>
           <a href="/login/logout" id="logoutBtn">로그아웃</a>
 
         </div>
@@ -49,7 +49,7 @@
 
         <form action="/login/login" method="post" id="login-form">
           <section class="input-box">
-            <input type="text" name="memberEmail" id="username" placeholder="아이디" required>
+            <input type="text" name="memberId" id="username" placeholder="아이디" required>
           </section>
 
           <section class="input-box">
