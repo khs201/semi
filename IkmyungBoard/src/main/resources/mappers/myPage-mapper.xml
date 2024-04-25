@@ -2,20 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="edu.kh.ib.login.myPage.mapper.MyPageMapper">
 
-
-	<select id="selectPw">
-		SELECT MEMBER_PW
-		FROM "MEMBER"
-		WHERE MEMBER_NO = #{memberNo}
-	</select>
-
-
-
-	<update id="logout">
-		UPDATE MEMBER
-		SET MEMBER_DEL_FL = 'Y'
+	<!-- 회원 정보 수정 -->
+	<update id="updateInfo">
+		UPDATE "MEMBER" SET
+		MEMBER_NICKNAME = #{memberNickname},
+		MEMBER_TEL = #{memberTel},
+		MEMBER_ADDRESS = #{memberAddress}
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
+
+
+	
+
+
+
+	
 	
 	 
 

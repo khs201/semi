@@ -1,6 +1,7 @@
 package edu.kh.ib.myPage.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,22 @@ public class MyPageController {
 	private final MyPageService service;
 	
 	@GetMapping("info")
-	public String info() {
+	public String info(
+		@SessionAttribute("loginMember") Member loginMember,
+		Model model) {
+		
+		String memberAddress = loginMember.getMemberAddress();
+		
+		if(memberAddress != null) {
+			
+			String[] arr = memberAddress.split("\\^\\^\\^");
+			
+			model.addAttribute("postcode"      , arr[0]);
+			model.addAttribute("address"       , arr[1]);
+			model.addAttribute("detailAddress" , arr[2]);
+		}
+		
+		
 		return "myPage/myPage-info";
 	}
 	
@@ -36,6 +52,41 @@ public class MyPageController {
 	public String secession() {
 		return "myPage/myPage-secession";
 	}
+	
+	@PostMapping("info")
+	public String updateInfo( 	
+		Member inputMember,
+		@SessionAttribute("loginMember") Member loginMember,
+		@RequestParam("memberAddress") String[] memberAddress,
+		RedirectAttributes ra
+		) {
+		
+		// inputMember에 로그인한 회원번호 추가
+		int memberNo = loginMember.getMemberNo();
+		inputMember.setMemberNo(memberNo);
+		
+		// 회원 정보 수정 서비스 호출
+		int result = service.updateInfo(inputMember, memberAddress);
+		
+		String message = null;
+		
+		if(result > 0) {
+			message = "회원 정보 수정 성공!!";
+			
+			loginMember.setMemberNickname(inputMember.getMemberNickname());
+			
+			loginMember.setMemberTel(inputMember.getMemberTel());
+			
+			loginMember.setMemberAddress(inputMember.getMemberAddress());
+		} else {
+			message = "회원 정보 수정 실패...";
+		}
+		
+		ra.addFlashAttribute("message", message);	
+		
+		return "redirect:info";
+	}
+	
 	
 	/*
 	 * // 회원 탈퇴
