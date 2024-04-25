@@ -33,7 +33,9 @@
   </div>
   
   
-  <form action="write" method="POST" class="write-form" id="writeForm" name="writeForm">
+  <form action="write" method="POST" class="write-form" id="writeForm" name="writeForm"
+  enctype="multipart/form-data"
+  >
     
     <!-- 제목 -->
     <h1 class="write-title">
@@ -46,6 +48,18 @@
     </div>
     
     <button type="submit" id="writeBtn" class="write-btn">글 등록</button>
+
+
+    <!-- 이미지 -->
+    <div class="img-area">
+      <label for="img0">
+          <img class="preview" src="">
+      </label>
+      <input type="file" name="images" class="inputImage" id="img0" accept="image/*">
+      <span class="delete-image">&times;</span>
+  </div>
+
+
   </form>
   
   
@@ -55,3 +69,24 @@
   
 </body>
 </html>
+
+<!-- 이미지 참고 내용
+ [form 태그의 encType 속성]
+
+          encType이란?
+          - 데이터를 서버로 전송할 때 데이터의 형태(인코딩)를 지정하는 속성
+
+          * enctype="application/x-www-form-urlencoded" (기본값)
+          - URL 인코딩된 "문자열"로 서버에 제출
+
+
+          * enctype="multipart/form-data" (무조건 POST에서만 동작)
+          - 제출되는 여러 데이터 타입에 맞춰서 인코딩하여 제출
+            문자열 -> String
+            숫자 -> String -> int/double(Spring이 처리)
+            파일 -> 2진 데이터
+
+          * enctype="text/plain"
+          - 텍스트로 서버에 제출
+        
+        -->
