@@ -39,6 +39,7 @@ public class MyPageServiceImpl implements MyPageService {
 		return mapper.updateInfo(inputMember);
 	}
 	
+
 	// 비밀번호 변경
 	@Override
 	public int change(String currentPw, String newPw, Member loginMember) {
@@ -72,4 +73,5 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	
 	
+
 

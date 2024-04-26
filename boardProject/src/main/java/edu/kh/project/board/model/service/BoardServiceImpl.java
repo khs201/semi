@@ -139,7 +139,7 @@ public class BoardServiceImpl implements BoardService {
 		return -1; // 실패 한 경우 -1 반환
 	}
 	
-	// 검색 서비스  (게시글 목록 조회 참고)
+		// 검색 서비스  (게시글 목록 조회 참고)
 		@Override
 		public Map<String, Object> searchList(Map<String, Object> paramMap, int cp) {
 			
@@ -158,7 +158,6 @@ public class BoardServiceImpl implements BoardService {
 			
 			
 			// 3. 지정된 페이지의 검색 결과 목록 조회
-			
 			int limit = pagination.getLimit(); 
 			int offset = (cp - 1) * limit;
 			RowBounds rowBounds = new RowBounds(offset, limit); 

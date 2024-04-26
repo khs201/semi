@@ -13,6 +13,7 @@ public interface MyPageMapper {
 	 */
 	int updateInfo(Member inputMember);
 
+
 	/** 번호 조회
 	 * @param loginMember
 	 * @return reuslt
@@ -41,4 +42,6 @@ public interface MyPageMapper {
 
 	
 	
+
+
 }

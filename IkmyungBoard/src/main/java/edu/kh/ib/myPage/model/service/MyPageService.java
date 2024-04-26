@@ -11,6 +11,7 @@ public interface MyPageService {
 	 */
 	int updateInfo(Member inputMember, String[] memberAddress);
 
+
 	/** 비밀번호 변경
 	 * @param currentPw
 	 * @param newPw
@@ -27,6 +28,8 @@ public interface MyPageService {
 	int logout(String memberPw, Member loginMember);
 
 	
+
+
 
 	
 	
