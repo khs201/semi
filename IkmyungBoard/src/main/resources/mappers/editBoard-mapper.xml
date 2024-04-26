@@ -94,4 +94,12 @@ DEFAULT,
 		)
 	</insert>
 	
+	<!-- # : 해당 컬럼 자료형에 맞는 자료형에 맞는 리터럴로 변환 -->
+<!-- $ : SQL에 값 그대로 추가 (문자열이라도 '', "" 존재 X) -->
+<delete id="deleteImage">
+	DELETE FROM "BOARD_IMG"
+	WHERE IMG_ORDER IN (${deleteOrder})
+	AND BOARD_NO = #{boardNo}
+</delete>
+	
 </mapper>

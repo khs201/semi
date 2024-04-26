@@ -105,13 +105,13 @@ const changeImageFn = (inputImage, order) => {
 
 
 
-
-for(let i=0 ; i<inputImageList.length ; i++){
-
   // **** input태그에 이미지가 선택된 경우(값이 변경된 경우) ****
-  inputImageList[i].addEventListener("change", e => {
+  inputImageList[0].addEventListener("change", e => {
     changeImageFn(e.target, i);
   })
+
+
+for(let i=0 ; i<previewList.length ; i++){
 
 
   // **** x 버튼 클릭 시 ****

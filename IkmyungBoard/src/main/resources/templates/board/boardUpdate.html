@@ -35,17 +35,12 @@
 
 
 
-            <!-- <th:block th:each="image, iterStat : ${board.imageList}"> -->
-              <!-- iterStat.index를 사용하여 각 img 태그에 고유한 id를 부여합니다. -->
-              <!-- <img class="preview" src="" />
-              <span class="delete-image">&times;</span>
-          </th:block> -->
-
           <th:block th:each="image, iterStat : ${board.imageList}">
-  <!-- iterStat.index를 사용하여 각 img 태그와 삭제 버튼에 고유한 id 및 클래스를 부여합니다. -->
-  <img class="preview" id="preview-${iterStat.index}" src="" />
-  <span class="delete-image" id="delete-[[${iterStat.index}]]">&times;</span>
-</th:block>
+            <!-- iterStat.index를 사용하여 각 img 태그와 삭제 버튼에 고유한 id를 부여합니다. -->
+            <img class="preview" th:id="'img' + ${image.imgOrder}" src="" />
+            <span class="delete-image" th:id="${image.imgOrder}">&times;</span>
+          </th:block>
+          
 
 
 
