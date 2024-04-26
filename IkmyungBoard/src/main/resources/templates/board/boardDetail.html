@@ -96,9 +96,12 @@
 
   <div class="choochun-area">
     <!-- 버튼 꾸밀 예정 -->
-    <button>추천하기!</button>
-    
+    <button id="likeBtn">추천하기!</button>
   </div>
+
+
+
+
 
     <div id="commentArea">
       <!-- 댓글 목록 -->
@@ -149,6 +152,43 @@
     
         </ul>
       </div>
+
+
+      <!-- 게시글 수정, 삭제 버튼 영역 -->
+
+      <div class="board-btn-area">
+      
+        <!-- 로그인한 회원과 게시글 작성자 번호가 같은 경우-->
+      
+        <!-- 
+                  ${객체?.필드} : 안전 탐색 연산자(Safe Navigation Operator)
+                  객체가 null인지 판별해서 null이 아닌 경우에 수행
+               -->
+        <th:block th:if="${board.memberNo == session.loginMember?.memberNo}">
+          <button id="updateBtn">수정</button>
+          <button id="deleteBtn">삭제</button>
+        </th:block>
+        <button id="goToListBtn">목록으로</button>
+      </div>
+
+
+
+
+
+
+
+      <!-- =====================-->
+
+
+
+
+
+
+
+
+
+
+
     
     
       <!-- 댓글 작성 부분 -->
@@ -169,11 +209,31 @@
 
   <h1></h1>
   
+  <script th:inline="javascript">
+        
+    /* 로그인 상태인 경우 로그인한 회원 번호를 전역 변수 저장 */
 
+    // session.loginMember?.memberNo 
+    // - session에서 loginMember를 얻어 왔는데 
+    //   null이 아닌 경우(?) [회원 번호(memberNo)] 얻어오기
+    
+    // - loginMember가 null인 경우 [null] 반환
+    const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호" ;
+
+    /* 현재 게시글 번호를 전역 변수로 저장 */
+    const boardNo = /*[[${board.boardNo}]]*/ "게시글 번호";
+
+    /* 현재 게시글 좋아요 여부(boardLike)를 전역 변수로 저장 */
+    let likeCheck = /*[[${board.likeCheck}]]*/ "좋아요 여부";
+
+     const userDefaultIamge = /*[[#{user.default.image}]]*/ "기본이미지";
+</script>
 
 
 
   <th:block th:replace="~{common/footer}"></th:block>
+
+  <script src="/js/board/boardDetail.js"></script>
 
 </body>
 </html>

@@ -90,6 +90,12 @@
 										 th:href="@{/board/{boardCode}/{boardNo} (boardCode=${boardCode}, boardNo=*{boardNo}, cp=${pagination.currentPage})}" 
 										 th:text="*{boardTitle}">게시글 제목</a>
 
+									<!-- 검색 O -->
+									<a th:if="${param.key}"
+										 th:href="@{/board/{boardCode}/{boardNo} (boardCode=${boardCode}, boardNo=*{boardNo}, cp=${pagination.currentPage}, key=${param.key}, query=${param.query} )}" 
+										 th:text="*{boardTitle}">게시글 제목</a>
+
+
 									<th:block th:text="|[*{commentCount}]|">댓글 수</th:block>
 								</td>
 	
