@@ -25,7 +25,19 @@
 	  WHERE MEMBER_NO = #{memberNo}
 	</update>
 
+	 <!-- 비밀번호 찾기 -->
+	 <select id="selectPw">
+	   SELECT MEMBER_PW
+	   FROM "MEMBER"
+	   WHERE MEMBER_NO = #{memberNo}
+	 </select>
 	 
-
+	 
+	 <!-- y로 바꾸기 -->
+	 <update id="logout">
+	   UPDATE MEMBER
+	   SET MEMBER_DEL_FL = 'Y'
+	   WHERE MEMBER_NO = #{memberNo}
+	 </update>
 
 </mapper>

@@ -54,7 +54,19 @@ public class MyPageServiceImpl implements MyPageService {
 		}
 		
 		
-
+	}
+	
+	// 계정 탈퇴
+	@Override
+	public int logout(String memberPw, Member loginMember) {
+		String logout = mapper.selectPw(loginMember);
+		
+		if(!bcrypt.matches(memberPw, logout)) {
+			return 0;
+		} else {
+			
+		return mapper.logout(loginMember);
+		}
 	}
 }
 	

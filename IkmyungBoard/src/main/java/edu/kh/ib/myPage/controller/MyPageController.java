@@ -1,5 +1,7 @@
 package edu.kh.ib.myPage.controller;
 
+import java.lang.ProcessBuilder.Redirect;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -113,6 +115,33 @@ public class MyPageController {
 
 	
 	 
-	  
+	 @PostMapping("secession")
+	 public String secession(
+		@RequestParam("memberPw") String memberPw,
+		@SessionAttribute("loginMember") Member loginMember,
+		SessionStatus status,
+		RedirectAttributes ra
+		) {
+		 
+		 int result = service.logout(memberPw, loginMember);
+		 
+		 String message = null;
+		 String path = null;
+		 
+		 if(result == 0) {
+			 message = "비밀번호가 일치하지 않습니다";
+			 path = "/myPage/secession";
+		 } else {
+			 message = "탈퇴 되었습니다";
+			 path = "/";
+			 
+			 status.setComplete();
+		 }
+		 
+		 ra.addFlashAttribute("message", message);
+		 
+		 
+		 return "redirect:" + path;
+	 }
 	 
 }

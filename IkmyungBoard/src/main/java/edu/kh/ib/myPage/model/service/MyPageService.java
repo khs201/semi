@@ -19,6 +19,13 @@ public interface MyPageService {
 	 */
 	int change(String currentPw, String newPw, Member loginMember);
 
+	/** 계정 탈퇴
+	 * @param memberPw
+	 * @param loginMember
+	 * @return
+	 */
+	int logout(String memberPw, Member loginMember);
+
 	
 
 	
