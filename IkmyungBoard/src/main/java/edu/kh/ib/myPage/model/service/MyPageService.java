@@ -11,6 +11,26 @@ public interface MyPageService {
 	 */
 	int updateInfo(Member inputMember, String[] memberAddress);
 
+
+	/** 비밀번호 변경
+	 * @param currentPw
+	 * @param newPw
+	 * @param loginMember
+	 * @return result
+	 */
+	int change(String currentPw, String newPw, Member loginMember);
+
+	/** 계정 탈퇴
+	 * @param memberPw
+	 * @param loginMember
+	 * @return
+	 */
+	int logout(String memberPw, Member loginMember);
+
+	
+
+
+
 	
 	
 	

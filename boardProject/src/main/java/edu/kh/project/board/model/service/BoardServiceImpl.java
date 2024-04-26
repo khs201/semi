@@ -142,7 +142,11 @@ public class BoardServiceImpl implements BoardService{
 		}
 		
 		
-		// 검색 서비스 (게시글 목록 조회)
+
+		return -1; // 실패 한 경우 -1 반환
+	}
+	
+		// 검색 서비스  (게시글 목록 조회 참고)
 		@Override
 		public Map<String, Object> searchList(Map<String, Object> paramMap, int cp) {
 			
