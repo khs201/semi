@@ -1,5 +1,9 @@
 package edu.kh.ib.myPage.model.service;
 
+import java.io.IOException;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import edu.kh.ib.member.model.dto.Member;
 
 public interface MyPageService {
@@ -26,6 +30,14 @@ public interface MyPageService {
 	 * @return
 	 */
 	int logout(String memberPw, Member loginMember);
+
+
+	/** 프로필 이미지 변경
+	 * @param profileImg
+	 * @param loginMember
+	 * @return result
+	 */
+	int profile(MultipartFile profileImg, Member loginMember) throws IllegalStateException, IOException;
 
 	
 

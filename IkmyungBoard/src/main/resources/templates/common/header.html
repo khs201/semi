@@ -28,6 +28,17 @@
     <th:block th:if="${session.loginMember != null}" th:object="${session.loginMember}">
       <div class="my-info">
         <div>
+          <a href="/myPage/profile ">
+            <!-- 프로필 이미지 -->
+            
+            <!-- messages.properties에 작성된 기본 사용자 이미지 -->
+            <img th:with="user=#{user.default.image}" 
+                th:src="${session.loginMember.profileImg ?: user }" 
+                          id="memberProfile"
+                          class="memberProfile"
+                          alt="프로필 이미지 없음" >
+          </a>
+          <br>
           <a href="/myPage/profile" id="nickname" th:text="*{memberNickname}">닉네임</a>
           <a href="/login/logout" id="logoutBtn">로그아웃</a>
 
