@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${boardName}">게시판 이름</title>
+            <title th:text="${boardName}">게시판 이름</title>
 
-    <th:block th:replace="~{common/common}"></th:block>
-    
+            <th:block th:replace="~{common/common}"></th:block>
+
     <link rel="stylesheet" th:href="@{/css/board/boardWrite-style.css}">
 </head>
 <body>
     <main>
         <th:block th:replace="~{common/header}"></th:block>
 
-        <!-- <form th:action="@{/editBoard/{boardCode}/insert(boardCode=${boardCode})}"  -->
-        <form action="insert" 
+        <!-- <form th:action="@{/editCodeboard2/{boardCode}/insert(boardCode=${boardCode})}"  -->
+        <form th:action="@{insert}" 
             th:object="${board}"
-            method="POST"  class="board-write" id="boardWriteFrm" 
-            enctype="multipart/form-data">  
+            method="POST"  class="board-write" id="boardWriteFrm" enctype="multipart/form-data">  
 
             <h1 class="board-name" th:text="${boardName}">게시판 이름</h1>
 

@@ -160,8 +160,8 @@ SELECT BOARD_NO, BOARD_TITLE,
 		ORDER BY IMG_ORDER
 	</select>
 	
-	<!-- 상세 조회한 게시글의 댓글 목록 조회 @@@@아직 상세 구현 확인 안함@@@@@@-->
-	<select id="selectCommentList" resultType="Comment">
+	<!-- 상세 조회한 게시글의 댓글 목록 조회 @@@@@아직 상세 구현 확인 안함@@@@@@@-->
+	<select id="selectCommentList" resultType = "Comment">
 		SELECT LEVEL, C.* FROM
 			(SELECT COMMENT_NO, COMMENT_CONTENT,
 			    TO_CHAR(COMMENT_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') COMMENT_WRITE_DATE,
@@ -178,6 +178,7 @@ SELECT BOARD_NO, BOARD_TITLE,
 		ORDER SIBLINGS BY COMMENT_NO
 	
 	</select>
+	
 
 
 

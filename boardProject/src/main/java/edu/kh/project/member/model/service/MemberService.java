@@ -12,7 +12,7 @@ public interface MemberService {
 	 */
 	Member login(Member inputMember);
 
-	/** 회원가입 서비스
+	/**
 	 * @param inputMember
 	 * @param memberAddress
 	 * @return result
@@ -27,22 +27,21 @@ public interface MemberService {
 
 	/** 닉네임 중복 검사
 	 * @param memberNickname
-	 * @return count
+	 * @return
 	 */
 	int checkNickname(String memberNickname);
 
-	/** 전화번호 중복 검사
-	 * @param memberTel
-	 * @return count
-	 */
-	int checkTel(String memberTel);
-
 	/** 빠른 로그인
 	 * @param memberEmail
-	 * @return  loginMember
+	 * @return loginMember
 	 */
-	Member quickLogin(String memberEmail);
+	Member quickLigin(String memberEmail);
 
-	List<Member> selectMemberList();
+	
+	/** 회원 목록 조회
+	 * @return memberList
+	 */
+	List<Member> selectmemberList();
+
 
 }
