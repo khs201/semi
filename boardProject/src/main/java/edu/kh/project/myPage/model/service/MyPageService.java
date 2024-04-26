@@ -16,48 +16,72 @@ public interface MyPageService {
 	 * @return result
 	 */
 	int updateInfo(Member inputMember, String[] memberAddress);
-
-	/** 비번 변경
-	 * @param loginMember
+	
+	
+	/** 비밀번호 수정
 	 * @param currentPw
 	 * @param newPw
-	 * @return
+	 * @param loginMember
+	 * @return result
 	 */
-	int changePw(Member loginMember, String currentPw, String newPw);
+	int memberPw(String currentPw, String newPw, Member loginMember);
+
 
 	/** 회원 탈퇴
+	 * @param memberPw
 	 * @param loginMember
-	 * @param currentPw
-	 * @return
+	 * @return result
 	 */
-	int secession(Member loginMember, String currentPw);
+	int selectPw(String memberPw, Member loginMember);
 
-	String fileUpload1(MultipartFile uploadFile) throws IllegalStateException, IOException ;
 
-	/** 업로드 테스트 2 (+DB)
+	/** 파일 업로드 테스트1
 	 * @param uploadFile
-	 * @param memberNo
+	 * @return path
+	 */
+	String fileUpload1(MultipartFile uploadFile) throws IllegalStateException, IOException;
+
+
+	/** 파일 업로드 테스트2 (+DB)
+	 * @param uploadFile
+	 * @param memberNo 
 	 * @return result
 	 */
 	int fileUpload2(MultipartFile uploadFile, int memberNo) throws IllegalStateException, IOException;
 
-	/** 파일 목록 조회
+
+	/** 파일 목록 조회 
 	 * @return
 	 */
 	List<UploadFile> fileList();
 
+	
 	/** 여러 파일 업로드
 	 * @param aaaList
 	 * @param bbbList
+	 * @param memberNo
 	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
 	 */
-	int fileUpload3(List<MultipartFile> aaaList, List<MultipartFile> bbbList, int memberNo) throws IllegalStateException, IOException;
+	int fileUpload3(List<MultipartFile> aaaList,
+			        List<MultipartFile> bbbList, 
+			        int memberNo) 
+			        throws IllegalStateException, IOException;
 
-	/** 프로파일 이미지 변경
+
+	/** 프로필 이미지 변경
 	 * @param profileImg
 	 * @param memberNo
 	 * @return
 	 */
 	int profile(MultipartFile profileImg, Member loginMember) throws IllegalStateException, IOException;
+
+
+
+	
+	
+	
+	
 
 }

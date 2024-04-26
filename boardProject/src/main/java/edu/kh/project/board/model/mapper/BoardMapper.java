@@ -16,7 +16,7 @@ public interface BoardMapper {
 	 */
 	List<Map<String, Object>> selectBoardTypeList();
 
-	/** 게시글 수를 조회
+	/** 게시글 수 조회
 	 * @param boardCode
 	 * @return listCount
 	 */
@@ -35,34 +35,26 @@ public interface BoardMapper {
 	 */
 	Board selectOne(Map<String, Integer> map);
 
-	/** 좋아요 해제(delete)
+	/** 좋아요 해제(DELETE)
 	 * @param map
-	 * @return
+	 * @return result
 	 */
 	int deleteBoardLike(Map<String, Integer> map);
 
-	/** 좋아요 체크(insert)
+	/** 좋아요 체크(INSERT)
 	 * @param map
-	 * @return
+	 * @return result
 	 */
 	int insertBoardLike(Map<String, Integer> map);
 
 	/** 게시글 좋아요 개수 조회
-	 * @param temp
-	 * @return count
+	 * @param integer
+	 * @return result
 	 */
-	int selectLikeCount(int temp);
+	int selectLikeCount(Integer integer);
 
-	/** 조회수 1 증가
-	 * @param boardNo
-	 * @return
-	 */
 	int updateReadCount(int boardNo);
 
-	/** 조회 수 조회
-	 * @param boardNo
-	 * @return
-	 */
 	int selectReadCount(int boardNo);
 
 	/** 검색 조건이 맞는 게시글 수 조회
@@ -71,10 +63,11 @@ public interface BoardMapper {
 	 */
 	int getSearchCount(Map<String, Object> paramMap);
 
+	
 	/** 검색 결과 목록 조회
 	 * @param paramMap
 	 * @param rowBounds
-	 * @return boardList 
+	 * @return boardList
 	 */
 	List<Board> selectSearchList(Map<String, Object> paramMap, RowBounds rowBounds);
 
