@@ -2,23 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="edu.kh.project.main.model.mapper.MainMapper">
 
-	<!-- 비밀번호 초기화 -->
-	<update id="resetPw">
+<!-- 비밀번호 초기화 -->
+<update id="resetPw">
 	UPDATE "MEMBER" SET
 	MEMBER_PW = #{encPw}
 	WHERE MEMBER_NO = #{inputNo}
-	</update>
+</update>
 
-	<!-- 탈퇴 회원 재가입 시키기 -->
-	<update id="resetReg">
+<!-- 회원 탈퇴 복구 -->
+<update id="returnMember">
 	UPDATE "MEMBER" SET
 	MEMBER_DEL_FL = 'N'
 	WHERE MEMBER_NO = #{inputNo}
-	</update>
-	
-	<delete id="delMem">
-	DELETE FROM "MEMBER"
-	WHERE MEMBER_NO = #{inputNo}
-	</delete>
+</update>
 
 </mapper>

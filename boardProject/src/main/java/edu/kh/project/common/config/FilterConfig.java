@@ -5,6 +5,8 @@ import java.util.Arrays;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.project.common.filter.LoginFilter;
 
@@ -30,7 +32,12 @@ public class FilterConfig {
 		
 		String[] filteringURL = {"/myPage/*", "/editBoard/*"};
 		
-		filter.setUrlPatterns(Arrays.asList(filteringURL));
+		// 필터가 동작할 URL을 세팅
+		
+		// Arrays.asList(filteringURL)
+		// -> filteringURL 배열을 List로 변환
+		filter.setUrlPatterns( Arrays.asList(filteringURL) );
+		
 		
 		// 필터 이름 지정
 		filter.setName("loginFilter");
@@ -40,6 +47,8 @@ public class FilterConfig {
 		
 		return filter; // 반환된 객체가 필터를 생성해서 Bean으로 등록
 	}
+	
+
 	
 	
 	

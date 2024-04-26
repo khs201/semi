@@ -121,22 +121,23 @@ for(let i=0 ; i<inputImageList.length ; i++){
 
     // 삭제된 이미지 순서를 deleteOrder에 기록
 
-    // 미리보기 이미지가 있을 때에만
-    if (previewList[i].getAttribute("src") != null && previewList[i].getAttribute("src") != "") {
+    // 미리보기 이미지가 있을 때만
+    if(previewList[i].getAttribute("src") != null
+       && previewList[i].getAttribute("src") != ""){
 
-      // 기존에 이미지가 존재하고 있을 때에만
-      if (orderList.includes(i)) {
+        // 기존에 이미지가 존재하고 있을 경우에만
+        if(orderList.includes(i) ){
+            deleteOrder.add(i); 
+        }
 
-        deleteOrder.add(i);
-      }
+        
     }
 
-
     
+
     previewList[i].src       = ""; // 미리보기 이미지 제거
     inputImageList[i].value  = ""; // input에 선택된 파일 제거
-    backupInputList[i]       = undefined; // 백업본 제거
-
+    backupInputList[i] = undefined; // 백업본 제거
   });
 }
 
