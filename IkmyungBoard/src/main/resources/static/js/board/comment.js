@@ -88,7 +88,7 @@ const selectCommentList = () => {
   
               // 수정 버튼에 onclick 이벤트 리스너 추가 
               updateBtn.setAttribute("onclick", 
-              `showInsertComment(${comment.commentNo}, this)`);
+              `showUpdateComment(${comment.commentNo}, this)`);
               
               // 삭제 버튼
               const deleteBtn = document.createElement("button");
@@ -264,14 +264,14 @@ const insertChildComment = (parentCommentNo, btn) => {
 const data = {
   "commentContent" : textarea.value,
   "boardNo"        : boardNo,
-  "memberNo"       : loginMemberNo,  // 또는 Session 회원 번호 이용도 가능
-  "parentCommentNo" : parentCommentNo // 부모 댓글 번호
+  "memberNo"       : loginMemberNo, 
+  "parentCommentNo" : parentCommentNo 
 };
 
 fetch("/comment", {
   method : "POST",
   headers : {"Content-Type" : "application/json"},
-  body : JSON.stringify(data) // data 객체를 JSON 문자열로 변환
+  body : JSON.stringify(data) 
 })
 
 .then(response => response.text())
@@ -279,7 +279,7 @@ fetch("/comment", {
 
   if(result > 0){
     alert("답글이 등록 되었습니다");
-    selectCommentList(); // 댓글 목록을 다시 조회해서 화면에 출력
+    selectCommentList();
 
   } else{
     alert("답글 등록 실패");
@@ -310,7 +310,7 @@ const deleteComment = commentNo => {
 
   if(result > 0){
       alert("삭제 되었습니다");
-      selectCommentList(); // 다시 조회해서 화면 다시 만들기
+      selectCommentList(); 
       
       } else {
       alert("삭제 실패");
@@ -327,10 +327,7 @@ const deleteComment = commentNo => {
 // 수정 취소 시 원래 댓글 형태로 돌아가기 위한 백업 변수
 let beforeCommentRow;
 
-/** 댓글 수정 화면 전환
-* @param{*} commentNo
-* @param{*} btn
-*/
+/*  댓글 수정 화면 전환 */
 const showUpdateComment = (commentNo,btn) => {
 
 /* 댓글 수정 화면이 1개만 열릴 수 있게 하기 */
@@ -358,10 +355,7 @@ if(temp != null){
 const commentRow = btn.closest("li");
 
 // 2.행 전체를 백업
-// 요소.cloneNode(true) : 요소 복제,
-// 매개변수 true == 하위 요소도 복제
 beforeCommentRow = commentRow.cloneNode(true);
-// console.log(beforeCommentRow);
 
 // 3. 기존 댓글에 작성되어 있던 내용만 얻어오기
 let beforeContent = commentRow.children[1].innerText;
