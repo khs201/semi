@@ -9,13 +9,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
+@ToString
 public class BoardImg {
+
 	private int imgNo;
 	private String imgPath;
 	private String imgOriginalName;
@@ -23,6 +25,8 @@ public class BoardImg {
 	private int imgOrder;
 	private int boardNo;
 	
-	// 게시글 이미지 삽입/수정 때 사용
+	// 게시글 이미지 삽입/수정 시 사용
 	private MultipartFile uploadFile;
+	
+	
 }
