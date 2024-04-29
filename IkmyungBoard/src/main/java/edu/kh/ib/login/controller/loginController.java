@@ -44,11 +44,14 @@ public class loginController {
 			
 			model.addAttribute("loginMember", loginMember);
 			
+			// 아이디 저장
 			Cookie cookie = new Cookie("saveId", loginMember.getMemberId());
-			cookie.setPath("/");
 			
+			// 클라이언트가 어떤 요청을 할 떄 쿠키가 첨부될지 지정
+			cookie.setPath("/");
+			 
 			// 만료 기간 지정
-			if(saveId != null) { 
+			if(saveId != null) { // 아이디 저장 시 체크
 				cookie.setMaxAge(30 *24 * 60 * 60); 
 			} else {
 				cookie.setMaxAge(0);
@@ -56,7 +59,6 @@ public class loginController {
 			
 			// 응답 객체에 쿠키 추가 -> 클라이언트로 전달
 			resp.addCookie(cookie);
-			
 			
 		}
 		

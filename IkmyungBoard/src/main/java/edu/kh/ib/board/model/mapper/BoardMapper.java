@@ -54,6 +54,19 @@ public interface BoardMapper {
 	 */
 	List<Board> selectSearchBoard(Map<String, Object> paramMap, RowBounds rowBounds);
 
+
+	/** 조회수 1 증가
+	 * @param boardNo
+	 * @return 
+	 */
+	int updateReadCount(int boardNo);
+
+	/** 조회 수 조회
+	 * @param boardNo
+	 * @return
+	 */
+	int selectReadCount(int boardNo);
+
 	/** 좋아요 체크 해제
 	 * @param map
 	 * @return
@@ -71,6 +84,7 @@ public interface BoardMapper {
 	 * @return
 	 */
 	int selectLikeCount(Integer integer);
+
 
 
 	
