@@ -72,6 +72,12 @@ public interface BoardMapper {
 	 */
 	int selectLikeCount(Integer integer);
 
+	/** 게시글 인기글
+	 * @param boardCode
+	 * @return
+	 */
+	List<Board> selectPopularBoardList(int boardCode);
+
 
 	
 	

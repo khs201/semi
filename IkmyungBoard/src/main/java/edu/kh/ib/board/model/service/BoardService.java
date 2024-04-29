@@ -44,6 +44,12 @@ public interface BoardService {
 	 */
 	int boardLike(Map<String, Integer> map);
 
+	/** 게시글 인기글
+	 * @param boardCode
+	 * @return
+	 */
+	List<Board> getPopularBoardList(int boardCode);
+
 	
 	
 

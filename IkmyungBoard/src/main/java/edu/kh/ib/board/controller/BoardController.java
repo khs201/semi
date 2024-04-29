@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -215,5 +216,56 @@ public class BoardController {
 
 		return service.boardLike(map);
 	}
+	
+	
+	/** 게시글 인기글
+	 * @param boardCode
+	 * @return
+	 */
+	@GetMapping("{boardCode:[0-9]+}/popular")
+	public String boardPopular(
+		@PathVariable("boardCode") int boardCode,
+		Model model) {
+		
+		List<Board> popularBoardList = service.getPopularBoardList(boardCode);
+		
+		model.addAttribute("popularBoardList", popularBoardList);
+		
+		return "board/board";
+	}
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

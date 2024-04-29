@@ -57,3 +57,12 @@ const options = document.querySelectorAll("#searchKey > option");
 }
 )
 ();
+
+/* 인기글 버튼 */
+const popularBtn = document.querySelector("#popularBtn");
+
+popularBtn.addEventListener("click", e=>{
+
+  location.href = `/Board/${boardCode}/popular`;
+
+})

@@ -82,3 +82,53 @@ tbody tr td { /* tbody 내 td 테두리 제거 */
   color: white !important;
   letter-spacing: 0 !important;
 }
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 수직 가운데 정렬 */
+  padding: 20px; /* 좌우 여백 추가 */
+}
+
+.searchArea {
+  background-color: #f0f0f0; /* 배경색 설정 */
+  padding: 10px 20px; /* 내부 여백 설정 */
+  border-radius: 5px; /* 모서리를 둥글게 만듦 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+
+.popular {
+  background-color: #f9f9f9; /* 배경색 설정 */
+  padding: 10px 20px; /* 내부 여백 설정 */
+  border-radius: 5px; /* 모서리를 둥글게 만듦 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+
+/* 검색창 스타일 */
+#searchKey,
+#searchQuery,
+button {
+  padding: 8px; /* 내부 여백 설정 */
+  border: none; /* 테두리 없앰 */
+  border-radius: 3px; /* 모서리를 둥글게 만듦 */
+}
+
+button {
+  background-color: #455ba8; /* 배경색 설정 */
+  color: white; /* 글자색 설정 */
+  cursor: pointer; /* 커서를 포인터로 변경 */
+}
+
+button:hover {
+  background-color: #3c4d84; /* 마우스 오버 시 배경색 변경 */
+}
+
+/* 링크 스타일 */
+a {
+  text-decoration: none;
+  color: #333; /* 링크 색상 설정 */
+}
+
+a:hover {
+  text-decoration: underline;
+}
