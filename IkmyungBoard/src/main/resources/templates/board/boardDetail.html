@@ -79,6 +79,23 @@
     <button id="likeBtn">추천하기!</button>
   </div>
 
+        <!-- 게시글 수정, 삭제 버튼 영역 -->
+
+        <div class="board-btn-area">
+      
+          <!-- 로그인한 회원과 게시글 작성자 번호가 같은 경우-->
+        
+          <!-- 
+                    ${객체?.필드} : 안전 탐색 연산자(Safe Navigation Operator)
+                    객체가 null인지 판별해서 null이 아닌 경우에 수행
+                 -->
+          <th:block th:if="${board.memberNo == session.loginMember?.memberNo}">
+            <button id="updateBtn">수정</button>
+            <button id="deleteBtn">삭제</button>
+          </th:block>
+          <button id="goToListBtn">목록으로</button>
+        </div>
+
 
 
 
@@ -134,22 +151,7 @@
       </div>
 
 
-      <!-- 게시글 수정, 삭제 버튼 영역 -->
 
-      <div class="board-btn-area">
-      
-        <!-- 로그인한 회원과 게시글 작성자 번호가 같은 경우-->
-      
-        <!-- 
-                  ${객체?.필드} : 안전 탐색 연산자(Safe Navigation Operator)
-                  객체가 null인지 판별해서 null이 아닌 경우에 수행
-               -->
-        <th:block th:if="${board.memberNo == session.loginMember?.memberNo}">
-          <button id="updateBtn">수정</button>
-          <button id="deleteBtn">삭제</button>
-        </th:block>
-        <button id="goToListBtn">목록으로</button>
-      </div>
 
 
 
