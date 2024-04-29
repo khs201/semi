@@ -49,7 +49,6 @@ boardLike.addEventListener("click", e => {
       return;
     }
 
-
     // 5. likeCheck 값 0 <-> 1 변환
     //  (왜? 클릭 될 때 마다 INSERT/DELETE 동작을 번갈아 가면서 할 수 있음)
     likeCheck = likeCheck == 0 ? 1 : 0;
@@ -66,79 +65,50 @@ boardLike.addEventListener("click", e => {
 
 });
 
-/* 삭제(GET) */
+// 게시글 삭제
 const deleteBtn = document.querySelector("#deleteBtn");
-
 if(deleteBtn != null){
-  deleteBtn.addEventListener("click", () => {
-    if( !confirm("삭제 하시겠습니까?") ) {
-      alert("취소됨")
-      return;
-    }
+deleteBtn.addEventListener("click", e => {
 
-    const url = location.pathname.replace("board","editBoard") + "/delete"; // /editBoard/1/2000/delete
-    const queryString = location.search; // ? cp=1
-    location.href = url + queryString;
-  });
+  const boardCode = location.pathname.split("/")[2];
+
+  // console.log(`/editBoard/${boardCode}/${boardNo}/delete`);
+
+  if(confirm("삭제할꺼임?")){
+
+  location.href = `/editBoard/${boardCode}/${boardNo}/delete`;
+} else {
+  alert("취소됨");
 }
 
 
-/* 삭제(POST) */
-const deleteBtn2 = document.querySelector("#deleteBtn2");
-
-if(deleteBtn2 != null){
-  deleteBtn2.addEventListener("click", () => {
-
-    if( !confirm("삭제 하시겠습니까?") ) {
-      alert("취소됨")
-      return;
-    }
-
-    const url = location.pathname.replace("board","editBoard")  + "/delete"; 
-
-    // form태그 생성
-    const form = document.createElement("form");
-    form.action = url;
-    form.method = "POST";
-
-    // cp값을 저장할 input 생성
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = "cp";
-
-    // 쿼리스트링에서 원하는 파라미터 얻어오기
-    const params = new URLSearchParams(location.search)
-    const cp = params.get("cp");
-    input.value = cp;
-
-    form.append(input);
-
-    // 화면에 form태그를 추가한 후 제출하기
-    document.querySelector("body").append(form);
-    form.submit();
-  });
+})
 }
 
 
-
-/* -------------- 게시글 수정 버튼 ---------------- */
+/* -------- 게시글 수정 버튼 */
 const updateBtn = document.querySelector("#updateBtn");
 
 if(updateBtn != null){ // 수정 버튼 존재 시
   updateBtn.addEventListener("click", () => {
 
-    // 현재 : /board/1/2010?cp=1 
-    // 목표 : /editBoard/1/2010/update?cp=1  (GET 방식)
-    location.href =  location.pathname.replace('board', 'editBoard')
-                     + "/update"
-                     + location.search;
+    // /editBoard/1/2010/update?cp=1 (get 방식)
 
-  }) 
+    // 현재 : /board/1/2010?cp=1
+    // 목표 : /editBoard/1/21010/update?cp=1 (get방식)
+    location.href = location.pathname.replace('board', 'editBoard')
+                    + "/update" 
+                    + location.search
+
+  })
+
 }
 
 
 
-// ---------------------------------------------------
+
+
+//-----------------------------
 
 /* 목록으로 돌아가는 버튼 */
 const goToListBtn = document.querySelector("#goToListBtn");
@@ -154,3 +124,16 @@ goToListBtn.addEventListener("click", () => {
   location.href = url + location.search;
                         // 쿼리스트링
 });
+
+
+
+
+
+
+
+
+
+
+
+
+

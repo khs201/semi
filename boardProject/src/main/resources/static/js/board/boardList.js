@@ -2,38 +2,43 @@
 
 const insertBtn = document.querySelector("#insertBtn");
 
-// 글쓰기 버튼이 존재할 때(로그인 상태인 경우)
-if(insertBtn != null){
-  insertBtn.addEventListener('click', () => {
-    
-    // * boardCode 얻어오는 방법 *
-    // 1) @PathVariable("boardCode") 얻어와 전역 변수 저장
-    // 2) location.pathname.split("/")[2]
+if (insertBtn != null) { // 글쓰기 버튼이 존재할 때 (로그인 상태인 경우)
+insertBtn.addEventListener("click", () => {
 
-    // get방식 요청
-    location.href = `/editBoard/${boardCode}/insert`;
-  })
+  // * boardCode 얻어오는 방법 : 
+  // 1) @PathVariable("boardCode") 얻어와 전역 변수 저장
+  // 2) location.pathname.split("/")[2]
 
+  // location.href : get 방식 요청
+  location.href = `/editBoard/${boardCode}/insert`;
+
+  
+});
 }
 
+
 /* 검색 관련된 요소 */
+
 const searchKey = document.querySelector("#searchKey");
 const searchQuery = document.querySelector("#searchQuery");
+
 const options = document.querySelectorAll("#searchKey > option");
+
 
 
 // 검색창에 이전 검색 기록을 남겨놓기
 
-// 즉시 실행 함수 ( () => {} )();
+// 즉시 실행 함수  (() => {})();
 // - 함수가 정의 되자마자 바로 실행
 
 // 장점 1. 변수명 중복 해결
 // 장점 2. 조금 더 빠름(속도적 우위)
 
 
-( () => {} )();
+(()=>{
 
-  // 쿼리스트링 값을 key,value 구분해서 저장하는 객체 반환
+  // 쿼리스트링 값을 key, value 구분해서 저장하는 객체 반환
+  
   const params = new URL(location.href).searchParams;
 
   const key = params.get("key"); // t, c, tc, w 중 하나
@@ -50,3 +55,6 @@ const options = document.querySelectorAll("#searchKey > option");
           }
       }
   }
+}
+)
+();
