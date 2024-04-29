@@ -53,6 +53,18 @@
   font-size: 16px; /* 내용 크기를 설정합니다. */
 }
 
+.like{
+  background-color: #fff;
+  color: black !important;
+  border: 1px solid black !important;
+}
+
+.notlike {
+  
+}
+
+
+
 /* 추천 영역 스타일 */
 .choochun-area button {
   background-color: #007bff;

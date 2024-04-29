@@ -2,7 +2,6 @@ package edu.kh.project.board.model.service;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,27 +16,21 @@ public interface EditBoardService {
 	 */
 	int boardInsert(Board inputBoard, List<MultipartFile> images) throws IllegalStateException, IOException;
 
-	
 	/** 게시글 삭제
-	 * @param map
-	 * @return result
+	 * @param boardCode
+	 * @param boardNo
+	 * @return
 	 */
-	int boardDelete(Map<String, Integer> map);
+	int boardDelete(int boardCode, int boardNo);
 
-	
 	/** 게시글 수정
 	 * @param inputBoard
 	 * @param images
 	 * @param deleteOrder
-	 * @return result
-	 * @throws IOException 
-	 * @throws IllegalStateException 
+	 * @return result 
 	 */
-	int boardUpdate(Board inputBoard, 
-			List<MultipartFile> images,
-			String deleteOrder)
-    throws IllegalStateException, IOException;
+	int boardUpdate(Board inputBoard, List<MultipartFile> images, String deleteOrder) throws IllegalStateException, IOException;
 
-	
+
 
 }

@@ -10,12 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.ib.board.model.dto.Board;
 import edu.kh.ib.board.model.service.BoardService;
+import edu.kh.ib.member.model.dto.Member;
 import edu.kh.ib.board.model.dto.BoardImg;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,31 +28,24 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-
 @Controller
 @RequestMapping("board")
 @RequiredArgsConstructor
 @Slf4j
 public class BoardController {
-	
+
 	private final BoardService service;
-	
-	
+
 	@GetMapping("{boardCode:[0-9]+}")
-	public String selectBoard(
-			@PathVariable("boardCode") int boardCode,
-			Model model,
-			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
-			@RequestParam Map<String, Object> paramMap
-			) {
-		
+	public String selectBoard(@PathVariable("boardCode") int boardCode, Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam Map<String, Object> paramMap) {
+
 		String boardName = service.getBoardName(boardCode);
-		
+
 		// 조회 서비스 반환값 저장용
-		Map<String, Object> map = null; 
-		
-		
-		
+		Map<String, Object> map = null;
+
 		// 검색이 아닌 경우
 		if (paramMap.get("key") == null) {
 
@@ -55,37 +53,31 @@ public class BoardController {
 			map = service.selectBoardList(boardCode, cp);
 
 		} else { // 검색인 경우
-			
+
 			// boardCode를 paramMap에 추가
 			paramMap.put("boardCode", boardCode);
-			
+
 			// 검색 서비스 호출
-			 map = service.searchBoard(paramMap, cp);
-			
+			map = service.searchBoard(paramMap, cp);
+
 		}
 
-		
-		
-		
-		
-		
 		model.addAttribute("boardCode", boardCode);
 		model.addAttribute("boardName", boardName);
 		model.addAttribute("pagination", map.get("pagination"));
 		model.addAttribute("boardList", map.get("boardList"));
-		
-		
+
 		return "board/board";
-		
+
 	}
-	
+
 	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}")
 	public String detailBoard(
 			@PathVariable("boardCode") int boardCode,
 			@PathVariable("boardNo") int boardNo,
 			Model model,
 			RedirectAttributes ra,
-			/* 이거 DTO 없어서 아직 못 넣음 @SessionAttribute(value = "loginMember", required = false) Member loginMember,*/
+			@SessionAttribute(value = "loginMember", required = false) Member loginMember,
 			HttpServletRequest req,
 			HttpServletResponse resp
 			) {
@@ -97,10 +89,11 @@ public class BoardController {
 		map.put("boardCode", boardCode);
 		map.put("boardNo", boardNo);
 		
-		/*        !!!!!!!!!!!!!!!!! 아직 미구현  !!!!!!!!!!!!!!!!!
-		 * if(loginMember != null) { // 로그인 상태인 경우에만 memberNo 추가 map.put("memberNo",
-		 * loginMember.getMemberNo()); }
-		 */
+		if(loginMember != null) { 
+		  // 로그인 상태인 경우에만 memberNo 추가 
+		  map.put("memberNo", loginMember.getMemberNo()); 
+		}
+		
 		
 		Board board = service.selectOne(map);
 		
@@ -210,8 +203,17 @@ public class BoardController {
 		
 		
 	}
-	
-	
-	
+
+	/**
+	 * 게시글 좋아요 체크/해제
+	 * 
+	 * @return count
+	 */
+	@ResponseBody
+	@PostMapping("like")
+	public int boardLike(@RequestBody Map<String, Integer> map) {
+
+		return service.boardLike(map);
+	}
 
 }

@@ -3,6 +3,7 @@ package edu.kh.project.myPage.controller;
 import java.io.IOException;
 import java.util.List;
 
+import org.eclipse.angus.mail.handlers.multipart_mixed;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,92 +21,97 @@ import edu.kh.project.member.model.dto.Member;
 import edu.kh.project.myPage.model.dto.UploadFile;
 import edu.kh.project.myPage.model.service.MyPageService;
 import lombok.RequiredArgsConstructor;
-import oracle.jdbc.proxy.annotation.Post;
 
-@SessionAttributes({"loginMember"})
+
 @Controller
 @RequestMapping("myPage")
 @RequiredArgsConstructor
+@SessionAttributes({"loginMember"})
 public class MyPageController {
-	
+
 	private final MyPageService service;
 	
-	
 	/** 내 정보 조회/수정 화면으로 전환
-	 * 
-	 * @param loginMember
-	 * :세션에 존재하는 loginMember를 얻어와 매개 변수에 대입
-	 * 
-	 * @param model: 데이터 전달용 객체(기본 request scope)
-	 * 
+	 * @param loginMember : 세션에 존재하는 loginMember를 얻어와 매개 변수에 대입
+	 * @param model : 데이터 전달용 객체(기본 request scope)
 	 * @return myPage/myPage-info.html 요청 위임
 	 */
-	@GetMapping("info") //   /myPage/info (GET)
+	@GetMapping("info") // /myPage/info (GET)
 	public String info(
 			@SessionAttribute("loginMember") Member loginMember,
 			Model model
 			) {
+		
+		// 주소만 꺼내옴
+		String memberAddress = loginMember.getMemberAddress();
+		
+		// 주소가 있을 경우에만 동작
+		if(memberAddress != null) {
 			
-			// 주소만 꺼내옴
-			String memberAddress = loginMember.getMemberAddress();
+			// 구분자 "^^^"를 기준으로
+			// memberAddress 값을 쪼개어 String[]로 반환
+			// "04540^^^서울시 중구 남대문로 120^^^2층 A강의장"
+			// --> ["04540", "서울시 중구 남대문로 120", "2층 A강의장"]
+			String[] arr = memberAddress.split("\\^\\^\\^");
 			
-			// 주소가 있을 경우에만 동작
-			if(memberAddress != null) {
-				
-				// 구분자 "^^^"를 기준으로
-				// memberAddress 값을 쪼개어 String[]로 반환
-				String[] arr = memberAddress.split("\\^\\^\\^");
-				
-				// "04540^^^서울시 중구 남대문로 120^^^2층 A강의장"
-				// --> ["04540", "서울시 중구 남대문로 120", "2층 A강의장"]
-				model.addAttribute("postcode"      , arr[0]);
-				model.addAttribute("address"       , arr[1]);
-				model.addAttribute("detailAddress" , arr[2]);
-				
-			}
+			model.addAttribute("postcode", arr[0]);
+			model.addAttribute("address", arr[1]);
+			model.addAttribute("detailAddress", arr[2]);
 			
-			// /templates/myPage/myPage-info.html로 forward
-			return "myPage/myPage-info";
+					
 		}
+		
+		
+		
+		
+		// /templates/myPage/myPage-info.html로 forward
+		return "myPage/myPage-info"; // 포워드
+	}
 	
 	
 	/** 프로필 이미지 변경 화면 이동
+	 * @return
 	 */
 	@GetMapping("profile")
 	public String profile() {
+		
 		return "myPage/myPage-profile";
 	}
 	
-	
-	/** 비밀번호 변경 화면 이동
+	/** 비번 변경 화면 이동
+	 * @return
 	 */
 	@GetMapping("changePw")
 	public String changePw() {
+		
 		return "myPage/myPage-changePw";
 	}
 	
-	/** 회원 탈퇴 화면 이동
+	/** 비번 변경 화면 이동
+	 * @return
 	 */
 	@GetMapping("secession")
 	public String secession() {
+		
 		return "myPage/myPage-secession";
 	}
 	
-	
 	/** 회원 정보 수정
-	 * @param inputMember : 제출된 회원 닉네임, 전화번호, 주소
-	 * @param loginMember : 로그인한 회원 정보(회원 번호 사용할 예정)
+	 * @param inputMember : 제출된 회원 닉네임, 전화 번호, 주소
+	 * @param loginMember : 세션에 저장된 로그인한 회원 정보 (회원 번호 사용)
 	 * @param memberAddress : 주소만 따로 받은 String[]
+	 * @param ra : 리다이렉트 시 request scope로 데이터 전달
 	 * @return
 	 */
 	@PostMapping("info")
 	public String updateInfo(
-			Member inputMember,
+			@ModelAttribute Member inputMember,
 			@SessionAttribute("loginMember") Member loginMember,
 			@RequestParam("memberAddress") String[] memberAddress,
-			RedirectAttributes ra) {
-		
-		// inputMember에 로그인한 회원번호 추가
+			RedirectAttributes ra
+			) {
+
+		// inputMember에 로그인한 회원 번호 추가
 		int memberNo = loginMember.getMemberNo();
 		inputMember.setMemberNo(memberNo);
 		
@@ -117,133 +123,131 @@ public class MyPageController {
 		if(result > 0) {
 			message = "회원 정보 수정 성공!!!";
 			
-			// loginMember는 
+			// loginMember는
 			// 세션에 저장된 로그인된 회원 정보가 저장된 객체를
-			// 참고 하고 있다!!
+			// 참조하고 있다!!
 			// -> loginMember를 수정하면
-			//    세션에 저장된 로그인된 회원정보가 수정된다!!!
+			// 	  세션에 저장된 로그인된 회원 정보가 수정된다!! 
 			// == 세션 데이터가 수정됨
 			loginMember.setMemberNickname(inputMember.getMemberNickname());
-			
 			loginMember.setMemberTel(inputMember.getMemberTel());
-
 			loginMember.setMemberAddress(inputMember.getMemberAddress());
 			
-			
-		}else {
-			message = "회원 정보 수정 실패...";
+		} else {
+			message = "회원 정보 수정 실패....";
 		}
-		
-		ra.addFlashAttribute("message",message);
+		ra.addFlashAttribute("message", message);
 		
 		return "redirect:info";
 	}
 	
-	
-	/** 비밀번호 수정
-	 * @param currentPw
-	 * @param newPw
-	 * @param loginMember : 세션 로그인한 회원 정보
-	 * @param ra
-	 * @return
-	 */
 	@PostMapping("changePw")
-	public String changePw(
+	public String changePw (
+			@SessionAttribute("loginMember") Member loginMember,
 			@RequestParam("currentPw") String currentPw,
 			@RequestParam("newPw") String newPw,
-			@SessionAttribute("loginMember") Member loginMember,
-			RedirectAttributes ra){
+			RedirectAttributes ra
+			) {
 		
-		int result = service.memberPw(currentPw, newPw, loginMember);
+		int result = service.changePw(loginMember, currentPw, newPw);
 		
 		String message = null;
 		String path = null;
 		
+		
 		if(result == 0) {
 			message = "변경 실패";
 			path = "myPage/changePw";
-		}else {
+		} else {
 			message = "변경 성공";
 			path = "myPage/info";
 		}
-		
-		ra.addFlashAttribute("message",message);
+		ra.addFlashAttribute("message", message);
 		
 		return "redirect:/" + path;
 	}
 	
 	
-	// @SessionAttributes:
+	// @SessionAttributes :
 	// - Model에 세팅된 값 중 key가 일치하는 값을
-	//   request -> session으로 변경
+	// request -> session으로 변경
 	
-	// SessionStatus:
+	// SessionStatus : 
 	// - @SessionAttributes를 이용해서 올라간 데이터의 상태를 관리하는 객체
-	// -> 해당 컨트롤러에 @SessionAttributes({"key1","key2"})가 작성되어 있는 경우
-	//    () 내 key1,key2의 상태를 관리
+	
+	// -> 해당 컨트롤러에 @SessionAttributes({"key1", "key2"})가 작성되어 있는
+	// () 내 key1, key2의 상태를 관리
 	
 	/** 회원 탈퇴
-	 * @param memberPw : 입력 받은 비밀번호
-	 * @param loginMember : 로그인한 회원 정보(세션)
+	 * @param loginMember : 입력받은 비밀번호
+	 * @param currentPw : 입력받은 비밀번호
+	 * @param ra
+	 * @param model
 	 * @param status : 세션 완료(없애기) 용도의 객체
-	 *             -> @SessionAttributes 로 등록된 세션을 완료
 	 * @return
 	 */
 	@PostMapping("secession")
-	public String secession(
-			@RequestParam("memberPw") String memberPw,
+	public String postMethodName(
 			@SessionAttribute("loginMember") Member loginMember,
-			SessionStatus status,
-			RedirectAttributes ra) {
+			@RequestParam("memberPw") String currentPw,
+			RedirectAttributes ra,
+			Model model,
+			SessionStatus status
+			) {
 		
-		int result = service.selectPw(memberPw,loginMember);
+		model.addAttribute("loginMember", loginMember);
+		int result = service.secession(loginMember, currentPw);
 		
 		String message = null;
 		String path = null;
 		
-		if(result > 0) {
-			message = "탈퇴 되었습니다.";
-			path = "/";
-		
+		if(result == 0) {
+			message = "비밀번호가 일치하지 않습니다";
+			path = "myPage/secession";
+		} else {
+			message = "탈퇴 성공";
 			status.setComplete();
-			
-		}else {
-			message = "비밀번호가 일치하지 않습니다.";
-			path = "secession";
+			path = "";
 		}
-		
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:" + path;
+		return "redirect:/" + path;
 	}
 	
-	// --------------------------------------------------------------------
-	
-	/* 파일 업로드 테스트*/
-	
+	/* 파일 업로드 테스트 */
 	@GetMapping("fileTest")
 	public String fileTest() {
+		
+		
+		
 		return "myPage/myPage-fileTest";
 	}
 	
-	
-	/** Spring 에서 파일 업로드를 처리하는 방법
+	/* Spring에서 파일 업로드를 처리하는 방법
 	 * 
-	 * - enctype="multipart/form-data" 로 클라이언트 요청을 받으면
-	 *   (문자, 숫자, 파일 등이 섞여있는 요청)
-	 *   
-	 *   이를 MultipartResolver를 이용해서 
-	 *   섞여있는 파라미터를 분리
-	 *   문자열,숫자 -> String
-	 *   파일        -> MultipartFile
-	 * @throws IOException 
-	 * @throws IllegalStateException 
+	 * - enctype="multipart/form-data"로 클라이언트 요청을 받으면
+	 * 	 (문자, 숫자, 파일 등이 섞여있는 요청)
 	 * 
-	 */
+	 * 	 이를 스프링에서는 MultipartResolver를 이용해서
+	 * 	 섞여있는 파라미터를 분리
+	 * 
+	 * 	 문자열, 숫자 -> String
+	 * 	 파일 	   -> MultipartFile
+	 * 
+	 * 
+	 * 
+	 *  */
 	
 	// 파일 업로드 테스트 1
+	/** 파일 업로드 테스트1
+	 * @param uploadFile : 업로드한 파일 + 설정 내용
+	 * @return path
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
 	@PostMapping("file/test1")
 	public String fileUpload1(
+			
 			@RequestParam("uploadFile") MultipartFile uploadFile,
 			RedirectAttributes ra
 			) throws IllegalStateException, IOException {
@@ -252,53 +256,46 @@ public class MyPageController {
 		
 		// 파일이 저장되어 웹에서 접근할 수 있는 경로가 반환 되었을 때
 		if(path != null) {
-			ra.addFlashAttribute("path",path);
+			ra.addFlashAttribute("path", path);
 		}
 		
 		return "redirect:/myPage/fileTest";
 	}
 	
 	
-	/** 파일 업로드 + DB
-	 * @param uploadFile
-	 * @param loginMember
-	 * @param ra
-	 * @return
-	 * @throws IllegalStateException
-	 * @throws IOException
-	 */
 	@PostMapping("file/test2")
 	public String fileUpload2(
 			@RequestParam("uploadFile") MultipartFile uploadFile,
 			@SessionAttribute("loginMember") Member loginMember,
 			RedirectAttributes ra
 			) throws IllegalStateException, IOException {
-		
+
 		// 로그인한 회원의 번호 (누가 업로드 했는가)
 		int memberNo = loginMember.getMemberNo();
 		
 		// 업로드된 파일 정보를 INSERT 후 결과 행의 개수 반환 받을 예정
-		int result = service.fileUpload2(uploadFile,memberNo);
+		int result = service.fileUpload2(uploadFile, memberNo);
 		
 		String message = null;
+		
 		if(result > 0) {
 			message = "파일 업로드 성공";
-		}else {
-			message = "파일 업로드 실패";
+			
+		} else {
+			message = "파일 업로드 실패...";
 		}
 		
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:/myPage/fileTest"; // 변경 예정!
+		return "redirect:/myPage/fileTest"; // 변경 예정
 	}
 	
-	
-	/** 파일 목록 조회 
+	/** 파일 목록 조회
 	 * @param model
 	 * @return
 	 */
 	@GetMapping("fileList")
-	public String fileList(Model model) {
+	public String FileList(Model model) {
 		
 		// 파일 목록 조회 서비스 호출
 		List<UploadFile> list = service.fileList();
@@ -308,20 +305,22 @@ public class MyPageController {
 		return "myPage/myPage-fileList";
 	}
 	
-	
 	/** 여러 파일 업로드
 	 * @param aaaList
 	 * @param bbbList
 	 * @return
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 */
 	@PostMapping("file/test3")
 	public String fileUpload3(
-		@RequestParam("aaa") List<MultipartFile> aaaList,
-		@RequestParam("bbb") List<MultipartFile> bbbList,
-		@SessionAttribute("loginMember") Member loginMember,
-		RedirectAttributes ra) throws IllegalStateException, IOException {
+			@RequestParam("aaa") List<MultipartFile> aaaList,
+			@RequestParam("bbb") List<MultipartFile> bbbList,
+			@SessionAttribute("loginMember") Member loginMember,
+			RedirectAttributes ra
+			) throws IllegalStateException, IOException {
 		
-		// aaa 파일 미제출 시 
+		// aaa 파일 미제출 시
 		// -> 0번, 1번 인덱스 파일이 모두 비어있음
 		
 		// bbb(multiple) 파일 미제출 시
@@ -329,15 +328,15 @@ public class MyPageController {
 		
 		int memberNo = loginMember.getMemberNo();
 		
-		
+		// result == 업로드 파일 개수
 		int result = service.fileUpload3(aaaList, bbbList, memberNo);
 		
 		String message = null;
 		
-		if(result == 0) {
-			message = "업로드된 파일이 없습니다.";
-		}else {
-			message = "개 파일이 업로드 되었습니다.";
+		if(result == 0) { // 
+			message = "업로드된 파일이 없습니다";
+		} else {
+			message = result + "개 파일이 업로드 되었습니다.";
 		}
 		
 		ra.addFlashAttribute("message", message);
@@ -345,7 +344,6 @@ public class MyPageController {
 		
 		return "redirect:/myPage/fileTest";
 	}
-	
 	
 	/** 프로필 이미지 변경
 	 * @param profileImg
@@ -358,81 +356,40 @@ public class MyPageController {
 	@PostMapping("profile")
 	public String profile(
 			@RequestParam("profileImg") MultipartFile profileImg,
-			@SessionAttribute("loginMember")Member loginMember,
+			@SessionAttribute("loginMember") Member loginMember,
 			RedirectAttributes ra
 			) throws IllegalStateException, IOException {
 		
 		// 로그인한 회원 번호
 		int memberNo = loginMember.getMemberNo();
 		
-		// 서비스 호출
-		// -> /myPage/test/변경된파일명 형태의 문자열
-		// 현재 로그인한 회원의 PROFILE_IMG 컬럼 값으로 수정(UPDATE)
-		
-		int result = service.profile(profileImg, loginMember);
-		
 		String message = null;
 		
-		if(result > 0) message="변경 성공!!";
 		
-		// 세션에 저장되 로그인 회원 정보에서
-		// 프로필 이미지 수정
 		
-		else           message="변경 실패..";
+		// 서비스 호출
+		// -> /myPage/profile/변경된파일명 형태의 문자열
+		// 현재 로그인한 회원의 PROFILE_IMG 컬럼 값으로 수정(UPDATE)
+		int result = service.profile(profileImg, loginMember);
 		
-		ra.addFlashAttribute("message",message);
+		
+		if(result > 0) {
+			message = "변경 성공";
+			// 세션에 저장된 로그인 회원 정보에서
+			// 프로필 이미지 수정
+			
+			
+		
+		
+		
+		}
+		else message = "변경 실패";
+		
+		ra.addFlashAttribute("message", message);
 		
 		return "redirect:profile";
 	}
 	
 	
 	
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
