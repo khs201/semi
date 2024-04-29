@@ -28,7 +28,7 @@
   <div class="board-detail">
     <span th:text="*{memberNickname}">작성자 닉네임</span><span>
     <span th:text="*{boardWriteDate}">작성일</span>
-    <span th:text="*{readCount}">조회수</span>
+    <span> 조회수</span> [[*{readCount}]]   
 
 
   </div>
@@ -197,7 +197,7 @@
     /* 현재 게시글 좋아요 여부(boardLike)를 전역 변수로 저장 */
     let likeCheck = /*[[${board.likeCheck}]]*/ "좋아요 여부";
 
-     const userDefaultIamge = /*[[#{user.default.image}]]*/ "기본이미지";
+     const userDefaultImage = /*[[#{user.default.image}]]*/ "기본이미지";
 
 
 </script>
