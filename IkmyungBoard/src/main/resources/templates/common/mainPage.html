@@ -38,6 +38,21 @@
     </div>
   </div>
 
+ <!-- Thymeleaf에서 제공하는 numbers 시퀀스를 사용하여 반복적으로 섹션 생성 -->
+<th:block th:each="boardData : ${list}" th:object="${boardData}">
+  <section>
+      <!-- 게시판 코드를 기반으로 동적으로 제목 생성 -->
+      <!-- <h2 th:text="|${'Board ' + boardCode}|"></h2> -->
+      <h2 th:text="*{boardName}"></h2>
+
+      <p th:each="board : *{boardList}" th:text="${board.boardTitle}"></p>
+      
+  </section>
+</th:block>
+
+
+
+
   <th:block th:replace="~{common/footer}"></th:block>
   <script src="js/main.js"></script>
 

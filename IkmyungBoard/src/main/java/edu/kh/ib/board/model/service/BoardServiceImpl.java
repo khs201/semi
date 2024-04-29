@@ -82,6 +82,11 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 	
+	
+	
+	
+	
+	
 	@Override
 	public Board selectOne(Map<String, Integer> map) {
 		// [여러 SQL을 실행하는 방법]
@@ -167,6 +172,41 @@ public class BoardServiceImpl implements BoardService {
 		
 		return -1;
 	
+		
+		
+	}
+	
+	
+	/** 메인 페이지용 조회 서비스!!
+	 *
+	 */
+	@Override
+	public Map<String, Object> selectBoardList(int boardCode, int cp, int limit) {
+		
+		// 삭제되지 않은 게시글 수 조회
+		int listCount = mapper.getListCount(boardCode);
+		
+		 // limit을 파라미터로 받아 사용
+		int offset = (cp - 1) * limit; 
+		
+		// RowBounds 객체를 사용하여 limit 수만큼만 조회
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		// MyBatis Mapper를 통해 특정 게시판의 지정된 페이지 목록 조회
+	    List<Board> boardList = mapper.selectBoardList(boardCode, rowBounds);
+	    
+	    // 게시판 이름 가져오기
+	    String boardName = getBoardName(boardCode);
+	    
+	    // 조회된 게시글 목록과 페이지네이션 정보를 Map으로 묶어 반환
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("boardList", boardList);
+	    map.put("boardName", boardName);
+
+	    
+	    
+	    // 페이지 네이션은 조회하는 게시글 수가 제한적이므로 별도 객체를 생성하지 않음
+	    return map;
 		
 		
 	}

@@ -44,6 +44,11 @@ public interface BoardService {
 	 */
 	int boardLike(Map<String, Integer> map);
 
+	/** 메인 페이지용 조회 서비스!!
+	 *
+	 */
+	Map<String, Object> selectBoardList(int boardCode, int cp, int limit);
+
 	
 	
 
