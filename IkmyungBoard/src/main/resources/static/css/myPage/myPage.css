@@ -1,0 +1,17 @@
+.profile-image-area{
+    width: 150px !important;
+    height: 150px !important;
+    border: 3px solid #ccc !important;
+    border-radius: 50% !important;
+  
+    position: relative !important;
+  
+    overflow: hidden !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-content: center !important;
+  }
+  
+  #profileImage{
+    height: 100%;
+  }

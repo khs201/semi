@@ -87,8 +87,10 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public int profile(MultipartFile profileImg, Member loginMember) throws IllegalStateException, IOException {
 		
+		// 수정할 경로
 		String updatePath = null;
 		
+		// 변경명 저장
 		String rename = null;
 		
 		
