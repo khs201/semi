@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="|${board.boardTitle} - 수정|">게시글 명 - 수정</title>
+
+  <link rel="stylesheet" href="/css/board/boardUpdate-style.css">
+  <!-- 임시로 여기다가 작성함 나중에 boardUpdate-style.css 여기로 옮길꺼임 -->
+  <style>
+    
+  </style>
+</head>
+<body>
+
+  <th:block th:replace="~{common/header}"></th:block>
+
+  <form th:action="@{update}" th:object="${board}" method="POST" class="board-write" id="boardUpdateFrm"
+            enctype="multipart/form-data">
+
+            <h1 class="board-name" th:text="${boardName}">게시판 이름</h1>
+
+            <!-- 제목 -->
+            <h1 class="board-title">
+                <input type="text" name="boardTitle" placeholder="제목" th:value="${board.boardTitle}">
+            </h1>
+
+
+
+
+
+
+
+
+
+
+
+          <th:block th:each="image, iterStat : ${board.imageList}">
+            <!-- iterStat.index를 사용하여 각 img 태그와 삭제 버튼에 고유한 id를 부여합니다. -->
+            <img class="preview" th:id="'img' + ${image.imgOrder}" src="" />
+            <span class="delete-image" th:id="${image.imgOrder}">&times;</span>
+          </th:block>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+            <h5>이미지</h5>
+            <div class="img-box">
+                <div class="boardImg thumbnail">
+                    <input type="file" name="images" class="inputImage" id="img0" accept="image/*" multiple>
+                    
+                </div>
+            </div>
+
+            <!-- 내용 -->
+            <div class="board-content">
+                <textarea name="boardContent" th:text="*{boardContent}">게시글 내용</textarea>
+            </div>
+
+            <!-- 버튼 영역 -->
+            <div class="board-btn-area">
+                <button type="submit" id="writebtn">등록</button>
+            </div>
+
+            
+            <!-- 기존 이미지가 있다가 삭제된 이미지의 순서를 기록 *****확인 필요******* -->
+            <input type="hidden" name="deleteOrder" value="">
+
+            <!-- 수정 성공 시 주소(쿼리스트링) 유지용도 *****확인 필요******* -->
+            <input type="hidden" name="querystring">
+        </form>
+
+  <!-- 이미지 미리보기 설정 -->
+  <script th:inline="javascript">
+
+    const imageList = /*[[${board.imageList}]]*/[];
+
+    const previewList = document.querySelectorAll('img.preview');
+
+    const orderList = []; // 기존에 존재하던 이미지 순서를 기록
+
+    for (let img of imageList) {
+      previewList[img.imgOrder].src = img.imgPath + img.imgRename;
+
+      orderList.push(img.imgOrder);
+    }
+
+  </script>
+
+
+
+  <th:block th:replace="~{common/footer}"></th:block>
+
+  <script src="/js/board/boardUpdate.js"></script>
+  
+</body>
+</html>
