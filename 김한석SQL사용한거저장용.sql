@@ -179,7 +179,11 @@ FROM all_sequences
 WHERE sequence_owner NOT IN ('SYS', 'SYSTEM')
 ORDER BY sequence_owner, sequence_name;
 
+SELECT * FROM MEMBER;
 
 
+SELECT * FROM BOARD_LIKE bl ;
 
 
+		INSERT INTO "BOARD_LIKE"(MEMBER_NO, BOARD_NO)
+		VALUES(4, 1)

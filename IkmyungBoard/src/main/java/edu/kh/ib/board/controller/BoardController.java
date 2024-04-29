@@ -10,8 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.ib.board.model.dto.Board;
@@ -209,6 +212,17 @@ public class BoardController {
 				return path;
 		
 		
+	}
+	
+	/** 게시글 좋아요 체크/해제
+	 * @return count
+	 */
+	@ResponseBody
+	@PostMapping("like")
+	public int boardLike(
+			@RequestBody Map<String , Integer> map) {
+		
+		return service.boardLike(map);
 	}
 	
 	
