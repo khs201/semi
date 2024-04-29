@@ -8,35 +8,50 @@
   <link rel="stylesheet" href="/css/board/boardDetail-style.css">
   <link rel="stylesheet" href="/css/board/comment-style.css">
 
-
 </head>
 <body>
   
+
   <th:block th:replace="~{common/header}"></th:block>
 
   <main id="container">
 
-  <th:block th:object="${board}">
+
+<th:block th:object="${board}">
   <div class="board-header">
+    <h1 th:text="${boardName}">게시판명</h1>
+    <!-- 여기 최근 갔던 게시판들 나열하는거 할까? 말까? 고민중 -->
 
-      <h1 th:text="${boardName}">게시판명</h1>
-      <!-- 여기 최근 갔던 게시판들 나열하는거 할까? 말까? 고민중 -->
+    <h2 th:text="*{boardTitle}">게시글 제목</h2>
+  </div>
+  
+  <div class="board-detail">
+    <span th:text="*{memberNickname}">작성자 닉네임</span><span>
+    <span th:text="*{boardWriteDate}">작성일</span>
+    <span th:text="*{readCount}">조회수</span>
 
-      <h2 th:text="*{boardTitle}">게시글 제목</h2>
-    </div>
+
+  </div>
+  
+  <div class="board-body">
+    <!-- ====================== 이미지가 있을 경우 출력하는 구문  ====================== -->
+    <th:block th:if="${ #lists.size(board.imageList) > 0}">
+
+    <!-- 썸네일이 있을 경우 -->
+    <th:block th:if="*{thumbnail}">
+        <h5>썸네일</h5>
+        <div class="img-box">
+            <div class="boardImg thumbnail">
+                <img th:src="|${thumbnail.imgPath}${thumbnail.imgRename}|">                     
+                
+                <a th:href="|${thumbnail.imgPath}${thumbnail.imgRename}|"
+                   th:download="${thumbnail.imgOriginalName}">다운로드</a>         
+            </div>
+        </div>
+    </th:block>
     
-    <div class="board-detail">
-      <span th:text="*{memberNickname}">작성자 닉네임</span>
-      <span th:text="*{boardWriteDate}">작성일</span>
-      <span th:text="*{readCount}">조회수</span>
-
-
-    </div>
     
-    <div class="board-body">
-      <!-- ====================== 이미지가 있을 경우 출력하는 구문  ====================== -->
-      <th:block th:if="${ #lists.size(board.imageList) > 0}">
-
+    <th:block th:if="${#lists.size(board.imageList) > start}">
       
         <h5>업로드 이미지</h5>
         <th:block th:each="i : ${#numbers.sequence(start, #lists.size(board.imageList) -1)}">                                       
@@ -154,56 +169,14 @@
 
 
 
-    
-    
-      <!-- 댓글 작성 부분 -->
-      <div class="comment-write-area">
-        <textarea id="commentContent"></textarea>
-        <button id="addComment">
-          댓글<br>
-          등록
-        </button>
-      </div>
-    
-    </div>
-
-    <div class="choochun-area">
-      <!-- 버튼 꾸밀 예정 -->
-      <button>추천하기!</button>
-      
-    </div>
-    <!-- 댓글 영역-->
     <th:block th:replace="~{board/comment}"></th:block>
-
     
 
-  </th:block>
-
-  <script th:inline="javascript">
-          
-    /* 로그인 상태인 경우 로그인한 회원 번호를 전역 변수 저장 */
-    
-    // - loginMember가 null인 경우 [null] 반환
-    const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호" ;
-
-    /* 현재 게시글 번호를 전역 변수로 저장 */
-    const boardNo = /*[[${board.boardNo}]]*/ "게시글 번호";
-
-    /* 현재 게시글 좋아요 여부(boardLike)를 전역 변수로 저장 */
-    let likeCheck = /*[[${board.likeCheck}]]*/ "좋아요 여부";
-
-    const userDefaultImage = /*[[#{user.default.image}]]*/ "기본이미지";
-  </script>
-
-
-  </main>
   
 
-<<<<<<< HEAD
 </th:block>
 
 
-  <h1></h1>
   
   <script th:inline="javascript">
         
@@ -223,19 +196,17 @@
     let likeCheck = /*[[${board.likeCheck}]]*/ "좋아요 여부";
 
      const userDefaultIamge = /*[[#{user.default.image}]]*/ "기본이미지";
+
+
 </script>
 
 
+</main>
 
   <th:block th:replace="~{common/footer}"></th:block>
 
   <script src="/js/board/boardDetail.js"></script>
-=======
-  <th:block th:replace="~{common/footer}"></th:block>
-
   <script src="/js/board/comment.js"></script>
->>>>>>> main
 
 </body>
-
 </html>
