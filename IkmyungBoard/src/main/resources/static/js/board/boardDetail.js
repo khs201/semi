@@ -120,11 +120,15 @@ if(deleteBtn != null){
     likeCheck = likeCheck == 0 ? 1 : 0;
 
     // 6. 하트를 채웠다/비웠다 바꾸기
-    e.target.classList.toggle("fa-regular");
-    e.target.classList.toggle("fa-solid");
+    e.target.classList.toggle("like");
+    // e.target.classList.toggle("fa-solid");
 
     // 7. 게시글 좋아요 수 수정
-    // e.target.nextElementSibling.innerText = count;
+     //e.target.nextElementSibling.innerText = count;
+     
+     // 이전 요소 innerText를 count로 
+     e.target.previousElementSibling.innerText = count;
+     console.log(count);
 
   });
 
