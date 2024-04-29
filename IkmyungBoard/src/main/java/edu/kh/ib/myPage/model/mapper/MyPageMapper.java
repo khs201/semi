@@ -38,6 +38,13 @@ public interface MyPageMapper {
 	 */
 	int logout(Member loginMember);
 
+
+	/** 프로필 이미지 변경
+	 * @param mem
+	 * @return
+	 */
+	int profile(Member mem);
+
 	
 
 	

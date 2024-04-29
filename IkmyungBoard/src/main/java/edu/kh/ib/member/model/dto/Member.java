@@ -27,4 +27,5 @@ public class Member {
 	private int authority;
 	private String memberId;
 	
+	
 }

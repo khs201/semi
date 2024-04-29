@@ -1,5 +1,6 @@
 package edu.kh.ib.myPage.controller;
 
+import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect;
 
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.ib.member.model.dto.Member;
@@ -142,6 +144,36 @@ public class MyPageController {
 		 
 		 
 		 return "redirect:" + path;
+	 }
+	 
+	 @PostMapping("profile")
+	 public String profile(
+		@RequestParam("profileImg") MultipartFile profileImg,
+		@SessionAttribute("loginMember") Member loginMember,
+		RedirectAttributes ra
+		) throws IllegalStateException, IOException{
+		 
+		 int memberNo = loginMember.getMemberNo();
+		 
+		 
+		 int result = service.profile(profileImg, loginMember);
+		 
+		 String message = null;
+			
+			if(result > 0) {
+				message = "변경 성공!!";
+				
+				// 세션에 저장된 로그인 회원 정보에서 
+				// 프로필 이미지 수정
+				
+			} else	{	  
+				message = "변경 실패 ㅠㅠ";
+			}
+		ra.addFlashAttribute("message",message);
+			
+		return "redirect:profile";
+		 
+		 
 	 }
 	 
 }

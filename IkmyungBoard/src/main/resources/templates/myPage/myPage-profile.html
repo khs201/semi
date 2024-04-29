@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Page</title>
-  
+    <link rel="stylesheet" href="/css/myPage/myPage.css">
   </head>
   <body>
   
@@ -27,9 +27,9 @@
           <form action="profile" method="POST" name="myPageFrm" id="profile" enctype="multipart/form-data">
             <div class="profile-image-area">
   
-              <!-- <img th:with="user=#{user.default.image}" 
+               <img th:with="user=#{user.default.image}" 
                   th:src="${session.loginMember.profileImg ?: user }" 
-                  id="profileImg"> -->
+                  id="profileImg"> 
   
             </div>
             <span id="deleteImage">x</span>
