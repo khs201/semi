@@ -1,7 +1,6 @@
 package edu.kh.project.main.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,62 +17,114 @@ public class MainController {
 
 	private final MainService service;
 	
-	
-	
 	@RequestMapping("/") // "/" 요청 매핑(method 가리지 않음)
-	public String mainPage () {
-		
-		
-		return "common/main"; // 포워딩
-		
-		
+	public String mainPage() {
+
+		return "common/main";
 	}
 	
 	
-	/** 비번 초기화
+	/** 비밀번호 초기화
 	 * @param inputNo
 	 * @return result
 	 */
-	@PutMapping("resetPw")
 	@ResponseBody
-	public int resetPw(
-			@RequestBody int inputNo
-			
-			) {
-		
+	@PutMapping("resetPw")
+	public int resetPw(@RequestBody int inputNo) {
 		
 		return service.resetPw(inputNo);
-	}
-	
-	@PutMapping("resetReg")
-	@ResponseBody
-	public int resetReg(
-			@RequestBody int inputNo
-			) {
-		
-		return service.resetReg(inputNo);
 		
 	}
 	
-	@DeleteMapping("delMem")
+	/** 탈퇴복구
+	 * @param inputNo
+	 * @return
+	 */
 	@ResponseBody
-	public int delMem (
-			@RequestBody int inputNo
-			) {
+	@PutMapping("restore")
+	public int restore(@RequestBody int inputNo) {
 		
 		
-		
-		return service.delMem(inputNo);
+		return service.restore(inputNo);
 	}
-
+	
+	// LoginFilter -> loginError 리다이렉트
+	// -> message를 만들어서 메인 페이지로 리다이렉트
 	@GetMapping("loginError")
 	public String loginError(RedirectAttributes ra) {
-		
-		ra.addFlashAttribute("message", "로그인 후 이용해라");
-		
+		ra.addFlashAttribute("message", "로그인 후 이용해 주세요");
 		return "redirect:/";
 	}
 	
 	
 	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

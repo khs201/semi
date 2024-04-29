@@ -15,17 +15,18 @@ import edu.kh.project.email.model.mapper.EmailMapper;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 
+@Transactional // 예외 발생 하면 롤백 할께 (기본값 커밋)
 @Service // Bean 등록
 @RequiredArgsConstructor
-@Transactional // 예외 발생하면 롤백( 기본값 커밋)
 public class EmailServiceImpl implements EmailService{
-
+	
 	// EmailConfig 설정이 적용된 객체(메일 보내기 가능)
 	private final JavaMailSender mailSender;
 	
-	// 타임리프(템플릿 엔진)을 이용해서 html 코드 -> java로 변환
+	// 타임리프(탬플릿 엔진)을 이용해서 html 코드 -> java로 변환
 	private final SpringTemplateEngine templateEngine;
 	
+	// Mapper 의존성 주입
 	private final EmailMapper mapper;
 	
 	
@@ -33,17 +34,18 @@ public class EmailServiceImpl implements EmailService{
 	@Override
 	public String sendEmail(String htmlName, String email) {
 		
-		
 		// 6자리 난수(인증 코드) 생성
 		String authKey = createAuthKey();
 		
 		try {
+			
 			// 제목
 			String subject = null;
 			
 			switch(htmlName) {
-			case "signup" : subject = "[boardProject] 회원 가입 인증번호 입니다."; 
-			break;
+			case "signup":
+				subject = "[boardProject] 회원 가입 인증번호 입니다.";
+				break;
 			}
 			
 			// 인증 메일 보내기
@@ -51,30 +53,32 @@ public class EmailServiceImpl implements EmailService{
 			// MimeMessage : Java에서 메일을 보내는 객체
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
 			
-			// MimeMessageHelper : Spring에서 제공하는
-			// 메일 발송 도우미(간단 + 타임리프)
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+			// MimeMessageHelper:
+			//  Spring에서 제공하는 메일 발송 도우미(간단 + 타임리프)
+			MimeMessageHelper helper
+				= new MimeMessageHelper(mimeMessage,true,"UTF-8");
 			
-			// 1번 매개변수 : MimeMessage
-			// 2번 매개변수 : 파일 전송 사용? true/false
-			// 3번 매개변수 : 문자 인코딩 지정
-			
+			// 1번 매개변수: MimeMessage
+			// 2번 매개변수: 파일전송 사용? true/false
+			// 3번 매개변수: 문자 인코딩 지정
 			
 			helper.setTo(email); // 받는 사람 이메일 지정
 			helper.setSubject(subject); // 이메일 제목 지정
 			
+			helper.setText( loadHtml(authKey,htmlName) , true);
 			// HTML 코드 해석 여부 true (innerHTML 해석)
-			helper.setText( loadHtml(authKey, htmlName) , true );
 			
 			// CID(Content-ID)를 이용해 메일에 이미지 첨부
-			// (파일첨부와는 다름, 이메일 내용에 사용할 이미지)
-			helper.addInline("logo", new ClassPathResource("static/images/logo.jpg"));
+			// (파일첨부와는 다름, 이메일 내용에 사용할 이미지 첨부)
+			helper.addInline("logo", 
+						new ClassPathResource("static/images/logo.jpg"));
 			
-			// -> 로고 이미지를 메일 내용에 첨부하는데
-			// 사용하고 싶으면 "logo"라는 id를 작성해라
+			// -> 로고 이미지를 메일 내용에 첨부하는데 
+			//    사용하고 싶으면 "logo"라는 id를 작성해라
 			
 			// 메일 보내기
 			mailSender.send(mimeMessage);
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,15 +86,16 @@ public class EmailServiceImpl implements EmailService{
 		}
 		
 		// 이메일 + 인증 번호를 "TB_AUTH_KEY" 테이블 저장
-		Map<String, String> map = new HashMap<>();
+		
+		Map<String,String> map = new HashMap<>();
 		map.put("authKey", authKey);
 		map.put("email", email);
 		
-		// 1) 해당 이메일이 DB에 존재하는 경우가 있을 수 있기 때문에
-		// 	  수정을 먼저 진행
-		//	  -> 1반환 == 업데이트가 성공 == 이미 존재해서 인증 번호를 변경
-		// 	  -> 0 반환 == 업데이트 실패 == 이메일 존재 X
-		// 	  --> INSERT 시도
+		// 1) 해당 이메일이 DB에 존재하는 경우가 있을 수 있기 때문에 
+		//    수정(update)을 먼저 진행
+		//    -> 1 반환 == 업데이트 성공 == 이미 존재해서 인증번호 변경
+		//    -> 0 반환 == 업데이트 실패 == 이메일 존재 X
+		//       --> INSERT 시도
 		
 		int result = mapper.updateAuthKey(map);
 		
@@ -99,26 +104,30 @@ public class EmailServiceImpl implements EmailService{
 			result = mapper.insertAuthKey(map);
 		}
 		
-		// 수정, 삭제 후에도 result가 0 == 실패, 뭔가 오류
+		// 수정,삭제 후에도 result가 0 == 실패 
 		if(result == 0) return null;
+		
+		
 		
 		return authKey; // 오류 없이 전송되면 authKey 반환
 	}
 	
+	
 	// HTML 파일을 읽어와 String으로 변환 (타임리프 적용)
-	public String loadHtml( String authKey, String htmlName ) {
+	public String loadHtml(String authKey, String htmlName) {
 		
-		// org.thymeleaf.context 선택!!
+		// org.tyhmeleaf.Context 선택!!
 		Context context = new Context();
 		
-		// 타임리프가 적용된 HTML에서 사용할 값 추가
+		//타임리프가 적용된 HTML에서 사용할 값 추가
 		context.setVariable("authKey", authKey);
 		
-		// templates/email 폴더에서 htmlName과 같은 .html 파일 
-		// 내용을 읽어와 String으로 변환
+		// templates/email 폴더에서 htmlName과 같은 
+		// .html 파일 내용을 읽어와 String으로 변환
 		return templateEngine.process("email/" + htmlName, context);
 		
 	}
+	
 	
 	
 	
@@ -153,14 +162,21 @@ public class EmailServiceImpl implements EmailService{
         return key;
     }
 	
+    
+    // 이메일, 인증번호 확인
     @Override
     public int checkAuthKey(Map<String, Object> map) {
     	return mapper.checkAuthKey(map);
     }
+    
 	
 	
 	
+	
+
 }
+
+
 
 /* Google SMTP를 이용한 이메일 전송하기
  * 
@@ -175,7 +191,43 @@ public class EmailServiceImpl implements EmailService{
  * - Java Mail Sender에 Google SMTP 이용 설정 추가
  *  1) config.properties 내용 추가
  *  2) EmailConfig.java
+ *  
  * */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

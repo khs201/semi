@@ -16,19 +16,23 @@ public interface MyPageMapper {
 	 */
 	int updateInfo(Member inputMember);
 
-	/** 현재 비번 조회
+	/** 비밀번호 수정
 	 * @param loginMember
-	 * @return
+	 * @return result
 	 */
 	String currPw(Member loginMember);
 
-	/** 비번 변경
-	 * @param loginMember
-	 * @return
-	 */
 	int changePw(Member loginMember);
-
-	/** 회원 탈퇴
+	
+	
+	/** 비번 조회
+	 * @param loginMember
+	 * @return result
+	 */
+	String inputPw(Member loginMember);
+	
+	
+	/** N/Y 변경
 	 * @param loginMember
 	 * @return
 	 */
@@ -40,15 +44,55 @@ public interface MyPageMapper {
 	 */
 	int insertUploadFile(UploadFile uf);
 
-	/** 파일 목록 조회
+	
+	/** 파일 목록 조회 
 	 * @return
 	 */
 	List<UploadFile> fileList();
 
 	/** 프로필 이미지 변경
 	 * @param mem
-	 * @return result
+	 * @return
 	 */
 	int profile(Member mem);
 
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
