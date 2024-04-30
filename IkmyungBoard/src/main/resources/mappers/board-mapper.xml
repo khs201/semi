@@ -287,6 +287,23 @@ SELECT BOARD_NO, BOARD_TITLE,
 	
 	</select>
 
+	
+	
+	 <!-- 조회수 1 증가 -->
+	 <update id="updateReadCount">
+	 	UPDATE "BOARD" SET
+	 	READ_COUNT = READ_COUNT + 1
+	 	WHERE BOARD_NO = #{boardNo}
+	 </update>
+
+	<!-- 조회 수 조회 -->
+	<select id="selectReadCount" resultType="_int">
+	  SELECT READ_COUNT
+	  FROM "BOARD"
+	  WHERE BOARD_NO = #{boardNo}
+	</select>
+
+
 	<!-- 좋아요 해제 -->
 	<delete id="deleteBoardLike">
 		DELETE FROM "BOARD_LIKE"
@@ -306,6 +323,7 @@ SELECT BOARD_NO, BOARD_TITLE,
 		"BOARD_LIKE"
 		WHERE BOARD_NO = #{boardNo}
 	</select>
+
 
 
 

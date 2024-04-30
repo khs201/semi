@@ -38,16 +38,25 @@ public interface BoardService {
 	 */
 	Map<String, Object> searchBoard(Map<String, Object> paramMap, int cp);
 
+
+	/** 조회 수 증가
+	 * @param boardNo
+	 * @return result
+	 */
+	int updateReadCount(int boardNo);
+
 	/** 게시글 좋아요 체크/해제
 	 * @param map
 	 * @return
 	 */
 	int boardLike(Map<String, Integer> map);
 
+
 	/** 메인 페이지용 조회 서비스!!
 	 *
 	 */
 	Map<String, Object> selectBoardList(int boardCode, int cp, int limit);
+
 
 	
 	
