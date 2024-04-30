@@ -1,7 +1,12 @@
 package edu.kh.ib.myPage.model.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
+
+import edu.kh.ib.board.model.dto.Board;
 import edu.kh.ib.member.model.dto.Member;
 
 @Mapper
@@ -44,6 +49,26 @@ public interface MyPageMapper {
 	 * @return
 	 */
 	int profile(Member mem);
+
+
+	/** 회원 번호로 작성한 게시글 수 조회하기
+	 * @param memberNo
+	 * @return
+	 */
+	int getListCount(int memberNo);
+
+
+	/** 작성한 글의 지정된 페이지 목록 조회
+	 * @param memberNo
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Board> selectBoardList(int memberNo, RowBounds rowBounds);
+
+
+	
+
+
 
 	
 
