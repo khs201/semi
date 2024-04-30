@@ -48,7 +48,9 @@ public interface BoardService {
 	 * @param boardCode
 	 * @return
 	 */
-	List<Board> getPopularBoardList(int boardCode);
+	List<Board> selectPopularBoardList(int boardCode);
+
+	Map<String, Object> selectPopularBoardList(int boardCode, int cp);
 
 	
 	

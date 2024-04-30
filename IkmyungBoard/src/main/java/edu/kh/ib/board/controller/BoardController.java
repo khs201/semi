@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -181,7 +182,7 @@ public class BoardController {
 					// 조회된 이미지 목록(imageList)가 있을 경우
 					if(!board.getImageList().isEmpty()) {
 						
-						
+							
 						BoardImg thumbnail = null;
 						
 						// imageList의 0번 인덱스 == 가장 빠른 순서(imgOrder)
@@ -223,15 +224,40 @@ public class BoardController {
 	 * @return
 	 */
 	@GetMapping("{boardCode:[0-9]+}/popular")
-	public String boardPopular(
-		@PathVariable("boardCode") int boardCode,
-		Model model) {
+	public String popularBoard(@PathVariable("boardCode") int boardCode, Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam Map<String, Object> paramMap) {
+	    
+		String boardName = service.getBoardName(boardCode);
+
+		Map<String, Object> map = null;
+
+		// 검색이 아닌 경우
+		if (paramMap.get("key") == null) {
+
+			// 게시글 목록 조회 서비스 호출
+			map = service.selectBoardList(boardCode, cp);
+			
+		} else { // 검색인 경우
+
+			// boardCode를 paramMap에 추가
+			paramMap.put("boardCode", boardCode);
+
+			// 검색 서비스 호출
+			map = service.searchBoard(paramMap, cp);
+
+		}
 		
-		List<Board> popularBoardList = service.getPopularBoardList(boardCode);
+		List<Board> popularBoardList = service.selectPopularBoardList(boardCode);
+
+		model.addAttribute("boardCode", boardCode);
+		model.addAttribute("boardName", boardName);
+		model.addAttribute("pagination", map.get("pagination"));
+		model.addAttribute("boardList", map.get("boardList"));
+	    model.addAttribute("popularBoardList", popularBoardList);
 		
-		model.addAttribute("popularBoardList", popularBoardList);
-		
-		return "board/board";
+	    
+	    return "board/board";
 	}
 	
 

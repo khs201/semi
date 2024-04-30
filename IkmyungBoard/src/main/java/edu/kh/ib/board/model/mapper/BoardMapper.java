@@ -78,6 +78,8 @@ public interface BoardMapper {
 	 */
 	List<Board> selectPopularBoardList(int boardCode);
 
+	List<Board> selectPopularBoardList(int boardCode, RowBounds rowBounds);
+
 
 	
 	

@@ -58,11 +58,61 @@ const options = document.querySelectorAll("#searchKey > option");
 )
 ();
 
+
 /* 인기글 버튼 */
 const popularBtn = document.querySelector("#popularBtn");
 
-popularBtn.addEventListener("click", e=>{
+popularBtn.addEventListener("click", () => {
 
-  location.href = `/Board/${boardCode}/popular`;
+  location.href = `/board/${boardCode}/popular`;
 
-})
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* popularBtn.addEventListener("click", () => {
+  
+  fetch(`/board/${boardCode}/popular`)
+  .then(response => response.json())
+  .then(data => {
+
+    // 데이터를 받아온 후 처리
+    const boardList = data; // 받아온 데이터에서 게시글 목록 가져오기
+    
+    // 게시글 목록을 표시할 HTML 요소 선택
+    const boardListContainer = document.querySelector("#boardListContainer");
+  
+
+    // 받아온 게시글 목록을 순회하면서 HTML 요소를 생성하여 화면에 표시합니다.
+    boardList.forEach(board => {
+      const boardItem = document.createElement('div');
+      boardItem.classList.add('board-item');
+      
+      // 게시글 정보를 표시하는 HTML 생성
+      const boardInfo = `
+        <h2>${board.boardTitle}</h2>
+        <p>글쓴이: ${board.memberNickname}</p>
+        <p>추천 수: ${board.likeCount}</p>
+        <p>날짜: ${board.boardWriteDate}</p>
+      `;
+      
+      // HTML을 게시글 아이템에 추가
+      boardItem.innerHTML = boardInfo;
+      
+      // 게시글 아이템을 게시글 목록 컨테이너에 추가
+      boardListContainer.appendChild(boardItem);
+    });
+  })
+}); */
