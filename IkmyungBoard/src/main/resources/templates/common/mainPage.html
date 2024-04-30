@@ -16,14 +16,17 @@
   <th:block th:replace="~{common/header}"></th:block>
 
   <div class="board-container">
-    <th:block th:each="boardType : ${application.boardTypeList}">
+    <th:block th:each="boardData : ${list}">
       <section class="board-list">
-        <a th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}" th:text="${boardType.boardName}">게시판 이름</a>
+        <h2 th:text="${boardData.boardName}">게시판 이름</h2>
         <ul>
-          <li class="board-item">
-            <a href="#">
-              <p>[게시판 설명]</p>
-            </a>
+          <li th:unless="${#lists.size(boardData.boardList) > 0}" class="board-item">
+            작성된 게시글이 없습니다.
+          </li>
+          <li th:each="board : ${boardData.boardList}" class="board-item" th:if="${#lists.size(boardData.boardList) > 0}">
+            <a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardData.boardCode}, boardNo=${board.boardNo})}"
+               th:text="${board.boardTitle}">게시물 제목</a>
+            <span th:text="| [${board.commentCount}]|">댓글 수</span>
           </li>
         </ul>
       </section>
@@ -38,26 +41,10 @@
     </div>
   </div>
 
- <!-- Thymeleaf에서 제공하는 numbers 시퀀스를 사용하여 반복적으로 섹션 생성 -->
-<th:block th:each="boardData : ${list}" th:object="${boardData}">
-  <section>
-      <!-- 게시판 코드를 기반으로 동적으로 제목 생성 -->
-      <!-- <h2 th:text="|${'Board ' + boardCode}|"></h2> -->
-      <h2 th:text="*{boardName}"></h2>
-
-      <p th:each="board : *{boardList}">
-        <a th:href="@{/board/{boardCode}/{boardNo}(boardCode = *{boardCode}, boardNo = ${board.boardNo})}" th:text="${board.boardTitle}"></a><span th:text="| [${board.commentCount}]|">댓글수</span>
-
-      </p>
 
 
 
 
-
-      <!-- <p th:each="board : *{boardList}" th:text="${board.commentCount}"></p> -->
-      
-  </section>
-</th:block>
 
 
 
