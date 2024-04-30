@@ -168,7 +168,7 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		
 		
-		// 5. 결과 반한
+		// 5. 결과 반환
 		
 		
 		return map;

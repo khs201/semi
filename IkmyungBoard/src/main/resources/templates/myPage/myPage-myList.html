@@ -57,7 +57,8 @@
           
           <!-- 검색 X -->
           <!-- 주소 넣어야됨 th:href로 -->
-          <a href="#" 
+          <a 
+          th:href="@{/board/{boardCode}/{boardNo} (boardCode=*{boardCode}, boardNo=*{boardNo}, cp=${pagination.currentPage})}" 
              th:text="*{boardTitle}">게시글 제목</a>
 
              
