@@ -92,13 +92,13 @@
    <div class="pagination-area">
 
     <!-- 일반 목록 조회 ( 검색 X ) -->
-    <ul class="pagination" th:unless="${param.key}" th:object="${pagination}">
+    <ul class="pagination" th:object="${pagination}">
 
       <!-- 첫 페이지로 이동 -->
-      <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=1)}">&lt;&lt;</a></li>
+      <li><a th:href="@{/myPage/myList(cp=1)}">&lt;&lt;</a></li>
 
       <!-- 이전 목록 마지막 번호로 이동 -->
-      <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{prevPage})}">&lt;</a></li>
+      <li><a th:href="@{/myPage/myList (cp=*{prevPage})}">&lt;</a></li>
 
       <!-- 특정 페이지로 이동 -->
       
@@ -114,7 +114,7 @@
         <!-- 보고있지 않은 페이지 -->
         <!-- <li th:unless="${i == pagination.currentPage}">  -->
         <li th:unless="${i} == *{currentPage}">
-          <a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=${i})}" 
+          <a th:href="@{/myPage/myList (cp=${i})}" 
              th:text="${i}">이동할 페이지</a> 
         </li>
 
@@ -123,10 +123,10 @@
 
 
       <!-- 다음 목록 시작 번호로 이동 -->
-      <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{nextPage})}">&gt;</a></li>
+      <li><a th:href="@{/myPage/myList (cp=*{nextPage})}">&gt;</a></li>
 
       <!-- 끝 페이지로 이동 -->
-      <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{maxPage})}">&gt;&gt;</a></li>
+      <li><a th:href="@{/myPage/myList (cp=*{maxPage})}">&gt;&gt;</a></li>
     </ul>
 
     
