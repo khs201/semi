@@ -45,7 +45,16 @@
       <!-- <h2 th:text="|${'Board ' + boardCode}|"></h2> -->
       <h2 th:text="*{boardName}"></h2>
 
-      <p th:each="board : *{boardList}" th:text="${board.boardTitle}"></p>
+      <p th:each="board : *{boardList}">
+        <a href="" th:text="${board.boardTitle}"></a><p th:text=" [${board.commentCount}]|"></p>
+
+      </p>
+
+
+
+
+
+      <!-- <p th:each="board : *{boardList}" th:text="${board.commentCount}"></p> -->
       
   </section>
 </th:block>

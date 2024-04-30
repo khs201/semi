@@ -34,6 +34,7 @@ public class MainController {
 //            model.addAttribute("boardData" + boardCode, boardData.get("boardList"));
 //            model.addAttribute("boardName" + boardCode, boardData.get("boardName"));
             list.add(boardData);
+            
         }
         
         model.addAttribute("list", list);
