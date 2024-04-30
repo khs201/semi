@@ -33,6 +33,7 @@ public class MainController {
             Map<String, Object> boardData = service.selectBoardList(boardCode, cp, limit);
 //            model.addAttribute("boardData" + boardCode, boardData.get("boardList"));
 //            model.addAttribute("boardName" + boardCode, boardData.get("boardName"));
+            boardData.put("boardCode", boardCode); // Map에 boardCode를 추가
             list.add(boardData);
             
         }
