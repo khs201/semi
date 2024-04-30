@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -112,7 +112,7 @@ public class BoardController {
 					// 1. 비회원 또는 로그인한 회원의 글이 아닌 경우
 					// (글쓴이를 뺀 다른 사람)
 					
-					  if (loginMember == null || loginMember.getMemberNo() != board.getMemberNo()){
+					  
 					  
 					  // 요청에 담겨있는 모든 쿠키 얻어오기 
 					  Cookie[] cookies = req.getCookies();
@@ -219,14 +219,13 @@ public class BoardController {
 						
 					}
 					
-				}	
+					
 		
 	}
 
 			return path;
 	
   }	
-
 
 	/**
 	 * 게시글 좋아요 체크/해제

@@ -69,7 +69,7 @@ const getCookie = key => {
   }
 
   const loginForm = document.querySelector("#login-Form");
-  const loginPw = document.querySelector("#logi-Form input[name='memberPw']");
+  const loginPw = document.querySelector("#login-Form input[name='memberPw']");
 
   if(loginForm != null){
     loginForm.addEventListener("submit", e =>{
