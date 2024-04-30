@@ -13,12 +13,13 @@
 
 </head>
 <body>
+  <th:block th:replace="~{common/common}"></th:block>
   <th:block th:replace="~{common/header}"></th:block>
 
   <div class="board-container">
     <th:block th:each="boardData : ${list}">
       <section class="board-list">
-        <h2 th:text="${boardData.boardName}">게시판 이름</h2>
+        <h2 th:text="${boardData.boardName}">게시판 이름</h2><span></span>
         <ul>
           <li th:unless="${#lists.size(boardData.boardList) > 0}" class="board-item">
             작성된 게시글이 없습니다.

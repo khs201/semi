@@ -15,3 +15,188 @@
   #profileImage{
     height: 100%;
   }
+
+
+  
+ /* 사이드 메뉴 */
+
+ .left-side {
+  flex: 0 0 15%;
+  background-color: #fff; /* White background */
+  padding: 20px;
+  border-radius: 10px;
+  color: #333; /* Dark text color */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ccc; /* Add border */
+}
+
+.left-side ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.left-side li {
+  margin-bottom: 10px;
+}
+
+.left-side a {
+  color: #333; /* Dark text color */
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  border: 1px solid #ccc; /* Add border */
+}
+
+
+/* ----------------------------------------------------- */
+
+ 
+
+.myPage-content {
+  display: flex;
+}
+
+.myPage-side {
+  flex: 0 0 25%;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.myPage-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.myPage-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.myPage-subject {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.myPage-row {
+  margin-bottom: 15px;
+}
+
+.myPage-row label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.myPage-row input[type="password"] {
+  width: 30%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.myPage-row input[type="text"] {
+  width: 30%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.myPage-submit {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.myPage-submit:hover {
+  background-color: #0056b3;
+}
+
+/* 화면 */
+/* 프로필 섹션 스타일 */
+.myPage-main {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+/* "프로필" 제목 아래 두꺼운 줄 스타일 */
+.myPage-title {
+  border-bottom: 3px solid #007bff; /* 두꺼운 파란 선 */
+  padding-bottom: 15px; /* 제목 아래 여백 추가 */
+  margin-bottom: 15px; /* 섹션 아래 여백 추가 */
+}
+
+#profileImg{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 프로필 이미지 영역 스타일 */
+.profile-image-area {
+  position: relative; /* 삭제 이미지 버튼 위치 설정 */
+  margin-bottom: 20px; /* 프로필 이미지 아래 여백 추가 */
+}
+
+/* 삭제 이미지 버튼 스타일 */
+#deleteImage {
+  
+  top: 5px; /* 상단 위치 조정 */
+  right: 5px; /* 우측 위치 조정 */
+  font-size: 20px;
+  color: black; 
+  cursor: pointer;
+}
+
+/* 프로필 버튼 영역 스타일 */
+.profile-btn-area {
+  margin-bottom: 20px; /* 버튼 영역 아래 여백 추가 */
+  
+}
+
+/* 레이블 및 스팬 스타일 */
+.myPage-row {
+  margin-bottom: 15px; /* 행 사이 여백 추가 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+}
+
+/* 입력 파일 스타일 */
+#imageInput {
+  display: none; /* 입력 파일 숨기기 */
+}
+
+/* 레이블 스타일 */
+label[for="imageInput"] {
+  background-color: #007bff; /* 파란색 배경색 */
+  color: #fff; /* 흰색 텍스트 색상 */
+  padding: 10px 20px; /* 패딩 추가 */
+  border-radius: 5px; /* 둥근 모서리 */
+  cursor: pointer; /* 포인터로 변경 */
+  transition: background-color 0.3s; /* 부드러운 전환 효과 */
+}
+
+/* 레이블 호버 효과 */
+label[for="imageInput"]:hover {
+  background-color: #0056b3; /* 호버 시 더 진한 파란색 */
+}
+
+/* 버튼 스타일 */
+button {
+  background-color: #007bff; /* 파란색 배경색 */
+  color: #fff; /* 흰색 텍스트 색상 */
+  padding: 10px 20px; /* 패딩 추가 */
+  border: none; /* 테두리 제거 */
+  border-radius: 5px; /* 둥근 모서리 */
+  cursor: pointer; /* 포인터로 변경 */
+  transition: background-color 0.3s; /* 부드러운 전환 효과 */
+}
+
+/* 버튼 호버 효과 */
+button:hover {
+  background-color: #0056b3; /* 호버 시 더 진한 파란색 */
+}

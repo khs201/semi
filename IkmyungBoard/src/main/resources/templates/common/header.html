@@ -1,3 +1,4 @@
+
 <header>
 
 
@@ -13,8 +14,11 @@
         <li>
           <a th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}" th:text="${boardType.boardName}">게시판 이름</a>
         </li>
+        
       </th:block>
     </ul>
+
+    <ul><i class="fa-regular fa-lightbulb" id="changeBtn"></i></ul>
 
     <!-- 로그인과 회원가입 버튼-->
     <th:block th:if="${session.loginMember == null}">
