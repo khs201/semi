@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>내가 쓴 글</title>
+
+  <link rel="stylesheet" href="/css/board/board-style.css">
+
+</head>
+
+<body>
+
+
+  <th:block th:replace="~{common/header}"></th:block>
+
+  <h1 class="board-title">내가 쓴 글</h1>
+
+  <!-- 검색창 -->
+<!--   <form th:action="@{{boardCode}(boardCode=${boardCode})}" method="get" id="boardSearch">
+
+    <select name="key" id="searchKey">
+      <option value="t">제목</option>
+      <option value="c">내용</option>
+      <option value="tc">제목+내용</option>
+      <option value="w">글쓴이</option>
+    </select>
+
+    <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+    <button>검색</button>
+  </form> -->
+
+</main>
+
+
+
+  <table border=0 cellpadding=0 cellspacing=0>
+    <thead>
+      <tr>
+        <th>제목</th>
+        <th>글쓴이</th>
+        <th>추천수</th>
+        <th>날짜</th>
+        <th>조회수</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr th:each="board : ${boardList}" th:object="${board}">
+        
+        <td>
+          <!-- 썸네일 추가 예정 -->
+
+          <!-- 상세 조회 주소에 cp가 포함된 이유 : 상세 -> 목록 돌아올 때 사용 -->
+          
+          <!-- 검색 X -->
+          <!-- 주소 넣어야됨 th:href로 -->
+          <a href="#" 
+             th:text="*{boardTitle}">게시글 제목</a>
+
+             
+             <th:block th:text="|[*{commentCount}]|">댓글 수</th:block>
+            </td>
+            
+            <!-- 작성자 닉네임 -->
+            <td th:text="*{memberNickname}">닉네임</td>
+            
+            <!-- 좋아요 수 -->
+            <td th:text="*{likeCount}">0</td>
+            
+            <!-- 작성일 -->
+            <td th:text="*{boardWriteDate}">2023-10-26</td>
+
+            <!-- 조회수 -->
+            <td> <span>조회수</span> [[*{readCount}]]</td>           
+            
+      </tr>
+
+    </tbody>
+
+
+
+
+    </tr>
+  </table>
+
+
+   <!-- 게시글이 있을 때만 페이지네이션이 보이게 할 예정 -->
+   <div class="pagination-area">
+
+    <!-- 일반 목록 조회 ( 검색 X ) -->
+    <ul class="pagination" th:unless="${param.key}" th:object="${pagination}">
+
+      <!-- 첫 페이지로 이동 -->
+      <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=1)}">&lt;&lt;</a></li>
+
+      <!-- 이전 목록 마지막 번호로 이동 -->
+      <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{prevPage})}">&lt;</a></li>
+
+      <!-- 특정 페이지로 이동 -->
+      
+      <!-- <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}"> -->
+      <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}">
+        
+        <!-- 현재 보고있는 페이지 -->
+        <!-- <li th:if="${i == pagination.currentPage}"> -->
+        <li th:if="${i} == *{currentPage}">
+          <a class="current" th:text="${i}">현재 페이지</a>
+        </li>
+
+        <!-- 보고있지 않은 페이지 -->
+        <!-- <li th:unless="${i == pagination.currentPage}">  -->
+        <li th:unless="${i} == *{currentPage}">
+          <a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=${i})}" 
+             th:text="${i}">이동할 페이지</a> 
+        </li>
+
+      </th:block>
+      
+
+
+      <!-- 다음 목록 시작 번호로 이동 -->
+      <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{nextPage})}">&gt;</a></li>
+
+      <!-- 끝 페이지로 이동 -->
+      <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{maxPage})}">&gt;&gt;</a></li>
+    </ul>
+
+    
+
+
+
+
+  
+
+  
+
+  <th:block th:replace="~{common/footer}"></th:block>
+
+<!-- 	<script th:inline="javascript">
+    /* JS에서 쓰기 위해 boardCode 전역 변수 저장 */
+		const boardCode = /*[[${boardCode}]]*/ "게시판 코드 번호";
+	</script> -->
+
+  <script src="/js/board/board.js"></script>
+
+
+
+</body>
+
+</html>
