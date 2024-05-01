@@ -114,6 +114,8 @@ public class BoardServiceImpl implements BoardService {
 		// 1. 지정된 게시판(boardCode)에서
 		//    검색 조건에 맞으면서
 		//    삭제되지 않은 게시글 수를 조회
+		
+		
 		int listCount = mapper.getSearchCount(paramMap);
 		
 		// 2. 1번의 결과 + cp를 이용해서
