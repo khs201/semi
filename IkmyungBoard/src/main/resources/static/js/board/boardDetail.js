@@ -104,33 +104,28 @@ if(deleteBtn != null){
 
 
 
-  .then(resp => resp.text()) // 반화 결과 text(글자) 형태로 변환
-  .then(count => {
-    // count == 첫 번째 then의 파싱되어 반환된 값(-1 또는 게시글 좋아요 수)
-    // console.log("result : ", result);
-
-    if(count == -1){
-      console.log("좋아요 처리 실패");
-      return;
+.then(resp => resp.text()) // 서버 응답을 텍스트로 변환
+.then(count => {
+    if (count == -1) {
+        console.log("좋아요 처리 실패");
+        return;
     }
 
-
-    // 5. likeCheck 값 0 <-> 1 변환
-    //  (왜? 클릭 될 때 마다 INSERT/DELETE 동작을 번갈아 가면서 할 수 있음)
+    // likeCheck 값 0 <-> 1 변환
     likeCheck = likeCheck == 0 ? 1 : 0;
 
-    // 6. 하트를 채웠다/비웠다 바꾸기
+    // 하트를 채웠다/비웠다 바꾸기
     e.target.classList.toggle("like");
-    // e.target.classList.toggle("fa-solid");
 
-    // 7. 게시글 좋아요 수 수정
-     //e.target.nextElementSibling.innerText = count;
-     
-     // 이전 요소 innerText를 count로 
-     e.target.previousElementSibling.innerText = count;
-     console.log(count);
-
-  });
+    // 버튼 다음에 있는 숫자 요소를 찾아서 텍스트 업데이트
+    const numElement = e.target.nextElementSibling;
+    if (numElement) {
+        numElement.innerText = count;
+        console.log(count);
+    } else {
+        console.log("숫자 요소를 찾을 수 없습니다.");
+    }
+});
 
 
 });

@@ -14,7 +14,7 @@
 
   <th:block th:replace="~{common/header}"></th:block>
 
-  <main id="container">
+  <main class="container">
 
 
 <th:block th:object="${board}">
@@ -74,11 +74,17 @@
 
   </div>
 
-  <div class="choochun-area">
-    <!-- 버튼 꾸밀 예정 -->
-    <span th:text="*{likeCount}">0</span>
-    <button id="likeBtn" th:classappend="*{likeCheck == 1} ? like : notlike">추천하기!</button>
-  </div>
+  <label>
+    <div class="choochun-container">
+      <div class="semi-btn">
+        <i class="far fa-thumbs-up"></i>
+        <button id="likeBtn" th:classappend="*{likeCheck == 1} ? like : notlike">
+          추천하기
+        </button>
+        <span class="num" th:text="*{likeCount}">0</span>
+      </div>
+    </div>
+  </label>
 
         <!-- 게시글 수정, 삭제 버튼 영역 -->
 
@@ -99,32 +105,8 @@
 
 
 
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <th:block th:replace="~{board/comment}"></th:block>
-    
+    <th:block th:replace="~{common/common}"></th:block>
 
   
 
