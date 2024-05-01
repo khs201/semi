@@ -1,6 +1,7 @@
 package edu.kh.ib.myPage.model.service;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,6 +39,14 @@ public interface MyPageService {
 	 * @return result
 	 */
 	int profile(MultipartFile profileImg, Member loginMember) throws IllegalStateException, IOException;
+
+
+	/** 내가 쓴 글 조회하기
+	 * @param memberNo
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectBoardList(int memberNo, int cp);
 
 	
 

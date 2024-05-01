@@ -219,14 +219,13 @@ public class BoardController {
 						
 					}
 					
-				
+
 		
 	}
 
 			return path;
 	
   }	
-
 
 	/**
 	 * 게시글 좋아요 체크/해제

@@ -2,10 +2,12 @@ package edu.kh.ib.myPage.controller;
 
 import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,17 +17,21 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.kh.ib.board.model.service.BoardService;
 import edu.kh.ib.member.model.dto.Member;
 import edu.kh.ib.myPage.model.service.MyPageService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("myPage")
 @SessionAttributes({ "loginMember" })
+@Slf4j
 public class MyPageController {
 
 	private final MyPageService service;
+	private final BoardService boardService;
 
 	@GetMapping("info")
 	public String info(@SessionAttribute("loginMember") Member loginMember, Model model) {
@@ -174,6 +180,34 @@ public class MyPageController {
 		return "redirect:profile";
 		 
 		 
+	 }
+	 
+	 @GetMapping("myList")
+	 public String myList(
+				@SessionAttribute("loginMember") Member loginMember, 
+				@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+				Model model
+			 ) {
+		 
+		 
+		int memberNo = loginMember.getMemberNo();
+		 
+		// 조회 서비스 반환값 저장용
+		Map<String, Object> map = null;
+
+
+		// 게시글 목록 조회 서비스 호출
+		map = service.selectBoardList(memberNo, cp);
+
+
+			model.addAttribute("pagination", map.get("pagination"));
+			model.addAttribute("boardList", map.get("boardList"));
+			
+		 
+		 
+		 
+		 
+		 return "myPage/myPage-myList";
 	 }
 	 
 }
