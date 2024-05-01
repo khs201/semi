@@ -88,7 +88,7 @@ body{
 }
 
 .boardTitle {
-  color: var(--color1);
+  color: var(--color1) !important;
 }
 
 
