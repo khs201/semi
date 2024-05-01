@@ -171,6 +171,14 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 	
+	
+	// 게시판 목록 조회해오기
+	@Override
+	public List<Map<String, Object>> selectPopularBoardTypeList() {
+		
+		return mapper.selectPopularBoardTypeList();
+	}
+	
 	// 게시글 인기글
 	@Override
 	public List<Board> selectPopularBoardList(int boardCode) {

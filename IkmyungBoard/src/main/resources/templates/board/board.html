@@ -37,7 +37,7 @@
     </div>
 
     <div class="popular">
-      <button id="popularBtn">인기글</button>
+      <a th:href="@{/board/{boardCode}/popular (boardCode=${boardCode})}" id="popularBtn">인기글</a>
     </div>
 
   </div>
@@ -150,8 +150,6 @@
         <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{maxPage})}">&gt;&gt;</a></li>
       </ul>
 
-
-
       <!-- ------------- 검색인 경우 ------------- -->
       <ul class="pagination" th:if="${param.key}" th:object="${pagination}">
 
@@ -180,12 +178,55 @@
           </li>
         </th:block>
 
-                  <!-- 일치하는 게시글이 없을 경우 -->
+        <!-- 일치하는 게시글이 없을 경우 -->
         <th:block th:unless="*{startPage lt endPage}">
           <li>
             <a class="current">1</a>
           </li>
         </th:block>
+
+        <!-- ------------- 인기글 페이지인 경우 ------------- -->
+        <ul class="pagination-popular" th:if="${param.popular}" th:object="${pagination}">
+
+          <!-- 첫 페이지로 이동 -->
+          <li><a th:href="@{/board/{boardCode}/popular (boardCode=${boardCode}, cp=1)}">&lt;&lt;</a></li>
+
+          <!-- 이전 목록 마지막 번호로 이동 -->
+          <li><a th:href="@{/board/{boardCode}/popular (boardCode=${boardCode}, cp=*{prevPage})}">&lt;</a></li>
+
+          <!-- 특정 페이지로 이동 -->
+          <th:block th:if="*{startPage lt endPage}" th:each="i : *{#numbers.sequence(startPage, endPage)}">
+            
+          <!-- 현재 보고있는 페이지 -->
+          <!-- <li th:if="${i == pagination.currentPage}"> -->
+          <li th:if="${i} == *{currentPage}">
+            <a class="current" th:text="${i}">현재 페이지</a>
+          </li>
+
+          <!-- 보고있지 않은 페이지 -->
+          <!-- <li th:unless="${i == pagination.currentPage}">  -->
+          <li th:unless="${i} == *{currentPage}">
+            <a th:href="@{/board/{boardCode}/popular (boardCode=${boardCode}, cp=${i})}" 
+              th:text="${i}">이동할 페이지</a> 
+          </li>
+        </th:block>
+
+                      <!-- 일치하는 게시글이 없을 경우 -->
+        <th:block th:unless="*{startPage lt endPage}">
+          <li>
+            <a class="current">1</a>
+          </li>
+        </th:block>
+  
+
+
+        <!-- 다음 목록 시작 번호로 이동 -->
+        <li><a th:href="@{/board/{boardCode}/popular (boardCode=${boardCode}, cp=*{nextPage})}">&gt;</a></li>
+
+        <!-- 끝 페이지로 이동 -->
+        <li><a th:href="@{/board/{boardCode}/popular (boardCode=${boardCode}, cp=*{maxPage})}">&gt;&gt;</a></li>
+      </ul>
+
         
 
 

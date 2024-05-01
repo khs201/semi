@@ -44,6 +44,12 @@ public interface BoardService {
 	 */
 	int boardLike(Map<String, Integer> map);
 
+	
+	/** 게시판 목록 얻어와서 HTML application scope에 뿌리기
+	 * @return
+	 */
+	List<Map<String, Object>> selectPopularBoardTypeList();
+	
 	/** 게시글 인기글
 	 * @param boardCode
 	 * @return

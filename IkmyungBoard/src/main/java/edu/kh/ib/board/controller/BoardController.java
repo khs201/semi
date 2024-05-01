@@ -236,7 +236,7 @@ public class BoardController {
 		if (paramMap.get("key") == null) {
 
 			// 게시글 목록 조회 서비스 호출
-			map = service.selectBoardList(boardCode, cp);
+			map = service.selectPopularBoardList(boardCode, cp);
 			
 		} else { // 검색인 경우
 
@@ -253,7 +253,7 @@ public class BoardController {
 		model.addAttribute("boardCode", boardCode);
 		model.addAttribute("boardName", boardName);
 		model.addAttribute("pagination", map.get("pagination"));
-		model.addAttribute("boardList", map.get("boardList"));
+		model.addAttribute("popularBoardList", map.get("popularBoardList"));
 	    model.addAttribute("popularBoardList", popularBoardList);
 		
 	    

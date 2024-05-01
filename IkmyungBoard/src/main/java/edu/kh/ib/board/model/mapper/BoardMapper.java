@@ -80,6 +80,8 @@ public interface BoardMapper {
 
 	List<Board> selectPopularBoardList(int boardCode, RowBounds rowBounds);
 
+	List<Map<String, Object>> selectPopularBoardTypeList();
+
 
 	
 	
