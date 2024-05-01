@@ -353,3 +353,32 @@ AND MEMBER_NO = 4
 ORDER BY BOARD_NO DESC
 
 
+
+
+SELECT COUNT(*)
+		
+		FROM "BOARD"
+		WHERE BOARD_DEL_FL = 'N'
+		AND BOARD_CODE = #{boardCode};
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
