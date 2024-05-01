@@ -5,6 +5,8 @@ const signup = document.querySelector(".signup");
 const myInfo= document.querySelector(".my-info");
 const pageLogo = document.querySelector(".pageLogo");
 
+
+
 // 초기에는 로그인 레이어를 숨김
 loginLayer.style.visibility = 'hidden';
 if(login != null){
@@ -89,6 +91,16 @@ const getCookie = key => {
       }
     });
   }
+
+
+
+  
+   
+
+
+
+
+
 
 
 

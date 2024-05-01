@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +7,13 @@
 
   
   <link rel="stylesheet" href="/css/common/mainPage-style.css">
-
+  
   
 
 
 </head>
 <body>
+  
   <th:block th:replace="~{common/common}"></th:block>
   <th:block th:replace="~{common/header}"></th:block>
 
@@ -26,7 +27,7 @@
           </li>
           <li th:each="board : ${boardData.boardList}" class="board-item" th:if="${#lists.size(boardData.boardList) > 0}">
             <a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardData.boardCode}, boardNo=${board.boardNo})}"
-               th:text="${board.boardTitle}">게시물 제목</a>
+               th:text="${board.boardTitle}" class="boardTitle">게시물 제목</a>
             <span th:text="| [${board.commentCount}]|">댓글 수</span>
           </li>
         </ul>

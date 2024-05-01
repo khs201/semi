@@ -82,3 +82,33 @@ tbody tr td { /* tbody 내 td 테두리 제거 */
   color: white !important;
   letter-spacing: 0 !important;
 }
+
+/* 색 반전 */
+:root{
+  --color1:black;
+  --color2:white;
+}
+:root.dark{
+  --color1: white;
+  --color2: black;
+}
+
+.board-title{
+  color:var(--color1)
+}
+
+body{
+  background-color:var(--color2);
+}
+
+tbody td{
+  color:var(--color1);
+}
+
+thead th{
+  color:var(--color1);
+}
+
+.nextPage{
+  color:var(--color1);
+}
