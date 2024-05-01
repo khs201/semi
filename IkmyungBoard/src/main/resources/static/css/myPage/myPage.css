@@ -126,7 +126,7 @@
 
 /* "프로필" 제목 아래 두꺼운 줄 스타일 */
 .myPage-title {
-  border-bottom: 3px solid #007bff; /* 두꺼운 파란 선 */
+  border-bottom: 3px solid #3CB371; /* 두꺼운 파란 선 */
   padding-bottom: 15px; /* 제목 아래 여백 추가 */
   margin-bottom: 15px; /* 섹션 아래 여백 추가 */
 }

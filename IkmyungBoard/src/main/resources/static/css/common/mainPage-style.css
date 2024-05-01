@@ -26,7 +26,10 @@ body {
   width: calc(30% - 20px); /* 크기를 줄입니다 */
   aspect-ratio: 4/3; /* 직사각형 비율 설정 */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid #3CB371;
 }
+
+
 
 .board-list a {
   text-decoration: none;
@@ -91,6 +94,9 @@ body{
   color: var(--color1) !important;
 }
 
+.board-list{
+  
+}
 
 
 

@@ -3,7 +3,8 @@
   justify-content: space-around;
   align-items: center;
   padding: 20px;
-  background-color: #f0f0f0;
+  background-color: #3CB371;
+  color: white;
 }
 
 
@@ -22,7 +23,7 @@
 
 .gub li a {
   text-decoration: none;
-  color: #333;
+  color: white;
   margin:20px;
 }
 
@@ -74,6 +75,7 @@
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 }
 
+
 /* 로고 블럭 안잡히게 하기 */
 .pageLogo{
   user-select: none;
@@ -84,10 +86,44 @@
 
 }
 
-body{
-  background-color: #3CB371;
+.baordName:hover{
+  transform: scale(3.1);
+  border-radius: 4px;
+  background-color: rgb(19, 61, 56);
 }
 
+
+/* 회원가입 로그인 버튼 */
+.userlinks {
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.login,
+.signup {
+  padding: 10px 10px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login {
+  background-color: green;
+  color: white;
+}
+
+.signup {
+  background-color: white;
+  color: green;
+  text-decoration: none;
+  box-sizing: 10px;
+}
+
+.signup:hover {
+  text-decoration: underline;
+}
 
 
 

@@ -31,7 +31,7 @@
     <ul class="gub">
       <th:block th:each="boardType : ${application.boardTypeList}">
         <li>
-          <a th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}" th:text="${boardType.boardName}">게시판 이름</a>
+          <a th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}" th:text="${boardType.boardName}" class="baordName">게시판 이름</a>
         </li>
         
       </th:block>
