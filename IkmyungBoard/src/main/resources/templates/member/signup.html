@@ -54,10 +54,17 @@ input[type="password"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #0e427b;
+  background-color: #3CB371;
   color: #fff;
   display: block;
   width: 150px; /* 버튼의 너비를 조절합니다. */
+  transition: background-color 0.3s ease; /* 호버 효과 부드럽게 */
+}
+
+/* 버튼 호버 효과 */
+#signUpForm input[type="submit"]:hover,
+#signUpForm button:hover {
+  background-color: #2e8b57; /* 호버 시 어두운 컬러로 변경 */
 }
 
 
@@ -198,7 +205,7 @@ input[type="password"] {
           </div>
 
         <!-- 가입 완료 버튼 -->
-        <input type="submit" value="가입 완료" style="background-color:#0e427b; color: #fff; border: none; border-radius: 8px; padding: 10px; cursor: pointer; transition: background-color 0.3s;">
+        <input type="submit" value="가입 완료">
       </form>
     </section>
   </main>
