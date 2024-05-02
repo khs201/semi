@@ -7,6 +7,9 @@
   <title th:text="${boardName}">게시판 이름</title>
 
   <link rel="stylesheet" href="/css/board/board-style.css">
+  <style>
+ 
+  </style>
 
 </head>
 
@@ -16,6 +19,8 @@
   <th:block th:replace="~{common/header}"></th:block>
 
   <h1 class="board-title" th:text="${boardName}">게시판 이름</h1>
+
+  <div class="board-top-container">
 
   <!-- 검색창 -->
   <form th:action="@{{boardCode}(boardCode=${boardCode})}" method="get" id="boardSearch">
@@ -29,10 +34,11 @@
 
     <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
 
-    <button>검색</button>
+    <button class="search-btn" >검색</button>
   </form>
 
-</section>
+    <a th:href="@{/board/{boardCode} (boardCode=${boardCode}, key='p', query='1')}" id="popularBtn"><i class="fas fa-award"></i> 인기글</a>
+    </div>
 </main>
 
 
@@ -108,10 +114,10 @@
       <ul class="pagination" th:unless="${param.key}" th:object="${pagination}">
 
         <!-- 첫 페이지로 이동 -->
-        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=1)}">&lt;&lt;</a></li>
+        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=1)}"><i class="fa-solid fa-angles-left"></i></a></li>
 
         <!-- 이전 목록 마지막 번호로 이동 -->
-        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{prevPage})}">&lt;</a></li>
+        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{prevPage})}"><i class="fa-solid fa-chevron-left"></i></a></li>
 
         <!-- 특정 페이지로 이동 -->
         
@@ -136,10 +142,10 @@
 
 
         <!-- 다음 목록 시작 번호로 이동 -->
-        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{nextPage})}">&gt;</a></li>
+        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{nextPage})}"><i class="fa-solid fa-chevron-right"></i></a></li>
 
         <!-- 끝 페이지로 이동 -->
-        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{maxPage})}">&gt;&gt;</a></li>
+        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{maxPage})}"><i class="fa-solid fa-angles-right"></i></a></li>
       </ul>
 
 
@@ -148,10 +154,10 @@
       <ul class="pagination" th:if="${param.key}" th:object="${pagination}">
 
         <!-- 첫 페이지로 이동 -->
-        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=1, key=${param.key}, query=${param.query})}">&lt;&lt;</a></li>
+        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=1, key=${param.key}, query=${param.query})}"><i class="fa-solid fa-angles-left"></i></a></li>
 
         <!-- 이전 목록 마지막 번호로 이동 -->
-        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{prevPage}, key=${param.key}, query=${param.query})}">&lt;</a></li>
+        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{prevPage}, key=${param.key}, query=${param.query})}"><i class="fa-solid fa-chevron-left"></i></a></li>
 
 
 
@@ -182,10 +188,10 @@
 
 
         <!-- 다음 목록 시작 번호로 이동 -->
-        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{nextPage}, key=${param.key}, query=${param.query})}">&gt;</a></li>
+        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{nextPage}, key=${param.key}, query=${param.query})}"><i class="fa-solid fa-chevron-right"></i></a></li>
 
         <!-- 끝 페이지로 이동 -->
-        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{maxPage}, key=${param.key}, query=${param.query})}">&gt;&gt;</a></li>
+        <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{maxPage}, key=${param.key}, query=${param.query})}"><i class="fa-solid fa-angles-right"></i></a></li>
       </ul>
 
     </div>
@@ -207,6 +213,8 @@
 	</script>
 
   <script src="/js/board/board.js"></script>
+  
+  <th:block th:replace="~{common/common}"></th:block>
 
 
 
