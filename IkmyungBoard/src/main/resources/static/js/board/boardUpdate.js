@@ -3,12 +3,12 @@
 const inputImageList = document.getElementsByClassName("inputImage"); // input 태그
 const deleteImageList = document.getElementsByClassName("delete-image"); // x버튼
 
-document.body.addEventListener('change', function(e) {
+/* document.body.addEventListener('change', function(e) {
     if (e.target.matches('.inputImage')) { // .inputImage 클래스를 가진 input에서 발생한 이벤트인지 확인
         const order = Array.from(document.getElementsByClassName("inputImage")).indexOf(e.target);
         changeImageFn(e.target, order);
     }
-});
+}); */
 
 
 
@@ -26,98 +26,62 @@ const backupImageList = new Array(inputImageList.length);
  * @param order : 이미지 순서
  */
 const changeImageFn = (inputImage, order) => {
-
-  // byte단위로 10MB 지정
-  const maxSize = 1024 * 1024 * 10;
-
-  // 업로드된 파일 정보가 담긴 객체를 얻어와 변수에 저장
-  const file = inputImage.files[0];
-
-
-  // ------------- 파일 선택 -> 취소 해서 파일이 없는 경우 ----------------
-  if(file == undefined){
-    console.log("파일 선택 취소됨");
-
-    // 같은 순서(order)번째 backupInputList 요소를 얻어와 대체하기
-
-    /* 한 번 화면에 추가된 요소는 재사용(다른 곳에 또 추가) 불가능 */
-
-    // 백업본을 한 번 더 복제
-    const temp = backupInputList[order].cloneNode(true);
-
-    inputImage.after(temp); // 백업본을 다음 요소로 추가
-    inputImage.remove();    // 원본을 삭제
-    inputImage = temp;      // 원본 변수에 백업본을 참조할 수 있게 대입
-
-    // 백업본에 없는 이벤트 리스너를 다시 추가
-    inputImage.addEventListener("change", e => {
-      changeImageFn(e.target, order);
-    })
-
-    return;
-  }
-
-
-  // ---------- 선택된 파일의 크기가 최대 크기(maxSize) 초과 ---------
-
-  if(file.size > maxSize){
-    alert("10MB 이하의 이미지를 선택해주세요");
-
-    // 해당 순서의 backup 요소가 없거나, 
-    // 요소는 있는데 값이 없는 경우 == 아무 파일도 선택된적 없을 때
-    if(backupInputList[order] == undefined
-        || backupInputList[order].value == ''){
-
-      inputImage.value = ""; // 잘못 업로드된 파일 값 삭제
-      return;
-    }
-
-    // 이전에 정상 선택 -> 다음 선택에서 이미지 크기 초과한 경우
-    // 백업본을 한 번 더 복제
-    const temp = backupInputList[order].cloneNode(true);
-
-    inputImage.after(temp); // 백업본을 다음 요소로 추가
-    inputImage.remove();    // 원본을 삭제
-    inputImage = temp;      // 원본 변수에 백업본을 참조할 수 있게 대입
- 
-    // 백업본에 없는 이벤트 리스너를 다시 추가
-    inputImage.addEventListener("change", e => {
-     changeImageFn(e.target, order);
-    })
-
-    return;
-  }
+    // byte단위로 10MB 지정
+    const maxSize = 1024 * 1024 * 10;
+  
+    // 여러 파일 처리
+    Array.from(inputImage.files).forEach(file => {
+      // 파일 선택 -> 취소해서 파일이 없는 경우
+      if (!file) {
+        console.log("파일 선택 취소됨");
+        // 백업 및 복원 로직이 필요하면 여기에 추가
+        return;
+      }
+  
+      // 선택된 파일의 크기가 최대 크기(maxSize) 초과
+      if (file.size > maxSize) {
+        alert("10MB 이하의 이미지를 선택해주세요");
+  
+        // 백업 처리
+        if (!backupImageList[order] || backupImageList[order].value === '') {
+          inputImage.value = ""; // 잘못 업로드된 파일 값 삭제
+          return;
+        }
+  
+        // 백업본 복제 및 복원
+        const temp = backupImageList[order].cloneNode(true);
+        inputImage.after(temp);
+        inputImage.remove();
+        inputImage = temp;
+        inputImage.addEventListener("change", e => changeImageFn(e.target, order));
+        return;
+      }
+  
+      // 파일 리더를 사용한 이미지 미리보기
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = e => {
+        const url = e.target.result;
+        previewList[order].src = url; // 미리보기 업데이트
+        backupImageList[order] = inputImage.cloneNode(true); // 백업
+        deleteOrder.delete(order); // 삭제된 순서 관리
+      };
+    });
+  };
 
 
-  // ------------ 선택된 이미지 미리보기 --------------
 
-  const reader = new FileReader(); // JS에서 파일을 읽고 저장하는 객체
-
-  // 선택된 파일을 JS로 읽어오기 -> reader.result 변수에 저장됨
-  reader.readAsDataURL(file);
-
-  reader.addEventListener("load", e => {
-    const url = e.target.result;
-
-    // img 태그(.preview)에 src 속성으로 url 값을 대입
-   
-    previewList[order].src = url;
-
-    // 같은 순서 backupInputList에 input태그를 복제해서 대입
-    backupInputList[order] = inputImage.cloneNode(true);
-
-    // 이미지가 성공적으로 읽어진 경우
-    // deleteOrder에서 해당 순서를 삭제
-    deleteOrder.delete(order);
-  });
+//   // **** input태그에 이미지가 선택된 경우(값이 변경된 경우) ****
+//   inputImageList[0].addEventListener("change", e => {
+//     changeImageFn(e.target, i);
+//   })
+for(let i = 0; i < inputImageList.length; i++){
+    inputImageList[i].addEventListener("change", function(e) {
+        changeImageFn(e.target, i);
+    });
 }
 
 
-
-  // **** input태그에 이미지가 선택된 경우(값이 변경된 경우) ****
-  inputImageList[0].addEventListener("change", e => {
-    changeImageFn(e.target, i);
-  })
 
 
 for(let i=0 ; i<previewList.length ; i++){
@@ -144,7 +108,8 @@ for(let i=0 ; i<previewList.length ; i++){
     
     previewList[i].src       = ""; // 미리보기 이미지 제거
     inputImageList[i].value  = ""; // input에 선택된 파일 제거
-    backupInputList[i]       = undefined; // 백업본 제거
+    backupImageList[i]       = undefined; // 백업본 제거
+    // 요소 선택해서 네모 박스 삭제
 
   });
 }
