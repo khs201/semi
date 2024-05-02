@@ -51,22 +51,20 @@
     </th:block>
     
     
-    <th:block th:if="${#lists.size(board.imageList) > start}">
       
-        <h5>업로드 이미지</h5>
-        <th:block th:each="i : ${#numbers.sequence(start, #lists.size(board.imageList) -1)}">                                       
-            <div class="img-box">
-                <div class="boardImg">
+      <h5>업로드 이미지</h5>
+      <th:block th:each="i : ${#numbers.sequence(0, #lists.size(board.imageList) -1)}">                                       
+          <div class="img-box">
+              <div class="boardImg">
 
-                    <img th:src="|${board.imageList[i].imgPath}${board.imageList[i].imgRename}|">  
+                  <img th:src="|${board.imageList[i].imgPath}${board.imageList[i].imgRename}|">  
 
-                    <a th:href="|${board.imageList[i].imgPath}${board.imageList[i].imgRename}|"
-                       th:download="${board.imageList[i].imgOriginalName}" >다운로드</a>                
-                </div>
-            </div>
-        </th:block>
+                  <a th:href="|${board.imageList[i].imgPath}${board.imageList[i].imgRename}|"
+                      th:download="${board.imageList[i].imgOriginalName}" >다운로드</a>                
+              </div>
+          </div>
+      </th:block>
 
-    </th:block>
 </th:block>
 <!-- ====================== 이미지가 있을 경우 출력하는 구문 ====================== -->
 

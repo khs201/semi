@@ -140,7 +140,7 @@ public class EditBoardController {
 	 * @param loginMember : 로그인한 회원 번호 이용(로그인한 회원이 작성자인지 검사)
 	 * @param images : 제출된 input type="file" 모든 요소
 	 * @param ra : 리다이렉트 시 request scope로 값 전달
-	 * @param deleteOrder : 삭제된 이미지 순서가 기록된 문자열 (1,2,3)  *****확인 필요*******
+	 * @param deleteImgNo : 삭제된 이미지 순서가 기록된 문자열 (1,2,3)  *****확인 필요*******
 	 * @param querystring : 수정 성공 시 이전 파라미터 유지(cp, 검색어) *****확인 필요*******
 	 * @return 
 	 * @throws IOException 
@@ -154,7 +154,7 @@ public class EditBoardController {
 			@SessionAttribute("loginMember") Member loginMember,
 			@RequestParam("images") List<MultipartFile> images,
 			RedirectAttributes ra,
-			@RequestParam(value="deleteOrder", required = false) String deleteOrder,
+			@RequestParam(value="deleteImgNo", required = false) String deleteImgNo,
 			@RequestParam(value="querystring", required = false, defaultValue = "")
 			String querystring
 			) throws IllegalStateException, IOException {
@@ -165,7 +165,7 @@ public class EditBoardController {
 		inputBoard.setMemberNo(loginMember.getMemberNo());
 		
 		// 2. 게시글 수정 서비스 호출 후 결과 반환받기
-		int result = service.boardUpdate(inputBoard, images, deleteOrder);
+		int result = service.boardUpdate(inputBoard, images, deleteImgNo);
 		
 		// 3. 서비스 결과에 따라 응답 제어
 		String message = null;

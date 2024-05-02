@@ -199,27 +199,6 @@ public class BoardController {
 					model.addAttribute("board", board);
 					
 					
-					// 조회된 이미지 목록(imageList)가 있을 경우
-					if(!board.getImageList().isEmpty()) {
-						
-						
-						BoardImg thumbnail = null;
-						
-						// imageList의 0번 인덱스 == 가장 빠른 순서(imgOrder)
-						// 이미지 목록의 첫 번째 행이 순서 0 == 썸네일인 경우
-						if(board.getImageList().get(0).getImgOrder() == 0) {
-							thumbnail = board.getImageList().get(0);
-						}
-						
-						// 썸네일이 있을 때 / 없을 때
-						// 출력되는 이미지 시작 인덱스 지정하는 코드
-						// (썸네일 제외하고 인덱스 계산)
-						model.addAttribute("thumbnail", thumbnail);
-						model.addAttribute("start", thumbnail != null ? 1: 0);
-						
-					}
-					
-					
 		
 	}
 
