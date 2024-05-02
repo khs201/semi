@@ -126,7 +126,7 @@
 
 /* "프로필" 제목 아래 두꺼운 줄 스타일 */
 .myPage-title {
-  border-bottom: 3px solid #007bff; /* 두꺼운 파란 선 */
+  border-bottom: 3px solid #3CB371; /* 두꺼운 파란 선 */
   padding-bottom: 15px; /* 제목 아래 여백 추가 */
   margin-bottom: 15px; /* 섹션 아래 여백 추가 */
 }
@@ -135,6 +135,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #ccc !important;
 }
 
 /* 프로필 이미지 영역 스타일 */
@@ -156,7 +157,8 @@
 /* 프로필 버튼 영역 스타일 */
 .profile-btn-area {
   margin-bottom: 20px; /* 버튼 영역 아래 여백 추가 */
-  
+  border-bottom: 3px solid #3CB371;
+  padding-bottom: 5px;
 }
 
 /* 레이블 및 스팬 스타일 */
@@ -199,4 +201,53 @@ button {
 /* 버튼 호버 효과 */
 button:hover {
   background-color: #0056b3; /* 호버 시 더 진한 파란색 */
+}
+
+/* 이메일 , 가입일 */
+
+.myPage-row {
+  margin-bottom: 10px; /* 각 항목 사이의 간격 설정 */
+}
+
+.myPage-row label {
+  font-weight: bold; /* 라벨 텍스트 굵게 */
+  margin-right: 10px; /* 라벨과 정보 사이의 간격 설정 */
+}
+
+.myPage-row span {
+  color: #333; /* 정보 텍스트 색상 */
+}
+
+
+
+/* 색 반전 */
+:root{
+  --color1:black;
+  --color2:white;
+}
+:root.dark{
+  --color1: white;
+  --color2: black;
+}
+
+.left-side{
+  background-color: var(--color2);
+  color: var(--color1);
+}
+
+ul.list-group > li > a{
+  color: var(--color1) !important;
+}
+
+.myPage-main{
+ 
+  color: var(--color1);
+}
+
+body{
+  background-color: var(--color2);
+}
+
+#deleteImage{
+  color: var(--color1);
 }
