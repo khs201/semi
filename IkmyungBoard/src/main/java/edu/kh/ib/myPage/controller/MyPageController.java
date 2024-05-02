@@ -96,11 +96,8 @@ public class MyPageController {
 	}
 
 	@PostMapping("changePw")
-	public String changePw(
-		@RequestParam("currentPw") String currentPw, 
-		@RequestParam("newPw") String newPw,
-		@SessionAttribute("loginMember") Member loginMember, 
-		RedirectAttributes ra) {
+	public String changePw(@RequestParam("currentPw") String currentPw, @RequestParam("newPw") String newPw,
+			@SessionAttribute("loginMember") Member loginMember, RedirectAttributes ra) {
 
 		int result = service.change(currentPw, newPw, loginMember);
 
@@ -121,93 +118,72 @@ public class MyPageController {
 
 	}
 
-	
-	 
-	 @PostMapping("secession")
-	 public String secession(
-		@RequestParam("memberPw") String memberPw,
-		@SessionAttribute("loginMember") Member loginMember,
-		SessionStatus status,
-		RedirectAttributes ra
-		) {
-		 
-		 int result = service.logout(memberPw, loginMember);
-		 
-		 String message = null;
-		 String path = null;
-		 
-		 if(result == 0) {
-			 message = "비밀번호가 일치하지 않습니다";
-			 path = "/myPage/secession";
-		 } else {
-			 message = "탈퇴 되었습니다";
-			 path = "/";
-			 
-			 status.setComplete();
-		 }
-		 
-		 ra.addFlashAttribute("message", message);
-		 
-		 
-		 return "redirect:" + path;
-	 }
-	 
-	 @PostMapping("profile")
-	 public String profile(
-		@RequestParam("profileImg") MultipartFile profileImg,
-		@SessionAttribute("loginMember") Member loginMember,
-		RedirectAttributes ra
-		) throws IllegalStateException, IOException{
-		 
-		 int memberNo = loginMember.getMemberNo();
-		 
-		 
-		 int result = service.profile(profileImg, loginMember);
-		 
-		 String message = null;
-			
-			if(result > 0) {
-				message = "변경 성공!!";
-				
-				// 세션에 저장된 로그인 회원 정보에서 
-				// 프로필 이미지 수정
-				
-			} else	{	  
-				message = "변경 실패 ㅠㅠ";
-			}
-		ra.addFlashAttribute("message",message);
-			
-		return "redirect:profile";
-		 
-		 
-	 }
-	 
-	 @GetMapping("myList")
-	 public String myList(
-				@SessionAttribute("loginMember") Member loginMember, 
-				@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
-				Model model
-			 ) {
-		 
-		 
+	@PostMapping("secession")
+	public String secession(@RequestParam("memberPw") String memberPw,
+			@SessionAttribute("loginMember") Member loginMember, SessionStatus status, RedirectAttributes ra) {
+
+		int result = service.logout(memberPw, loginMember);
+
+		String message = null;
+		String path = null;
+
+		if (result == 0) {
+			message = "비밀번호가 일치하지 않습니다";
+			path = "/myPage/secession";
+		} else {
+			message = "탈퇴 되었습니다";
+			path = "/";
+
+			status.setComplete();
+		}
+
+		ra.addFlashAttribute("message", message);
+
+		return "redirect:" + path;
+	}
+
+	@PostMapping("profile")
+	public String profile(@RequestParam("profileImg") MultipartFile profileImg,
+			@SessionAttribute("loginMember") Member loginMember, RedirectAttributes ra)
+			throws IllegalStateException, IOException {
+
 		int memberNo = loginMember.getMemberNo();
-		 
+
+		int result = service.profile(profileImg, loginMember);
+
+		String message = null;
+
+		if (result > 0) {
+			message = "변경 성공!!";
+
+			// 세션에 저장된 로그인 회원 정보에서
+			// 프로필 이미지 수정
+
+		} else {
+			message = "변경 실패 ㅠㅠ";
+		}
+		ra.addFlashAttribute("message", message);
+
+		return "redirect:profile";
+
+	}
+
+	@GetMapping("myList")
+	public String myList(@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model) {
+
+		int memberNo = loginMember.getMemberNo();
+
 		// 조회 서비스 반환값 저장용
 		Map<String, Object> map = null;
-
 
 		// 게시글 목록 조회 서비스 호출
 		map = service.selectBoardList(memberNo, cp);
 
+		model.addAttribute("pagination", map.get("pagination"));
+		model.addAttribute("boardList", map.get("boardList"));
 
-			model.addAttribute("pagination", map.get("pagination"));
-			model.addAttribute("boardList", map.get("boardList"));
-			
-		 
-		 
-		 
-		 
-		 return "myPage/myPage-myList";
-	 }
-	 
+		return "myPage/myPage-myList";
+	}
+
 }
