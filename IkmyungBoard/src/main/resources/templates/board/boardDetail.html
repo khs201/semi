@@ -14,147 +14,143 @@
   <th:block th:replace="~{common/common}"></th:block>
   <th:block th:replace="~{common/header}"></th:block>
 
-  <main id="container">
+  <section class="container-wrapper">
+
+    <main class="container">
 
 
-<th:block th:object="${board}">
-  <div class="board-header">
-    <h1 th:text="${boardName}">게시판명</h1>
-    <!-- 여기 최근 갔던 게시판들 나열하는거 할까? 말까? 고민중 -->
+      <th:block th:object="${board}">
+      <div class="board-header">
+        <h1 th:text="${boardName}">게시판명</h1>
+        <!-- 여기 최근 갔던 게시판들 나열하는거 할까? 말까? 고민중 -->
 
-    <h2 th:text="*{boardTitle}">게시글 제목</h2>
-  </div>
-  
-  <div class="board-detail">
-    <span th:text="*{memberNickname}">작성자 닉네임</span><span>
-    <span th:text="*{boardWriteDate}">작성일</span>
-    <span> 조회수</span> [[*{readCount}]]   
-
-
-  </div>
-  
-  <div class="board-body">
-    <!-- ====================== 이미지가 있을 경우 출력하는 구문  ====================== -->
-    <th:block th:if="${ #lists.size(board.imageList) > 0}">
-
-    <!-- 썸네일이 있을 경우 -->
-    <th:block th:if="*{thumbnail}">
-        <h5>썸네일</h5>
-        <div class="img-box">
-            <div class="boardImg thumbnail">
-                <img th:src="|${thumbnail.imgPath}${thumbnail.imgRename}|">                     
-                
-                <a th:href="|${thumbnail.imgPath}${thumbnail.imgRename}|"
-                   th:download="${thumbnail.imgOriginalName}">다운로드</a>         
-            </div>
-        </div>
-    </th:block>
-    
-    
-    <th:block th:if="${#lists.size(board.imageList) > start}">
+        <h2 th:text="*{boardTitle}">게시글 제목</h2>
+      </div>
       
-        <h5>업로드 이미지</h5>
-        <th:block th:each="i : ${#numbers.sequence(start, #lists.size(board.imageList) -1)}">                                       
+      <div class="board-detail">
+        <span th:text="*{memberNickname}">작성자 닉네임</span><span>
+        <span th:text="*{boardWriteDate}">작성일</span>
+        <span> 조회수</span> [[*{readCount}]]   
+
+
+      </div>
+      
+      <div class="board-body">
+        <!-- ====================== 이미지가 있을 경우 출력하는 구문  ====================== -->
+        <th:block th:if="${ #lists.size(board.imageList) > 0}">
+
+        <!-- 썸네일이 있을 경우 -->
+        <th:block th:if="*{thumbnail}">
             <div class="img-box">
-                <div class="boardImg">
-
-                    <img th:src="|${board.imageList[i].imgPath}${board.imageList[i].imgRename}|">  
-
-                    <a th:href="|${board.imageList[i].imgPath}${board.imageList[i].imgRename}|"
-                       th:download="${board.imageList[i].imgOriginalName}" >다운로드</a>                
+                <div class="boardImg thumbnail">
+                    <img th:src="|${thumbnail.imgPath}${thumbnail.imgRename}|">                             
                 </div>
             </div>
         </th:block>
+        
+        
+        <th:block th:if="${#lists.size(board.imageList) > start}">
+
+            <th:block th:each="i : ${#numbers.sequence(start, #lists.size(board.imageList) -1)}">                                       
+                <div class="img-box">
+                    <div class="boardImg">
+
+                        <img th:src="|${board.imageList[i].imgPath}${board.imageList[i].imgRename}|">                
+                    </div>
+                </div>
+            </th:block>
+
+        </th:block>
+    </th:block>
+
+    <!-- 이미지 다운로드 영역 -->
+    <th:block th:if="${#lists.size(board.imageList) > 0}">
+      <div class="image-download">
+        <h5>이미지 다운로드</h5>
+        <th:block th:each="image : ${board.imageList}">
+          <div>
+            <a th:href="|${image.imgPath}${image.imgRename}|" th:download="${image.imgOriginalName}">
+              <span th:text="${image.imgOriginalName}">이미지 다운로드</span>
+            </a>
+          </div>
+        </th:block>
+      </div>
+    </th:block>
+    </div>
+
+    <!-- ====================== 이미지가 있을 경우 출력하는 구문 ====================== -->
+
+      <p class="bodyContent" th:text="*{boardContent}">게시글 내용</p>
+
+      </div>
+
+      <div class="choochunContainer">
+          <label>
+          <div class="semiBtn">
+            <i class="far fa-thumbs-up"></i>
+            <button id="likeBtn" th:classappend="*{likeCheck == 1} ? like : notlike">
+              추천하기
+            </button>
+            <span class="num" th:text="*{likeCount}">0</span>
+          </div>
+        </label>
+      </div>
+
+            <!-- 게시글 수정, 삭제 버튼 영역 -->
+
+            <div class="board-btn-area">
+          
+              <!-- 로그인한 회원과 게시글 작성자 번호가 같은 경우-->
+            
+              <!-- 
+                        ${객체?.필드} : 안전 탐색 연산자(Safe Navigation Operator)
+                        객체가 null인지 판별해서 null이 아닌 경우에 수행
+                    -->
+              <th:block th:if="${board.memberNo == session.loginMember?.memberNo}">
+                <button id="updateBtn">수정</button>
+                <button id="deleteBtn">삭제</button>
+              </th:block>
+              <button id="goToListBtn">목록으로</button>
+            </div>
+
+
+
+        <th:block th:replace="~{board/comment}"></th:block>
+        <th:block th:replace="~{common/common}"></th:block>
+
+      
 
     </th:block>
-</th:block>
-<!-- ====================== 이미지가 있을 경우 출력하는 구문 ====================== -->
 
-  <p th:text="*{boardContent}">게시글 내용</p>
-
-  </div>
-
-  <div class="choochun-area">
-    <!-- 버튼 꾸밀 예정 -->
-    <span th:text="*{likeCount}">0</span>
-    <button id="likeBtn" th:classappend="*{likeCheck == 1} ? like : notlike">추천하기!</button>
-  </div>
-
-        <!-- 게시글 수정, 삭제 버튼 영역 -->
-
-        <div class="board-btn-area">
       
-          <!-- 로그인한 회원과 게시글 작성자 번호가 같은 경우-->
+      <script th:inline="javascript">
+            
+        /* 로그인 상태인 경우 로그인한 회원 번호를 전역 변수 저장 */
+
+        // session.loginMember?.memberNo 
+        // - session에서 loginMember를 얻어 왔는데 
+        //   null이 아닌 경우(?) [회원 번호(memberNo)] 얻어오기
         
-          <!-- 
-                    ${객체?.필드} : 안전 탐색 연산자(Safe Navigation Operator)
-                    객체가 null인지 판별해서 null이 아닌 경우에 수행
-                 -->
-          <th:block th:if="${board.memberNo == session.loginMember?.memberNo}">
-            <button id="updateBtn">수정</button>
-            <button id="deleteBtn">삭제</button>
-          </th:block>
-          <button id="goToListBtn">목록으로</button>
-        </div>
+        // - loginMember가 null인 경우 [null] 반환
+        const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호" ;
+
+        /* 현재 게시글 번호를 전역 변수로 저장 */
+        const boardNo = /*[[${board.boardNo}]]*/ "게시글 번호";
+
+        /* 현재 게시글 좋아요 여부(boardLike)를 전역 변수로 저장 */
+        let likeCheck = /*[[${board.likeCheck}]]*/ "좋아요 여부";
+
+        const userDefaultImage = /*[[#{user.default.image}]]*/ "기본이미지";
 
 
+    </script>
 
 
+    </main>
 
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <th:block th:replace="~{board/comment}"></th:block>
-    
+  </section>
 
   
-
-</th:block>
-
-  
-  <script th:inline="javascript">
-        
-    /* 로그인 상태인 경우 로그인한 회원 번호를 전역 변수 저장 */
-
-    // session.loginMember?.memberNo 
-    // - session에서 loginMember를 얻어 왔는데 
-    //   null이 아닌 경우(?) [회원 번호(memberNo)] 얻어오기
-    
-    // - loginMember가 null인 경우 [null] 반환
-    const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호" ;
-
-    /* 현재 게시글 번호를 전역 변수로 저장 */
-    const boardNo = /*[[${board.boardNo}]]*/ "게시글 번호";
-
-    /* 현재 게시글 좋아요 여부(boardLike)를 전역 변수로 저장 */
-    let likeCheck = /*[[${board.likeCheck}]]*/ "좋아요 여부";
-
-     const userDefaultImage = /*[[#{user.default.image}]]*/ "기본이미지";
-
-
-</script>
-
-
-</main>
 
   <th:block th:replace="~{common/footer}"></th:block>
 
