@@ -67,3 +67,18 @@ body {
     background-color: #f0e68c; /* 옅은 베이지색 */
     color: #333;
   }
+
+
+  /* 색 반전 */
+:root{
+  --color1:black;
+  --color2:white;
+}
+:root.dark{
+  --color1: white;
+  --color2: rgba(95, 99, 104, 1);
+}
+
+body{
+  background-color:
+}
