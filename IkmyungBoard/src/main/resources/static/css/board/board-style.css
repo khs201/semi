@@ -74,6 +74,40 @@ tbody tr:nth-child(odd) {
   font-weight: bold;
   background-color: #455ba8; /* Contrast color for current page */
   color: white !important;
+
+  letter-spacing: 0 !important;
+}
+
+/* 색 반전 */
+:root{
+  --color1:black;
+  --color2:white;
+}
+:root.dark{
+  --color1: white;
+  --color2: black;
+}
+
+.board-title{
+  color:var(--color1)
+}
+
+body{
+  background-color:var(--color2);
+}
+
+tbody td{
+  color:var(--color1);
+}
+
+thead th{
+  color:var(--color1);
+}
+
+.nextPage{
+  color:var(--color1);
+}
+
   padding: 5px 10px;
   border-radius: 5px;
 }
@@ -138,4 +172,5 @@ input[type="text"]:focus, select:focus {
   flex-grow: 1; /* 폼이 가능한 많은 공간을 차지하도록 설정 */
   margin-right: 20px; /* 폼과 인기글 버튼 사이의 간격 설정 */
 }
+
 

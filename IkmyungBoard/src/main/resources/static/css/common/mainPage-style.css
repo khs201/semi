@@ -61,3 +61,38 @@ body {
 .quick-login-buttons .quick-login:hover {
   background-color: #0056b3;
 }
+
+/* 색 반전 */
+:root{
+  --color1:black;
+  --color2:white;
+  --color3:white;
+}
+:root.dark{
+  --color1: white;
+  --color2: #212121;
+  --color3: #808080;
+}
+
+body{
+  background-color:var(--color2);
+}
+
+.board-list{
+  background-color:var(--color3);
+  color:var(--color1);
+}
+
+.board-container{
+  color: var(--color1);
+}
+
+.boardTitle {
+  color: var(--color1);
+}
+
+
+
+
+
+
