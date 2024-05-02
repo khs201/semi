@@ -21,14 +21,14 @@
 	height: 45px; /* 버튼의 높이를 설정합니다. */
 	font-weight: bold;
 	border: 0;
-	background-color: #455ba8;
+	background-color: #3CB371;
 	color: white;
 	cursor: pointer;
 	border-radius: 5px; /* 버튼의 모서리를 둥글게 만듭니다. */
 }
 
 .comment-write-area > button:hover{
-	background-color: #344185; /* 마우스를 올렸을 때 버튼의 배경색을 바꿉니다. */
+	background-color: #3CB371; /* 마우스를 올렸을 때 버튼의 배경색을 바꿉니다. */
 }
 
 .comment-write-area > button#addComment {
@@ -36,14 +36,16 @@
     height: 70px; /* 버튼의 높이를 설정합니다. */
     font-weight: bold;
     border: 0;
-    background-color: #455ba8;
+    background-color: #3CB371;
     color: white;
     cursor: pointer;
     border-radius: 5px; /* 버튼의 모서리를 둥글게 만듭니다. */
 }
 
 .comment-write-area > button#addComment:hover {
-    background-color: #344185; /* 마우스를 올렸을 때 버튼의 배경색을 바꿉니다. */
+    background-color: whitesmoke; /* 마우스를 올렸을 때 버튼의 배경색을 바꿉니다. */
+	color : #3CB371;
+	border: 2px solid #3CB371;
 }
 
 #commentList{
@@ -86,7 +88,7 @@
 
     font-weight: bold;
     border: 0;
-    background-color: #455ba8;
+    background-color: #3CB371;
     color : white;
 
     cursor: pointer;
@@ -94,8 +96,8 @@
 
 .comment-btn-area button:hover{
     background-color: white;
-    color : #455ba8;
-    border: 2px solid #455ba8;
+    color : #3CB371;
+    border: 2px solid #3CB371;
 }
 
 .update-textarea{

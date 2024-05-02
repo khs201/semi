@@ -70,11 +70,17 @@
           <!-- 검색 O -->
           <a th:if="${param.key}"
              th:href="@{/board/{boardCode}/{boardNo} (boardCode=${boardCode}, boardNo=*{boardNo}, cp=${pagination.currentPage}, key=${param.key}, query=${param.query} )}" 
-             th:text="*{boardTitle}" >게시글 제목</a>
+             th:text="*{boardTitle}">게시글 제목
+          </a>
+          
+          <th:block th:text="|[*{commentCount}]|">댓글 수</th:block>
 
-             
-             <th:block th:text="|[*{commentCount}]|">댓글 수</th:block>
-            </td>
+          <!-- 이미지 아이콘 -->
+          <th:block th:if="${board.imgCount gt 0}">
+              <i class="fas fa-image ed margin-right-xxsmall"></i>
+          </th:block>
+        
+        </td>
             
             <!-- 작성자 닉네임 -->
             <td th:text="*{memberNickname}">닉네임</td>
