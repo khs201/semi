@@ -75,15 +75,11 @@ if(deleteBtn != null){
   });
 }
 
+// 1. #boardLike가 클릭 되었을 때
+likeBtn.addEventListener("click", e => {
 
- 
-
-
-  // 1. #boardLike가 클릭 되었을 때
-  likeBtn.addEventListener("click", e => {
-
-  // 2. 로그인 상태가 아닌 경우 동작 X
-  if(loginMemberNo == null){
+  // 로그인 상태가 아닌 경우 동작하지 않음
+  if (loginMemberNo == null) {
     alert("로그인 후 이용해 주세요");
     return;
   }
@@ -104,12 +100,12 @@ if(deleteBtn != null){
 
 
 
-.then(resp => resp.text()) // 서버 응답을 텍스트로 변환
-.then(count => {
-    if (count == -1) {
-        console.log("좋아요 처리 실패");
-        return;
-    }
+  .then(resp => resp.text()) // 서버 응답을 텍스트로 변환
+  .then(count => {
+      if (count == -1) {
+          console.log("좋아요 처리 실패");
+          return;
+      }
 
     // likeCheck 값 0 <-> 1 변환
     likeCheck = likeCheck == 0 ? 1 : 0;
@@ -125,7 +121,5 @@ if(deleteBtn != null){
     } else {
         console.log("숫자 요소를 찾을 수 없습니다.");
     }
-});
-
-
+  });
 });
