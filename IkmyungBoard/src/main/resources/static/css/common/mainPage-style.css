@@ -26,7 +26,10 @@ body {
   width: calc(30% - 20px); /* 크기를 줄입니다 */
   aspect-ratio: 4/3; /* 직사각형 비율 설정 */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid #3CB371;
 }
+
+
 
 .board-list a {
   text-decoration: none;
@@ -61,3 +64,41 @@ body {
 .quick-login-buttons .quick-login:hover {
   background-color: #0056b3;
 }
+
+/* 색 반전 */
+:root{
+  --color1:black;
+  --color2:white;
+  --color3:white;
+}
+:root.dark{
+  --color1: white;
+  --color2: #212121;
+  --color3: #808080;
+}
+
+body{
+  background-color:var(--color2);
+}
+
+.board-list{
+  background-color:var(--color3);
+  color:var(--color1);
+}
+
+.board-container{
+  color: var(--color1);
+}
+
+.boardTitle {
+  color: var(--color1) !important;
+}
+
+.board-list{
+  
+}
+
+
+
+
+

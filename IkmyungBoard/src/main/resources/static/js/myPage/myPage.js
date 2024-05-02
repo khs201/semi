@@ -2,6 +2,7 @@ const changePw = document.querySelector("#changePw");
 const deleteImage = document.querySelector("#deleteImage");
 const profileImg = document.querySelector("#profileImg");
 
+// 비밀번호 유효성 검사
 if(changePw != null){
 
     changePw.addEventListener("submit", e => {
@@ -89,6 +90,7 @@ if(secession != null){
 
 
 // x 버튼 클릭 시 이미지 지우기
+if(deleteImage != null){
 deleteImage.addEventListener("click", () =>{
 
     profileImg.src = "/images/user.png"
@@ -98,7 +100,9 @@ deleteImage.addEventListener("click", () =>{
     imageInput = undefined;
 
     statusChech = 0;
-});
+   });
+ }
+
 
 
 // -------------------------------------------------------------------
@@ -301,5 +305,66 @@ profile.addEventListener("submit", e => {
     e.preventDefault();
     alert("이미지 변경 후 클릭하세요")
    }
+  });
+}
+
+
+/* 내 정보 수정 페이지 검사 */
+
+const updateInfo = document.querySelector("#updateInfo")
+
+if(updateInfo != null){
+
+  updateInfo.addEventListener("submit", e =>{
+
+    const memberNickname = document.querySelector("#memberNickname");
+    const memberTel = document.querySelector("#memberTel");
+    const memberAddress = document.querySelectorAll("[name='memberAddress']");
+
+    // 닉네임 유효성 검사
+    if (memberNickname.value.trim().length == 0){
+      alert("닉네임을 입력하세요");
+      e.preventDefault();
+      return;
+    }
+
+    const regExp = /^[가-힣a-zA-Z0-9]{2,10}$/;
+
+    if(!regExp.test(memberNickname.value)){
+      alert("유효하지 않은 닉네임");
+      e.preventDefault();
+      return;
+    }
+
+    if(memberTel.value.trim().length == 0){
+      alert("전화 번호 입력");
+      e.preventDefault();
+      return;
+    }
+
+    const regExp1 = /^010[0-9]{3,4}[0-9]{4}$/;
+
+    if(!regExp1.test(memberTel.value)){
+      alert("틀린 번호");
+      e.preventDefault();
+      return;
+    }
+
+    // 주소 유효성 검사
+    const addr0 = memberAddress[0].value.trim().length == 0;
+    const addr1 = memberAddress[1].value.trim().length == 0;
+    const addr2 = memberAddress[2].value.trim().length == 0;
+
+    // 모두 옳은 경우 저장
+    const ture1 = addr0 && addr1 && addr2; // 입력 x
+
+    const ture2 = !(addr0 || addr1 || addr2); // 모두 다 입력
+
+    // 모두 입력 또는 모두 미입력이 아니면 막기
+    if(!(ture1 ||  ture2)) {
+      alert("주소를 모두 작성 또는 미작성 해주세요.")
+      e.preventDefault(); // 제출 막기
+    }
+
   });
 }
