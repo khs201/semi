@@ -3,7 +3,12 @@
   justify-content: space-around;
   align-items: center;
   padding: 20px;
-  background-color: #f0f0f0;
+  background-color: #3CB371;
+  color: black;
+}
+
+#pageLogo{
+  cursor: pointer;
 }
 
 
@@ -22,7 +27,7 @@
 
 .gub li a {
   text-decoration: none;
-  color: #333;
+  color: white;
   margin:20px;
 }
 
@@ -74,6 +79,7 @@
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 }
 
+
 /* 로고 블럭 안잡히게 하기 */
 .pageLogo{
   user-select: none;
@@ -84,6 +90,80 @@
 
 }
 
+.baordName:hover{
+  transform: scale(3.1);
+  border-radius: 4px;
+  background-color: rgb(19, 61, 56);
+}
 
 
+/* 회원가입 로그인 버튼 */
+.userlinks {
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
 
+.login,
+.signup {
+  padding: 10px 10px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login {
+  background-color: green;
+  color: white;
+}
+
+.signup {
+  background-color: white;
+  color: green;
+  text-decoration: none;
+  box-sizing: 10px;
+}
+
+.signup:hover {
+  text-decoration: underline;
+}
+
+.loginLook{
+  color: black;
+}
+
+/* 로그인 후 화면 */
+
+.my-info {
+  text-align: center; /* 센터 정렬 */
+}
+
+.memberProfile {
+  width: 100px; /* 이미지 크기 조정 */
+  height: 100px; /* 이미지 크기 조정 */
+  border-radius: 50%; /* 원형 모양 */
+  border: 2px solid #ccc; /* 테두리 스타일 */
+  object-fit: cover; /* 이미지를 부모 요소에 맞춤 */
+  margin-bottom: 10px; /* 아래 여백 */
+}
+
+#nickname {
+  font-size: 18px; /* 닉네임 크기 */
+  font-weight: bold; /* 닉네임 굵게 */
+  color: #333; /* 닉네임 색상 */
+  text-decoration: none; /* 밑줄 제거 */
+}
+
+#nickname:hover{
+  color: aqua;
+}
+
+#logoutBtn {
+  color: black;
+  text-decoration: none; /* 밑줄 제거 */
+}
+
+#logoutBtn:hover {
+  color: aqua; /* 마우스 호버 시 색상 변경 */
+}

@@ -78,39 +78,9 @@ tbody tr:nth-child(odd) {
   letter-spacing: 0 !important;
 }
 
-/* 색 반전 */
-:root{
-  --color1:black;
-  --color2:white;
-}
-:root.dark{
-  --color1: white;
-  --color2: black;
-}
 
-.board-title{
-  color:var(--color1)
-}
 
-body{
-  background-color:var(--color2);
-}
 
-tbody td{
-  color:var(--color1);
-}
-
-thead th{
-  color:var(--color1);
-}
-
-.nextPage{
-  color:var(--color1);
-}
-
-  padding: 5px 10px;
-  border-radius: 5px;
-}
 
 /* Button styling */
 button {
@@ -171,6 +141,41 @@ input[type="text"]:focus, select:focus {
 #boardSearch {
   flex-grow: 1; /* 폼이 가능한 많은 공간을 차지하도록 설정 */
   margin-right: 20px; /* 폼과 인기글 버튼 사이의 간격 설정 */
+}
+
+
+/* 색 반전 */
+:root{
+  --color1:black;
+  --color2:white;
+}
+:root.dark{
+  --color1: white;
+  --color2: black;
+}
+
+
+
+body{
+  background-color:var(--color2);
+}
+
+tbody > tr > td{
+  color:var(--color1);
+  background-color: var(--color2);
+}
+
+thead th{
+  color:var(--color1);
+}
+
+.nextPage{
+  color:var(--color1);
+}
+
+
+tr > td> a{
+  color: var(--color1);
 }
 
 
