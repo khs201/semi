@@ -3,6 +3,15 @@
 const inputImageList = document.getElementsByClassName("inputImage"); // input 태그
 const deleteImageList = document.getElementsByClassName("delete-image"); // x버튼
 
+document.body.addEventListener('change', function(e) {
+    if (e.target.matches('.inputImage')) { // .inputImage 클래스를 가진 input에서 발생한 이벤트인지 확인
+        const order = Array.from(document.getElementsByClassName("inputImage")).indexOf(e.target);
+        changeImageFn(e.target, order);
+    }
+});
+
+
+
 // x버튼이 눌러져 삭제된 이미지의 순서를 저장
 // * Set : 중복 저장 X, 순서 유지 X
 const deleteOrder = new Set();
