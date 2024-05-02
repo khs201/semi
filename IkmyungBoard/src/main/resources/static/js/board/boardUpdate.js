@@ -3,12 +3,6 @@
 const inputImageList = document.getElementsByClassName("inputImage"); // input 태그
 const deleteImageList = document.getElementsByClassName("delete-image"); // x버튼
 
-/* document.body.addEventListener('change', function(e) {
-    if (e.target.matches('.inputImage')) { // .inputImage 클래스를 가진 input에서 발생한 이벤트인지 확인
-        const order = Array.from(document.getElementsByClassName("inputImage")).indexOf(e.target);
-        changeImageFn(e.target, order);
-    }
-}); */
 
 
 
@@ -149,3 +143,66 @@ boardUpdateFrm.addEventListener("submit", e => {
 
   document.querySelector("[name='querystring']").value = location.search;
 });
+
+
+
+
+
+
+/* 테스트 */
+// 이미지 업로드 input에 이벤트 리스너 추가
+document.getElementById('imageUpload').addEventListener('change', function(e) {
+    const files = e.target.files; // 선택된 파일들
+    const previewContainer = document.getElementById('previewContainer'); // 미리보기 컨테이너
+    previewContainer.innerHTML = ''; // 기존의 미리보기를 초기화
+
+    // 선택된 파일 각각에 대해 미리보기 생성
+    Array.from(files).forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = document.createElement('img');
+            img.className = 'preview';
+            img.style.width = '100px'; // 미리보기 이미지 크기 설정
+            img.src = event.target.result;
+            previewContainer.appendChild(img); // 이미지 미리보기를 컨테이너에 추가
+
+            // 삭제 버튼 생성
+            const deleteBtn = document.createElement('span');
+            deleteBtn.textContent = '×';
+            deleteBtn.className = 'delete-image';
+            deleteBtn.onclick = function() { // 삭제 버튼 클릭 이벤트
+                img.remove(); // 이미지 삭제
+                deleteBtn.remove(); // 삭제 버튼 삭제
+            };
+            previewContainer.appendChild(deleteBtn);
+        };
+        reader.readAsDataURL(file);
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.delete-image');
+    
+    deleteButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            const imageId = this.getAttribute('id'); // 삭제 버튼의 id를 기반으로
+            const img = document.getElementById('img' + imageId); // 대응되는 이미지 찾기
+            if (img) {
+                img.remove(); // 이미지 요소 제거
+            }
+            this.remove(); // 삭제 버튼 요소 제거
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+

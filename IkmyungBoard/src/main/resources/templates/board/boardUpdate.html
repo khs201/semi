@@ -98,21 +98,33 @@ body {
             </div>
 
 
-            <!-- 이미지들 -->
-            <th:block th:each="image, iterStat : ${board.imageList}">
-              <!-- iterStat.index를 사용하여 각 img 태그와 삭제 버튼에 고유한 id를 부여합니다. -->
-              <img class="preview" th:id="'img' + ${image.imgOrder}" src="" />
-              <span class="delete-image" th:id="${image.imgOrder}">&times;</span>
-            </th:block>
-            
-  
-              <h5>이미지</h5>
-              <div class="img-box">
-                  <div class="boardImg thumbnail">
-                      <input type="file" name="images" class="inputImage" id="img0" accept="image/*" multiple>
-                      
-                  </div>
-              </div>
+        <!-- 테스트 -->
+        
+          
+           <!-- 미리보기 이미지들을 담을 컨테이너 -->
+      
+
+
+
+<!-- 이미지들 -->
+  <div id="previewContainer">
+<th:block th:each="image, iterStat : ${board.imageList}">
+  <!-- iterStat.index를 사용하여 각 img 태그와 삭제 버튼에 고유한 id를 부여합니다. -->
+  <img class="preview" th:id="'img' + ${image.imgOrder}" src="" />
+  <span class="delete-image" th:id="${image.imgOrder}">&times;</span>
+</th:block>
+</div>
+
+<h5>이미지</h5>
+<div class="img-box">
+  <div class="boardImg thumbnail">
+    <input type="file" name="images" id="imageUpload" class="inputImage" accept="image/*" multiple>
+
+  </div>
+
+
+
+</div>
 
 
             <!-- 버튼 영역 -->
@@ -128,8 +140,24 @@ body {
             <input type="hidden" name="querystring">
         </form>
 
+
+
+
+
+          <hr><hr><hr>
+
+
+      
+
+
+
+
+
+
+
+
   <!-- 이미지 미리보기 설정 -->
-  <script th:inline="javascript">
+<!--   <script th:inline="javascript">
 
     const imageList = /*[[${board.imageList}]]*/[];
 
@@ -143,7 +171,27 @@ body {
       orderList.push(img.imgOrder);
     }
 
-  </script>
+  </script> -->
+
+  <!-- 테스트 -->
+  <script th:inline="javascript">
+    const imageList = /*[[${board.imageList}]]*/[];
+    const previewList = document.querySelectorAll('img.preview');
+    const orderList = []; // 기존에 존재하던 이미지 순서를 기록
+
+    imageList.forEach((img) => {
+        if (img.imgOrder < previewList.length) { // 인덱스 유효성 검사
+            const previewImg = previewList[img.imgOrder];
+            if (previewImg) { // 해당 인덱스의 요소가 존재하는지 확인
+                previewImg.src = img.imgPath + img.imgRename;
+                orderList.push(img.imgOrder);
+            }
+        }
+    });
+</script>
+  <!-- 테스트끝 -->
+
+
 
   <th:block th:replace="~{common/footer}"></th:block>
 
