@@ -118,13 +118,16 @@ public class BoardController {
 					  Cookie[] cookies = req.getCookies();
 					  
 					  Cookie c = null; 
-					  for(Cookie temp : cookies) {
 					  
-						  // 요청에 담긴 쿠키에 "readBoardNo"가 존재할 때 
-						  if(temp.getName().equals("readBoardNo")) {
-						     c = temp; 
-						     break; 
-						  } 
+					  if(cookies != null) {
+						  for(Cookie temp : cookies) {
+							  
+							  // 요청에 담긴 쿠키에 "readBoardNo"가 존재할 때 
+							  if(temp.getName().equals("readBoardNo")) {
+								  c = temp; 
+								  break; 
+							  } 
+						  }
 					  }
 					  
 					  int result = 0; // 조회수 증가 결과를 저장할 변수
