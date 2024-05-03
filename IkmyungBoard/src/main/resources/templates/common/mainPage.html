@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,25 +7,29 @@
 
   
   <link rel="stylesheet" href="/css/common/mainPage-style.css">
-
+  
   
 
 
 </head>
 <body>
+  
+  <th:block th:replace="~{common/common}"></th:block>
   <th:block th:replace="~{common/header}"></th:block>
 
   <div class="board-container">
     <th:block th:each="boardData : ${list}">
       <section class="board-list">
-        <h2 th:text="${boardData.boardName}">게시판 이름</h2>
+        <h2>
+          <a th:href="@{/board/{boardCode}(boardCode=${boardData.boardCode})}" th:text="${boardData.boardName}">게시판 이름</a>
+        </h2>
         <ul>
           <li th:unless="${#lists.size(boardData.boardList) > 0}" class="board-item">
             작성된 게시글이 없습니다.
           </li>
           <li th:each="board : ${boardData.boardList}" class="board-item" th:if="${#lists.size(boardData.boardList) > 0}">
             <a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardData.boardCode}, boardNo=${board.boardNo})}"
-               th:text="${board.boardTitle}">게시물 제목</a>
+               th:text="${board.boardTitle}" class="boardTitle">게시물 제목</a>
             <span th:text="| [${board.commentCount}]|">댓글 수</span>
           </li>
         </ul>
