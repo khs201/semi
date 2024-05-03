@@ -150,7 +150,10 @@ boardUpdateFrm.addEventListener("submit", e => {
 });
 
 
-
+/* 숨겨진 이미지 업로드 버튼이랑 연결하는 코드 */
+document.getElementById('customButton').addEventListener('click', function() {
+  document.getElementById('imageUpload').click();
+});
 
 
 
