@@ -88,6 +88,22 @@ input[type="password"] {
 .required {
   color: red;
 }
+
+  :root{
+    --color1:black;
+    --color2:#F5F5DC;
+      }
+  :root.dark{
+    --color1: white;
+    --color2: black;
+      }
+   body{
+    background-color: var(--color2);
+   }
+
+   footer > p {
+    color: var(--color1);
+   }
   </style>
 
 
