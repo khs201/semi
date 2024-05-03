@@ -98,7 +98,7 @@ DEFAULT,
 <!-- $ : SQL에 값 그대로 추가 (문자열이라도 '', "" 존재 X) -->
 <delete id="deleteImage">
 	DELETE FROM "BOARD_IMG"
-	WHERE IMG_ORDER IN (${deleteOrder})
+	WHERE IMG_NO IN (${deleteImgNo})
 	AND BOARD_NO = #{boardNo}
 </delete>
 
