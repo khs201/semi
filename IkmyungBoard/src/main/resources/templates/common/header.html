@@ -1,6 +1,21 @@
+
+
+<style>
+
+
+/* 색 반전 */
+:root{
+  --color1:black;
+  --color2:white;
+}
+:root.dark{
+  --color1: white;
+  --color2: black;
+}
+
+
+</style>
 <header>
-
-
   <div class="header">
     <!-- 로고 -->
 
@@ -11,10 +26,13 @@
     <ul class="gub">
       <th:block th:each="boardType : ${application.boardTypeList}">
         <li>
-          <a th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}" th:text="${boardType.boardName}">게시판 이름</a>
+          <a th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}" th:text="${boardType.boardName}" class="baordName">게시판 이름</a>
         </li>
+        
       </th:block>
     </ul>
+
+    <a href="#" class="menu__item" data-background="212121"><i class="fa-regular fa-lightbulb" id="changeBtn">Change Background</i></a>
 
     <!-- 로그인과 회원가입 버튼-->
     <th:block th:if="${session.loginMember == null}">
@@ -54,7 +72,7 @@
 
     <div id="loginlayer" class="loginlayer">
       <div class="login-container">
-        <h2>Login</h2>
+        <h2 class="loginLook">Login</h2>
 
 
         <form action="/login/login" method="post" id="login-form">
@@ -79,6 +97,28 @@
     </div>
   </div>
 </header>
+
+
+
+
+
+<script>
+ const changeBtn = document.getElementById('changeBtn');
+
+changeBtn.addEventListener('click', function() {
+  document.documentElement.classList.toggle('dark');
+  // 사용자가 선택한 테마를 로컬 스토리지에 저장
+  localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+});
+
+// 페이지 로드 시 로컬 스토리지에서 테마를 가져와서 적용
+document.addEventListener('DOMContentLoaded', function () {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark');
+  }
+});
+</script>
 
 <link rel="stylesheet" href="/css/common/header-style.css">
 <script src="/js/login.js"></script>

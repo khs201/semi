@@ -74,9 +74,13 @@ tbody tr:nth-child(odd) {
   font-weight: bold;
   background-color: #455ba8; /* Contrast color for current page */
   color: white !important;
-  padding: 5px 10px;
-  border-radius: 5px;
+
+  letter-spacing: 0 !important;
 }
+
+
+
+
 
 /* Button styling */
 button {
@@ -139,3 +143,48 @@ input[type="text"]:focus, select:focus {
   margin-right: 20px; /* 폼과 인기글 버튼 사이의 간격 설정 */
 }
 
+/* 이미지 아이콘 스타일 */
+.fas.fa-image.ed {
+  color: #6c757d; /* 아이콘 색상 */
+}
+
+/* 그림자 효과 */
+.board-top-container {
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  padding: 10px; /* 그림자 여백 */
+  margin-bottom: 20px; /* 상단과의 여백 */
+}
+
+/* 색 반전 */
+:root{
+  --color1:black;
+  --color2:white;
+}
+:root.dark{
+  --color1: white;
+  --color2: black;
+}
+
+
+
+body{
+  background-color:var(--color2);
+}
+
+tbody > tr > td{
+  color:var(--color1);
+  background-color: var(--color2);
+}
+
+thead th{
+  color:var(--color1);
+}
+
+.nextPage{
+  color:var(--color1);
+}
+
+
+tr > td> a{
+  color: var(--color1);
+}

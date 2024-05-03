@@ -11,7 +11,7 @@
 </head>
 <body>
   
-
+  <th:block th:replace="~{common/common}"></th:block>
   <th:block th:replace="~{common/header}"></th:block>
 
   <section class="container-wrapper">
@@ -19,10 +19,10 @@
   <main class="container">
 
 
-<th:block th:object="${board}">
-  <div class="board-header">
-    <h1 th:text="${boardName}">게시판명</h1>
-    <!-- 여기 최근 갔던 게시판들 나열하는거 할까? 말까? 고민중 -->
+      <th:block th:object="${board}">
+      <div class="board-header">
+        <h1 th:text="${boardName}">게시판명</h1>
+        <!-- 여기 최근 갔던 게시판들 나열하는거 할까? 말까? 고민중 -->
 
     <h2 th:text="*{boardTitle}">게시글 제목</h2>
   </div>
@@ -39,30 +39,23 @@
     <!-- ====================== 이미지가 있을 경우 출력하는 구문  ====================== -->
     <th:block th:if="${ #lists.size(board.imageList) > 0}">
 
-    <!-- 썸네일이 있을 경우 -->
     <th:block th:if="*{thumbnail}">
-        <h5>썸네일</h5>
         <div class="img-box">
             <div class="boardImg thumbnail">
                 <img th:src="|${thumbnail.imgPath}${thumbnail.imgRename}|">                     
                 
-                <a th:href="|${thumbnail.imgPath}${thumbnail.imgRename}|"
-                   th:download="${thumbnail.imgOriginalName}">다운로드</a>         
             </div>
         </div>
     </th:block>
     
     
       
-      <h5>업로드 이미지</h5>
       <th:block th:each="i : ${#numbers.sequence(0, #lists.size(board.imageList) -1)}">                                       
           <div class="img-box">
               <div class="boardImg">
 
                   <img th:src="|${board.imageList[i].imgPath}${board.imageList[i].imgRename}|">  
 
-                  <a th:href="|${board.imageList[i].imgPath}${board.imageList[i].imgRename}|"
-                      th:download="${board.imageList[i].imgOriginalName}" >다운로드</a>                
               </div>
           </div>
       </th:block>
@@ -105,7 +98,7 @@
 
         <div class="board-btn-area">
       
-          <!-- 로그인한 회원과 게시글 작성자 번호가 같은 경우-->
+            
         
           <!-- 
                     ${객체?.필드} : 안전 탐색 연산자(Safe Navigation Operator)
