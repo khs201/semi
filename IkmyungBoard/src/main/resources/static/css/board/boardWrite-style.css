@@ -72,3 +72,90 @@ body {
   background-color: #f0e68c; /* 옅은 베이지색 */
   color: #333;
 }
+    
+  
+  /* 헤더 스타일 */
+  .write-header {
+    background-color: #e5e5b9; /* 옅은 베이지색 */
+    color: #333;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .write-header h1 {
+    margin: 0;
+  }
+  
+  /* 글쓰기 폼 스타일 */
+  .write-form {
+    background-color: #fff; /* 흰색 배경 */
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .write-title input[type="text"] {
+    width: 100%;
+    font-size: 1.2em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .write-content textarea {
+    width: 100%;
+    height: 500px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+  }
+  
+  .write-btn {
+    background-color:#e5e5b9;
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+  }
+  
+  .write-btn:hover {
+    background-color: #f8f805;
+  }
+  
+  /* 푸터 스타일 */
+  .write-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f0e68c; /* 옅은 베이지색 */
+    color: #333;
+  }
+
+
+  /* 색 반전 */
+:root{
+  --color1:black;
+  --color2:#F5F5DC;
+  --color3: #F5F5DC;
+}
+:root.dark{
+  --color1: white;
+  --color2: black;
+  --color3: #F5F5DC;
+}
+
+body{
+  background-color:var(--color2);
+}
+
+footer > p {
+  color: var(--color1);
+}
+
+#writeForm{
+  background-color: var(--color3);
+}

@@ -7,16 +7,3 @@ footer {
   /* margin-bottom: 20px; /* 행 사이 여백 */ 
 }
 
-/* 색 반전 */
-:root{
-  --color1:black;
-  --color2:white;
-}
-:root.dark{
-  --color1: white;
-  --color2: black;
-}
-
-footer > p {
-  color: var(--color1);
-}
