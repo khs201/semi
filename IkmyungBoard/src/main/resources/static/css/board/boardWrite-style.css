@@ -140,12 +140,12 @@ body {
 :root{
   --color1:black;
   --color2:#F5F5DC;
-  --color3: #F5F5DC;
+  --color3: white;
 }
 :root.dark{
   --color1: white;
   --color2: black;
-  --color3: #F5F5DC;
+  --color3: white;
 }
 
 body{

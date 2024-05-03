@@ -92,6 +92,23 @@
         padding: 10px;
       }
     }
+
+    /* 색상 반전 */
+
+      :root{
+        --color1:black;
+        --color2:#F5F5DC;
+      }
+      :root.dark{
+        --color1: white;
+        --color2: black;
+      }
+
+      body{
+        background-color: var(--color2) !important;
+      }
+
+    
   </style>
 </head>
 
