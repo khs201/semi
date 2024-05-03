@@ -11,7 +11,9 @@
   cursor: pointer;
 }
 
-
+.pageLogo1{
+  width: 250px;
+}
 
 .gub {
   list-style-type: none;
@@ -167,3 +169,5 @@
 #logoutBtn:hover {
   color: aqua; /* 마우스 호버 시 색상 변경 */
 }
+
+

@@ -72,12 +72,7 @@ body {
   background-color: #f0e68c; /* 옅은 베이지색 */
   color: #333;
 }
-    font-family: Arial, sans-serif;
-    background-color: #d7d7c9; /* 베이지색 */
-    color: #333; /* 어두운 글자색 */
-    margin: 0;
-    padding: 0;
-  }
+    
   
   /* 헤더 스타일 */
   .write-header {
@@ -144,13 +139,23 @@ body {
   /* 색 반전 */
 :root{
   --color1:black;
-  --color2:white;
+  --color2:#F5F5DC;
+  --color3: #F5F5DC;
 }
 :root.dark{
   --color1: white;
-  --color2: rgba(95, 99, 104, 1);
+  --color2: black;
+  --color3: #F5F5DC;
 }
 
 body{
-  background-color:
+  background-color:var(--color2);
+}
+
+footer > p {
+  color: var(--color1);
+}
+
+#writeForm{
+  background-color: var(--color3);
 }
