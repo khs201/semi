@@ -79,6 +79,35 @@
       </th:block>
 
 </th:block>
+
+<!-- 게시글 내용 영역 -->
+<p class="bodyContent" th:text="*{boardContent}">게시글 내용</p>
+
+<div class="choochunContainer">
+    <label>
+    <div class="semiBtn">
+      <i class="far fa-thumbs-up"></i>
+      <button id="likeBtn" th:classappend="*{likeCheck == 1} ? like : notlike">
+        추천하기
+      </button>
+      <span class="num" th:text="*{likeCount}">0</span>
+    </div>
+  </label>
+</div>
+
+      <!-- 게시글 수정, 삭제 버튼 영역 -->
+      <div class="board-btn-area">
+        <th:block th:if="${board.memberNo == session.loginMember?.memberNo}">
+          <button id="updateBtn">수정</button>
+          <button id="deleteBtn">삭제</button>
+        </th:block>
+        <button id="goToListBtn">목록으로</button>
+      </div>
+
+
+
+  
+
 <!-- 이미지 다운로드 영역 -->
 <th:block th:if="${#lists.size(board.imageList) > 0}">
   <div class="image-download">
@@ -94,44 +123,12 @@
 </th:block>
 </div>
 
-<!-- ====================== 이미지가 있을 경우 출력하는 구문 ====================== -->
+<th:block th:replace="~{board/comment}"></th:block>
 
-  <p class="bodyContent" th:text="*{boardContent}">게시글 내용</p>
+
 
   </div>
 
-  <div class="choochunContainer">
-      <label>
-      <div class="semiBtn">
-        <i class="far fa-thumbs-up"></i>
-        <button id="likeBtn" th:classappend="*{likeCheck == 1} ? like : notlike">
-          추천하기
-        </button>
-        <span class="num" th:text="*{likeCount}">0</span>
-      </div>
-    </label>
-  </div>
-
-        <!-- 게시글 수정, 삭제 버튼 영역 -->
-
-        <div class="board-btn-area">
-      
-            
-        
-          <!-- 
-                    ${객체?.필드} : 안전 탐색 연산자(Safe Navigation Operator)
-                    객체가 null인지 판별해서 null이 아닌 경우에 수행
-                -->
-          <th:block th:if="${board.memberNo == session.loginMember?.memberNo}">
-            <button id="updateBtn">수정</button>
-            <button id="deleteBtn">삭제</button>
-          </th:block>
-          <button id="goToListBtn">목록으로</button>
-        </div>
-
-
-
-    <th:block th:replace="~{board/comment}"></th:block>
     <th:block th:replace="~{common/common}"></th:block>
 
   

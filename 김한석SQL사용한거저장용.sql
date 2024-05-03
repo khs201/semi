@@ -363,7 +363,7 @@ SELECT COUNT(*)
 		
 
 
-
+SELECT * FROM BOARD;
 
 
 
