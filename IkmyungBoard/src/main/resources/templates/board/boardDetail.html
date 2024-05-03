@@ -14,7 +14,9 @@
 
   <th:block th:replace="~{common/header}"></th:block>
 
-  <main id="container">
+  <section class="container-wrapper">
+
+  <main class="container">
 
 
 <th:block th:object="${board}">
@@ -66,16 +68,37 @@
       </th:block>
 
 </th:block>
+<!-- 이미지 다운로드 영역 -->
+<th:block th:if="${#lists.size(board.imageList) > 0}">
+  <div class="image-download">
+    <h5>이미지 다운로드</h5>
+    <th:block th:each="image : ${board.imageList}">
+      <div>
+        <a th:href="|${image.imgPath}${image.imgRename}|" th:download="${image.imgOriginalName}">
+          <span th:text="${image.imgOriginalName}">이미지 다운로드</span>
+        </a>
+      </div>
+    </th:block>
+  </div>
+</th:block>
+</div>
+
 <!-- ====================== 이미지가 있을 경우 출력하는 구문 ====================== -->
 
-  <p th:text="*{boardContent}">게시글 내용</p>
+  <p class="bodyContent" th:text="*{boardContent}">게시글 내용</p>
 
   </div>
 
-  <div class="choochun-area">
-    <!-- 버튼 꾸밀 예정 -->
-    <span th:text="*{likeCount}">0</span>
-    <button id="likeBtn" th:classappend="*{likeCheck == 1} ? like : notlike">추천하기!</button>
+  <div class="choochunContainer">
+      <label>
+      <div class="semiBtn">
+        <i class="far fa-thumbs-up"></i>
+        <button id="likeBtn" th:classappend="*{likeCheck == 1} ? like : notlike">
+          추천하기
+        </button>
+        <span class="num" th:text="*{likeCount}">0</span>
+      </div>
+    </label>
   </div>
 
         <!-- 게시글 수정, 삭제 버튼 영역 -->
@@ -87,7 +110,7 @@
           <!-- 
                     ${객체?.필드} : 안전 탐색 연산자(Safe Navigation Operator)
                     객체가 null인지 판별해서 null이 아닌 경우에 수행
-                 -->
+                -->
           <th:block th:if="${board.memberNo == session.loginMember?.memberNo}">
             <button id="updateBtn">수정</button>
             <button id="deleteBtn">삭제</button>
@@ -97,32 +120,8 @@
 
 
 
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <th:block th:replace="~{board/comment}"></th:block>
-    
+    <th:block th:replace="~{common/common}"></th:block>
 
   
 
@@ -153,6 +152,7 @@
 
 
 </main>
+</section>
 
   <th:block th:replace="~{common/footer}"></th:block>
 
