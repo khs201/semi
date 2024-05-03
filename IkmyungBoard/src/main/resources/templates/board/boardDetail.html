@@ -24,7 +24,6 @@
         <h1 th:text="${boardName}">게시판명</h1>
         <!-- 여기 최근 갔던 게시판들 나열하는거 할까? 말까? 고민중 -->
 
-<<<<<<< HEAD
     <h2 th:text="*{boardTitle}">게시글 제목</h2>
   </div>
   
@@ -91,9 +90,6 @@
           추천하기
         </button>
         <span class="num" th:text="*{likeCount}">0</span>
-=======
-        <h2 th:text="*{boardTitle}">게시글 제목</h2>
->>>>>>> 3f4379ba3e8f838da37d70a8e1679c931747e7cb
       </div>
     </label>
   </div>
@@ -103,37 +99,6 @@
         <div class="board-btn-area">
       
             
-<<<<<<< HEAD
-=======
-              <!-- 
-                        ${객체?.필드} : 안전 탐색 연산자(Safe Navigation Operator)
-                        객체가 null인지 판별해서 null이 아닌 경우에 수행
-                    -->
-              <th:block th:if="${board.memberNo == session.loginMember?.memberNo}">
-                <button id="updateBtn">수정</button>
-                <button id="deleteBtn">삭제</button>
-              </th:block>
-              <button id="goToListBtn">목록으로</button>
-            </div>
-
-
-
-        <th:block th:replace="~{board/comment}"></th:block>
-        <th:block th:replace="~{common/common}"></th:block>
-
-      
-
-    </th:block>
-
-      
-      <script th:inline="javascript">
-            
-        /* 로그인 상태인 경우 로그인한 회원 번호를 전역 변수 저장 */
-
-        // session.loginMember?.memberNo 
-        // - session에서 loginMember를 얻어 왔는데 
-        //   null이 아닌 경우(?) [회원 번호(memberNo)] 얻어오기
->>>>>>> 3f4379ba3e8f838da37d70a8e1679c931747e7cb
         
           <!-- 
                     ${객체?.필드} : 안전 탐색 연산자(Safe Navigation Operator)
